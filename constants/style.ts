@@ -1,5 +1,11 @@
-export const softPrimaryColor = "#6D66AA";
+import { colorsType } from "./types";
 
-export const vividPrimaryColor = "#2A1598";
+type IColors = {
+  [key in colorsType]: string;
+};
 
-export const primaryWhite = "#ffffff";
+export const colors: IColors = {
+  softPrimaryColor: "#6D66AA",
+  vividPrimaryColor: "#2A1598",
+  primaryWhite: "#ffffff",
+};

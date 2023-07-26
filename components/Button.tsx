@@ -1,75 +1,64 @@
 import { PropsWithChildren, useMemo } from "react";
 import { styled } from "styled-components";
-import {
-  primaryWhite,
-  softPrimaryColor,
-  vividPrimaryColor,
-} from "../constants/style";
+import { colors } from "../constants/style";
+import { colorsType, sizesType, variantsType } from "../constants/types";
 
 interface IProps {
-  variants?: "primary" | "secondary";
-  size: "sm" | "md" | "lg";
+  variants?: variantsType;
+  size: Exclude<sizesType, "xs" | "xl">;
   disabled?: boolean;
 }
+
+const variantsColors: {
+  [key in variantsType]: {
+    backgroundColor: string;
+    textColor: string;
+    borderColor: string;
+  };
+} = {
+  primary: {
+    backgroundColor: colors.vividPrimaryColor,
+    textColor: colors.primaryWhite,
+    borderColor: "transaparent",
+  },
+  secondary: {
+    backgroundColor: colors.primaryWhite,
+    textColor: colors.vividPrimaryColor,
+    borderColor: colors.vividPrimaryColor,
+  },
+};
+
+const sizes: {
+  [key in Exclude<sizesType, "xs" | "xl">]: {
+    height: number;
+    fontSize: number;
+  };
+} = {
+  sm: {
+    height: 60,
+    fontSize: 24,
+  },
+  md: {
+    height: 80,
+    fontSize: 24,
+  },
+  lg: {
+    height: 120,
+    fontSize: 36,
+  },
+};
 
 const Button = (props: PropsWithChildren<IProps>) => {
   const { variants = "primary", children, size, disabled = false } = props;
 
-  const backgroundColor = useMemo(
-    () => (variants === "primary" ? `${softPrimaryColor}` : `${primaryWhite}`),
-    [variants]
-  );
-
-  const textColor = useMemo(
-    () => (variants === "primary" ? `${primaryWhite}` : `${vividPrimaryColor}`),
-    [variants]
-  );
-
-  const borderColor = useMemo(
-    () => (variants === "primary" ? "transparent" : `${vividPrimaryColor}`),
-    [variants]
-  );
-
-  const buttonHeight = useMemo(() => {
-    let height;
-    switch (size) {
-      case "sm":
-        height = 60;
-        break;
-      case "md":
-        height = 80;
-        break;
-      case "lg":
-        height = 120;
-        break;
-    }
-    return height;
-  }, [size]);
-
-  const fontSize = useMemo(() => {
-    let fontPixel;
-    switch (size) {
-      case "sm":
-        fontPixel = 24;
-        break;
-      case "md":
-        fontPixel = 24;
-        break;
-      case "lg":
-        fontPixel = 36;
-        break;
-    }
-    return fontPixel;
-  }, [size]);
-
   return (
     <Box
       style={{
-        backgroundColor: `${backgroundColor}`,
-        color: `${textColor}`,
-        border: `2px solid ${borderColor}`,
-        height: `${buttonHeight}px`,
-        fontSize: `${fontSize}px`,
+        backgroundColor: `${variantsColors[variants].backgroundColor}`,
+        color: `${variantsColors[variants].textColor}`,
+        border: `2px solid ${variantsColors[variants].borderColor}`,
+        height: `${sizes[size].height}px`,
+        fontSize: `${sizes[size].fontSize}px`,
       }}
     >
       {children ? children : "확인"}

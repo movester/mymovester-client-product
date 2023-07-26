@@ -1,31 +1,17 @@
 import { styled } from "styled-components";
 import Button from "../components/Button";
+import Typography from "../components/Typography";
 
 const mainPage = () => {
   return (
     <div>
-      <GridBox>
-        <Button variants="primary" size="lg">
-          버튼
-        </Button>
-        <Button variants="secondary" size="lg">
-          버튼
-        </Button>
-
-        <Button variants="primary" size="md">
-          버튼
-        </Button>
-        <Button variants="secondary" size="md">
-          버튼
-        </Button>
-
-        <Button variants="primary" size="sm">
-          버튼
-        </Button>
-        <Button variants="secondary" size="sm">
-          버튼
-        </Button>
-      </GridBox>
+      <Typography variants="heading1">heading1</Typography>
+      <Typography variants="heading2">heading2</Typography>
+      <Typography variants="body1">body1</Typography>
+      <Typography variants="body2">body2</Typography>
+      <Button size="sm" variants="secondary">
+        dddd
+      </Button>
     </div>
   );
 };
