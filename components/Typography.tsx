@@ -1,13 +1,15 @@
 import { PropsWithChildren, useEffect, useMemo } from "react";
-import { colorsType } from "../constants/types";
+import { colorsType, typographyType } from "../constants/types";
 import { colors } from "../constants/style";
 
 interface IProps {
-  variants?: "heading1" | "heading2" | "body1" | "body2" | "caption";
+  variants?: typographyType;
   color?: colorsType;
 }
 
-const variantsProperties = {
+const variantsProperties: {
+  [key in typographyType]: { fontSize: number; fontWeight: number };
+} = {
   heading1: {
     fontSize: 36,
     fontWeight: 800,
