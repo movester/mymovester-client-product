@@ -1,6 +1,7 @@
 import { styled } from "styled-components";
 import Button from "../components/Button";
 import Typography from "../components/Typography";
+import Divider from "../components/Divder";
 
 const mainPage = () => {
   return (
@@ -12,6 +13,7 @@ const mainPage = () => {
       <Button size="sm" variants="secondary">
         dddd
       </Button>
+      <Divider></Divider>
     </div>
   );
 };
