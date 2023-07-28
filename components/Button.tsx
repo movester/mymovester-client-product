@@ -18,11 +18,11 @@ const variantsColors: {
 } = {
   primary: {
     backgroundColor: colors.vividPrimaryColor,
-    textColor: colors.primaryWhite,
+    textColor: colors.f000,
     borderColor: "transaparent",
   },
   secondary: {
-    backgroundColor: colors.primaryWhite,
+    backgroundColor: colors.f000,
     textColor: colors.vividPrimaryColor,
     borderColor: colors.vividPrimaryColor,
   },
@@ -72,7 +72,7 @@ const Box = styled.div`
   justify-content: center;
   text-align: center;
   display: flex;
-  border-radius: 16px;
+  border-radius: 8px;
   align-items: center;
   font-weight: bold;
   width: 100%;
