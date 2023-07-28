@@ -1,7 +1,9 @@
 export type colorsType =
   | "softPrimaryColor"
   | "vividPrimaryColor"
-  | "primaryWhite";
+  | "f000"
+  | "g100"
+  | "g000";
 
 export type sizesType = "xs" | "sm" | "md" | "lg" | "xl";
 

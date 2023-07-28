@@ -36,7 +36,7 @@ const Typography = (props: PropsWithChildren<IProps>) => {
   const { variants = "body2", color, children } = props;
 
   return (
-    <div
+    <span
       style={{
         fontSize: `${variantsProperties[variants].fontSize}px`,
         fontWeight: `${variantsProperties[variants].fontWeight}`,
@@ -44,7 +44,7 @@ const Typography = (props: PropsWithChildren<IProps>) => {
       }}
     >
       {children}
-    </div>
+    </span>
   );
 };
 
