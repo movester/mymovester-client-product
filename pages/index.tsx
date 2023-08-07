@@ -21,32 +21,14 @@ const mainPage = () => {
   console.log(inputValue);
 
   return (
-    <div>
-      <Typography variants="heading1">heading1</Typography>
-      <Typography variants="heading2">heading2</Typography>
-      <Typography variants="body1">body1</Typography>
-      <Typography variants="body2">body2</Typography>
-      <Button size="sm" variants="secondary">
-        dddd
-      </Button>
-      <Divider></Divider>
-      <ComboBox
-        list={list}
-        value={comboBoxValue}
-        setValue={setComboBoxValue}
-        size="sm"
-      ></ComboBox>
-      <GridBox>
-        <ComboBox
-          list={list}
-          value={comboBoxValue}
-          setValue={setComboBoxValue}
-          size="md"
-        ></ComboBox>
-
-        <Input value={inputValue} setValue={setInputValue}></Input>
-      </GridBox>
-    </div>
+    <GridBox>
+      <Button size="lg" variants="primary"></Button>
+      <Button size="lg" variants="secondary"></Button>
+      <Button size="md" variants="primary"></Button>
+      <Button size="md" variants="secondary"></Button>
+      <Button size="sm" variants="primary"></Button>
+      <Button size="sm" variants="secondary"></Button>
+    </GridBox>
   );
 };
 
