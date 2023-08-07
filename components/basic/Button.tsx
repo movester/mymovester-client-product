@@ -1,7 +1,7 @@
 import { PropsWithChildren, useMemo } from "react";
 import { styled } from "styled-components";
-import { colors } from "../constants/style";
-import { sizesType, variantsType } from "../constants/types";
+import { colors } from "../../constants/style";
+import { sizesType, variantsType } from "../../constants/types";
 
 interface IProps {
   variants?: variantsType;
