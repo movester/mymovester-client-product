@@ -5,6 +5,7 @@ import Typography from "../components/Typography";
 import Divider from "../components/Divder";
 import ComboBox from "../components/ComboBox";
 import { useState } from "react";
+import Input from "../components/Input";
 
 const list = [
   { name: "1번", id: "aaaa" },
@@ -15,31 +16,19 @@ const list = [
 
 const mainPage = () => {
   const [comboBoxValue, setComboBoxValue] = useState(undefined);
+  const [inputValue, setInputValue] = useState<string>("");
+
+  console.log(inputValue);
 
   return (
-    <div>
-      <Typography variants="heading1">heading1</Typography>
-      <Typography variants="heading2">heading2</Typography>
-      <Typography variants="body1">body1</Typography>
-      <Typography variants="body2">body2</Typography>
-      <Button size="sm" variants="secondary">
-        dddd
-      </Button>
-      <Divider></Divider>
-      <ComboBox
-        list={list}
-        value={comboBoxValue}
-        setValue={setComboBoxValue}
-        size="sm"
-      ></ComboBox>
-
-      <ComboBox
-        list={list}
-        value={comboBoxValue}
-        setValue={setComboBoxValue}
-        size="md"
-      ></ComboBox>
-    </div>
+    <GridBox>
+      <Button size="lg" variants="primary"></Button>
+      <Button size="lg" variants="secondary"></Button>
+      <Button size="md" variants="primary"></Button>
+      <Button size="md" variants="secondary"></Button>
+      <Button size="sm" variants="primary"></Button>
+      <Button size="sm" variants="secondary"></Button>
+    </GridBox>
   );
 };
 

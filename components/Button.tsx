@@ -1,12 +1,20 @@
 import { PropsWithChildren, useMemo } from "react";
 import { styled } from "styled-components";
 import { colors } from "../constants/style";
-import { colorsType, sizesType, variantsType } from "../constants/types";
+import { sizesType, variantsType } from "../constants/types";
 
 interface IProps {
   variants?: variantsType;
   size: Exclude<sizesType, "xs" | "xl">;
   disabled?: boolean;
+}
+
+interface IButton {
+  $backgroundColor: string;
+  $color: string;
+  $border: string;
+  $height: number;
+  $fontSize: number;
 }
 
 const variantsColors: {
@@ -17,7 +25,7 @@ const variantsColors: {
   };
 } = {
   primary: {
-    backgroundColor: colors.vividPrimaryColor,
+    backgroundColor: colors.softPrimaryColor,
     textColor: colors.f000,
     borderColor: "transaparent",
   },
@@ -53,13 +61,11 @@ const Button = (props: PropsWithChildren<IProps>) => {
 
   return (
     <Box
-      style={{
-        backgroundColor: `${variantsColors[variants].backgroundColor}`,
-        color: `${variantsColors[variants].textColor}`,
-        border: `2px solid ${variantsColors[variants].borderColor}`,
-        height: `${sizes[size].height}px`,
-        fontSize: `${sizes[size].fontSize}px`,
-      }}
+      $backgroundColor={variantsColors[variants].backgroundColor}
+      $color={variantsColors[variants].textColor}
+      $border={`2px solid ${variantsColors[variants].borderColor}`}
+      $height={sizes[size].height}
+      $fontSize={sizes[size].fontSize}
     >
       {children ? children : "확인"}
     </Box>
@@ -68,16 +74,20 @@ const Button = (props: PropsWithChildren<IProps>) => {
 
 export default Button;
 
-const Box = styled.div`
+const Box = styled.div<IButton>`
+  border-radius: 8px;
   justify-content: center;
+  align-items: center;
   text-align: center;
   display: flex;
-  border-radius: 8px;
-  align-items: center;
   font-weight: bold;
   width: 100%;
   box-sizing: border-box;
-
+  background-color: ${(props) => props.$backgroundColor};
+  color: ${(props) => props.$color};
+  height: ${(props) => `${props.$height}px`};
+  font-size: ${(props) => `${props.$fontSize}px`};
+  border: ${(props) => `${props.$border}}`};
   &:hover {
     cursor: pointer;
   }
