@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
-import Navigator from "../components/utils/Navigator";
-import { colors } from "../constants/style";
+import Navigator from "../../components/utils/Navigator";
+import { colors } from "../../constants/style";
 
 const StrechingPage = () => {
   return (
