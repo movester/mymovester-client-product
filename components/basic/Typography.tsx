@@ -11,23 +11,23 @@ const variantsProperties: {
   [key in typographyType]: { fontSize: number; fontWeight: number };
 } = {
   heading1: {
-    fontSize: 36,
+    fontSize: 24,
     fontWeight: 800,
   },
   heading2: {
-    fontSize: 24,
+    fontSize: 16,
     fontWeight: 800,
   },
   body1: {
-    fontSize: 24,
-    fontWeight: 500,
-  },
-  body2: {
     fontSize: 16,
     fontWeight: 500,
   },
-  caption: {
+  body2: {
     fontSize: 8,
+    fontWeight: 500,
+  },
+  caption: {
+    fontSize: 4,
     fontWeight: 500,
   },
 };
