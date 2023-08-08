@@ -1,10 +1,10 @@
 import { PropsWithChildren, useEffect, useMemo } from "react";
-import { colorsType, typographyType } from "../constants/types";
-import { colors } from "../constants/style";
+import { colorsType, typographyType } from "../../constants/types";
+import { colors } from "../../constants/style";
 
 interface IProps {
   variants?: typographyType;
-  color?: colorsType;
+  color?: string;
 }
 
 const variantsProperties: {
@@ -40,7 +40,7 @@ const Typography = (props: PropsWithChildren<IProps>) => {
       style={{
         fontSize: `${variantsProperties[variants].fontSize}px`,
         fontWeight: `${variantsProperties[variants].fontWeight}`,
-        color: `${colors[color]}`,
+        color: `${color}`,
       }}
     >
       {children}

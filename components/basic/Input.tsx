@@ -1,6 +1,6 @@
 import { Dispatch, PropsWithChildren, SetStateAction } from "react";
 import { styled } from "styled-components";
-import { colors } from "../constants/style";
+import { colors } from "../../constants/style";
 import { MdCancel } from "react-icons/md";
 
 interface IProps {

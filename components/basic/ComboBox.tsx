@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { styled } from "styled-components";
-import { colors } from "./../constants/style";
-import { sizesType } from "../constants/types";
+import { colors } from "../../constants/style";
+import { sizesType } from "../../constants/types";
 import { AiOutlineCheck, AiOutlineDown, AiOutlineUp } from "react-icons/ai";
 
 interface IProps {
