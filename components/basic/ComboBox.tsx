@@ -9,6 +9,7 @@ interface IProps {
   value: { name: string; id: string };
   setValue: Dispatch<SetStateAction<{ name: string; id: string }>>;
   size: Exclude<sizesType, "xs" | "lg" | "xl">;
+  disabled?: boolean;
 }
 
 const variants = {
@@ -23,7 +24,7 @@ const variants = {
 };
 
 const ComboBox = (props: IProps) => {
-  const { list, value, setValue, size } = props;
+  const { list, value, setValue, size, disabled = false } = props;
 
   const [isOpend, setIsOpened] = useState(false);
 
@@ -41,9 +42,9 @@ const ComboBox = (props: IProps) => {
           }`,
           fontSize: `${variants[size].fontSize}px`,
           padding: `${variants[size].padding}`,
-          borderRadius: `${isOpend ? "4px 4px 0px 0px" : "4px"}`,
+          borderRadius: `${isOpend ? "8px 8px 0px 0px" : "8px"}`,
         }}
-        onClick={() => setIsOpened((prev) => !prev)}
+        onClick={() => !disabled && setIsOpened((prev) => !prev)}
       >
         <Span>{value && value.id ? value.name : "선택"}</Span>
         {isOpend ? (
@@ -93,8 +94,9 @@ const Select = styled.div`
   outline: none;
   display: flex;
   justify-content: space-between;
-  width: fit-content;
+  width: auto;
   align-items: center;
+  height: 48px;
   :hover {
     cursor: pointer;
   }
@@ -105,10 +107,11 @@ const Span = styled.span`
 `;
 
 const OptionWarpper = styled.div`
-  border-radius: 0px 0px 4px 4px;
+  border-radius: 0px 0px 8px 8px;
   overflow: hidden;
   border: 1px solid ${colors.g000};
   border-top: none;
+  background-color: ${colors.f000};
   :hover {
     background-color: ${colors.softPrimaryColor};
     color: #ffffff;
