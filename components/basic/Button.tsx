@@ -1,4 +1,4 @@
-import { PropsWithChildren, useMemo } from "react";
+import { MouseEventHandler, PropsWithChildren, useMemo } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../constants/style";
 import { sizesType, variantsType } from "../../constants/types";
@@ -8,6 +8,7 @@ interface IProps {
   size: Exclude<sizesType, "xs" | "xl">;
   disabled?: boolean;
   width?: number;
+  onClick?: () => void;
 }
 
 interface IButton {
@@ -65,6 +66,7 @@ const Button = (props: PropsWithChildren<IProps>) => {
     size,
     disabled = false,
     width,
+    onClick,
   } = props;
 
   return (
@@ -75,6 +77,8 @@ const Button = (props: PropsWithChildren<IProps>) => {
       $height={sizes[size].height}
       $fontSize={sizes[size].fontSize}
       $width={width}
+      onClick={onClick}
+      className="ButtonComponent"
     >
       {children ? children : "확인"}
     </Box>
@@ -97,7 +101,8 @@ const Box = styled.div<IButton>`
   height: ${(props) => `${props.$height}px`};
   font-size: ${(props) => `${props.$fontSize}px`};
   border: ${(props) => `${props.$border}}`};
-  &:hover {
-    cursor: pointer;
+  outline: none;
+  :hover {
+    background-color: red;
   }
 `;

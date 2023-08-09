@@ -7,6 +7,7 @@ import Button from "../../components/basic/Button";
 import ComboBox from "../../components/basic/ComboBox";
 import { useState } from "react";
 import Input from "../../components/basic/Input";
+import { useRouter } from "next/router";
 
 const mainCatergory = [
   { name: "전체", id: "total" },
@@ -43,6 +44,9 @@ const StrechingPage = () => {
   const [subValue, setSubValue] = useState(undefined);
   const [effectValue, setEffectValue] = useState(undefined);
   const [inputValue, setInputValue] = useState<string>("");
+
+  const router = useRouter();
+
   return (
     <PageWrapper>
       <Navigator></Navigator>
@@ -50,8 +54,12 @@ const StrechingPage = () => {
         <ShadowBox>
           <BreadCrumb>
             <Typography variants="heading2">스트레칭</Typography>
-            <Button size="sm" width={160}>
-              +추가하기
+            <Button
+              size="sm"
+              width={160}
+              onClick={() => router.push("/stretching/post")}
+            >
+              + 추가하기
             </Button>
           </BreadCrumb>
         </ShadowBox>
@@ -88,9 +96,6 @@ const StrechingPage = () => {
               value={inputValue}
               setValue={setInputValue}
             ></Input>
-            {/* <Button variants="primary" size="sm">
-              dddd
-            </Button> */}
           </Box>
         </SearchBox>
       </ContentWrapper>
@@ -135,6 +140,6 @@ const ComboBoxBox = styled.div`
 `;
 
 const Box = styled.div`
-  width: 300px;
+  width: 400px;
   padding: 0;
 `;

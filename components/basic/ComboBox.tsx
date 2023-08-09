@@ -97,7 +97,7 @@ const Select = styled.div`
   width: auto;
   align-items: center;
   height: 48px;
-  :hover {
+  &:hover {
     cursor: pointer;
   }
 `;
@@ -112,7 +112,7 @@ const OptionWarpper = styled.div`
   border: 1px solid ${colors.g000};
   border-top: none;
   background-color: ${colors.f000};
-  :hover {
+  &:hover {
     background-color: ${colors.softPrimaryColor};
     color: #ffffff;
     border-color: ${colors.softPrimaryColor};
