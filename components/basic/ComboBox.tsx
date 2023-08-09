@@ -8,23 +8,38 @@ interface IProps {
   list: { name: string; id: string }[];
   value: { name: string; id: string };
   setValue: Dispatch<SetStateAction<{ name: string; id: string }>>;
-  size: Exclude<sizesType, "xs" | "lg" | "xl">;
+  size: Exclude<sizesType, "lg" | "xl">;
   disabled?: boolean;
+  label?: string;
 }
 
 const variants = {
+  xs: {
+    fontSize: 8,
+    padding: "4px 8px",
+    height: 32,
+  },
   sm: {
     fontSize: 16,
     padding: "8px 16px",
+    height: 48,
   },
   md: {
     fontSize: 24,
     padding: "16px 32px",
+    height: 48,
   },
 };
 
 const ComboBox = (props: IProps) => {
-  const { list, value, setValue, size, disabled = false } = props;
+  const {
+    list,
+    value,
+    setValue,
+    size,
+    disabled = false,
+    label = "선택",
+  } = props;
 
   const [isOpend, setIsOpened] = useState(false);
 
@@ -42,11 +57,12 @@ const ComboBox = (props: IProps) => {
           }`,
           fontSize: `${variants[size].fontSize}px`,
           padding: `${variants[size].padding}`,
+          height: `${variants[size].height}px`,
           borderRadius: `${isOpend ? "8px 8px 0px 0px" : "8px"}`,
         }}
         onClick={() => !disabled && setIsOpened((prev) => !prev)}
       >
-        <Span>{value && value.id ? value.name : "선택"}</Span>
+        <Span>{value && value.id ? value.name : label}</Span>
         {isOpend ? (
           <AiOutlineUp size={8}></AiOutlineUp>
         ) : (
@@ -85,6 +101,7 @@ const ComboBox = (props: IProps) => {
 export default ComboBox;
 
 const Box = styled.div`
+  position: relative;
   width: fit-content;
 `;
 
@@ -96,7 +113,7 @@ const Select = styled.div`
   justify-content: space-between;
   width: auto;
   align-items: center;
-  height: 48px;
+
   &:hover {
     cursor: pointer;
   }
@@ -107,12 +124,14 @@ const Span = styled.span`
 `;
 
 const OptionWarpper = styled.div`
+  width: 100%;
+  position: absolute;
   border-radius: 0px 0px 8px 8px;
   overflow: hidden;
   border: 1px solid ${colors.g000};
   border-top: none;
   background-color: ${colors.f000};
-  &:hover {
+  :hover {
     background-color: ${colors.softPrimaryColor};
     color: #ffffff;
     border-color: ${colors.softPrimaryColor};
@@ -123,6 +142,6 @@ const OptionWarpper = styled.div`
 `;
 
 const Option = styled.div`
-  width: auto;
+  width: 100%;
   border-bottom: 1px solid ${colors.g000};
 `;
