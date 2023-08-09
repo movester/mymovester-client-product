@@ -1,8 +1,10 @@
 export type colorsType =
   | "softPrimaryColor"
   | "vividPrimaryColor"
+  | "f200"
   | "f100"
   | "f000"
+  | "g300"
   | "g200"
   | "g100"
   | "g000";
