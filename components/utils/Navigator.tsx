@@ -23,7 +23,7 @@ export default Navigator;
 
 const Wrapper = styled.div`
   background-color: ${colors.f000};
-  height: 100vh;
+  height: auto;
   padding: 16px;
   width: 300px;
 `;

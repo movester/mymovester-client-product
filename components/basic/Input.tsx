@@ -30,6 +30,7 @@ export default Input;
 
 const Box = styled.div`
   position: relative;
+  display: block;
 `;
 
 const IconBox = styled.div`
@@ -39,9 +40,9 @@ const IconBox = styled.div`
 `;
 
 const InputBox = styled.input`
-  position: absolute;
-  top: 0;
-  left: 0;
+  /* position: absolute; */
+  /* top: 0;
+  left: 0; */
   border: 1px solid ${colors.g000};
   padding: 16px;
   outline: none;
