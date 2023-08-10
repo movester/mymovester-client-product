@@ -1,4 +1,4 @@
-import { PropsWithChildren, useMemo } from "react";
+import { MouseEventHandler, PropsWithChildren, useMemo } from "react";
 import { styled } from "styled-components";
 import { colors } from "../../constants/style";
 import { sizesType, variantsType } from "../../constants/types";
@@ -7,6 +7,8 @@ interface IProps {
   variants?: variantsType;
   size: Exclude<sizesType, "xs" | "xl">;
   disabled?: boolean;
+  width?: number;
+  onClick?: () => void;
 }
 
 interface IButton {
@@ -15,6 +17,7 @@ interface IButton {
   $border: string;
   $height: number;
   $fontSize: number;
+  $width: number;
 }
 
 const variantsColors: {
@@ -43,21 +46,28 @@ const sizes: {
   };
 } = {
   sm: {
+    height: 48,
+    fontSize: 16,
+  },
+  md: {
     height: 60,
     fontSize: 24,
   },
-  md: {
-    height: 80,
-    fontSize: 24,
-  },
   lg: {
-    height: 120,
+    height: 80,
     fontSize: 36,
   },
 };
 
 const Button = (props: PropsWithChildren<IProps>) => {
-  const { variants = "primary", children, size, disabled = false } = props;
+  const {
+    variants = "primary",
+    children,
+    size,
+    disabled = false,
+    width,
+    onClick,
+  } = props;
 
   return (
     <Box
@@ -66,6 +76,9 @@ const Button = (props: PropsWithChildren<IProps>) => {
       $border={`2px solid ${variantsColors[variants].borderColor}`}
       $height={sizes[size].height}
       $fontSize={sizes[size].fontSize}
+      $width={width}
+      onClick={onClick}
+      className="ButtonComponent"
     >
       {children ? children : "확인"}
     </Box>
@@ -81,14 +94,15 @@ const Box = styled.div<IButton>`
   text-align: center;
   display: flex;
   font-weight: bold;
-  width: 100%;
+  width: ${(props) => (props.$width ? `${props.$width}px` : "100%")};
   box-sizing: border-box;
   background-color: ${(props) => props.$backgroundColor};
   color: ${(props) => props.$color};
   height: ${(props) => `${props.$height}px`};
   font-size: ${(props) => `${props.$fontSize}px`};
   border: ${(props) => `${props.$border}}`};
-  &:hover {
-    cursor: pointer;
+  outline: none;
+  :hover {
+    background-color: red;
   }
 `;

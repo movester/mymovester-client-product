@@ -39,13 +39,14 @@ const IconBox = styled.div`
 `;
 
 const InputBox = styled.input`
-  border: 1px solid ${colors.g000};
-  padding: 16px;
-  outline: none;
-  border-radius: 4px;
-  width: calc(100% - 32px);
-  font-size: 16px;
   position: absolute;
   top: 0;
   left: 0;
+  border: 1px solid ${colors.g000};
+  padding: 16px;
+  outline: none;
+  border-radius: 8px;
+  width: 100%;
+  height: 48px;
+  font-size: 16px;
 `;

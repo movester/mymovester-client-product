@@ -8,10 +8,10 @@ const Navigator = () => {
   return (
     <Wrapper>
       <Box>
-        <Typography>Movester - backoffice</Typography>
+        <Typography variants="heading2">Movester - backoffice</Typography>
       </Box>
       <NavigatorBox onClick={() => router.push("/stretching")}>
-        <Typography variants="body2" color={colors.f000}>
+        <Typography variants="heading2" color={colors.f000}>
           스트레칭
         </Typography>
       </NavigatorBox>
@@ -22,16 +22,10 @@ const Navigator = () => {
 export default Navigator;
 
 const Wrapper = styled.div`
-  /* position: absolute;
-  top: 0;
-  left: 0; */
   background-color: ${colors.f000};
   height: 100vh;
   padding: 16px;
   width: 300px;
-  :hover {
-    cursor: pointer;
-  }
 `;
 
 const Box = styled.div`
@@ -41,7 +35,7 @@ const Box = styled.div`
 const NavigatorBox = styled.div`
   background-color: ${colors.softPrimaryColor};
   width: 100%;
-  padding: 8px;
+  padding: 8px 8px 8px 16px;
   border-radius: 4px;
   align-items: center;
 `;
