@@ -109,7 +109,7 @@ const StrechingPage = () => {
             <Input
               placeholder="제목으로 검색"
               value={inputValue}
-              setValue={setInputValue}
+              setValue={(e) => setInputValue(e.target.value)}
             ></Input>
           </Box>
         </Box>

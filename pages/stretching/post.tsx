@@ -9,28 +9,26 @@ import { useState } from "react";
 import ComboBox from "../../components/basic/ComboBox";
 import Button from "../../components/basic/Button";
 import { FiLink2 } from "react-icons/fi";
+import InputTableItem from "../../components/utils/InputTableItem";
+import { useRouter } from "next/router";
 
 const mainCatergory = [
-  { name: "전체", id: "total" },
   { name: "상체", id: "upperBody" },
   { name: "하체", id: "lowerBody" },
 ];
 
 const upperBodyCatergory = [
-  { name: "상체 전체", id: "total" },
   { name: "목/가슴/어께", id: "u1" },
   { name: "팔/손/손목", id: "u2" },
   { name: "등/몸통", id: "u3" },
 ];
 
 const lowerBodyCatergory = [
-  { name: "하체 전체", id: "total" },
   { name: "고관절/둔근", id: "l1" },
   { name: "종아리/발목/발", id: "l2" },
   { name: "무릎/허벅지", id: "l3" },
 ];
 const effectsCategory = [
-  { name: "효과 전체", id: "total" },
   { name: "통증완화", id: "e1" },
   { name: "자세개선", id: "e2" },
   { name: "근육이완", id: "e3" },
@@ -43,7 +41,82 @@ const StretchingPostPage = () => {
   const [inputValue, setInputValue] = useState("");
   const [mainValue, setMainValue] = useState(undefined);
   const [subValue, setSubValue] = useState(undefined);
-  const [effectValue, setEffectValue] = useState(undefined);
+  const [effectValue1, setEffectValue1] = useState(undefined);
+  const [effectValue2, setEffectValue2] = useState(undefined);
+  const [effectValue3, setEffectValue3] = useState(undefined);
+  const [videoLink, setVideoLink] = useState("");
+  const [preferTimeValue, setPreferTimeValue] = useState<number | null>(null);
+  const [preferSetValue, setPreferSetValue] = useState<number | null>(null);
+  const [stretchingOrder, setStretchingOrder] = useState<
+    { order: number; detail: string }[]
+  >([{ order: 1, detail: "" }]);
+  const [isStretchingOrderDeleteMode, setIsStretchingOrderDeleteMode] =
+    useState<boolean>(false);
+  const [stretchingOrderDeletelist, setStretchingOrderDeletelist] = useState(
+    []
+  );
+
+  const [cautionOrder, setCautionOrder] = useState<
+    { order: number; detail: string }[]
+  >([]);
+  const [isCautionOrderDeleteMode, setIsCautionOrderDeleteMode] =
+    useState<boolean>(false);
+  const [cautionOrderDeletelist, setCautionOrderDeletelist] = useState([]);
+
+  const router = useRouter();
+
+  const handleOnClickDeleteStretchingOrder = (order: number) => {
+    if (stretchingOrderDeletelist.includes(order)) {
+      setStretchingOrderDeletelist((prev) =>
+        prev.filter((item) => item !== order)
+      );
+    } else {
+      setStretchingOrderDeletelist((prev) => [...prev, order]);
+    }
+  };
+
+  const handleOnClickStretchingDeleteButton = () => {
+    setIsStretchingOrderDeleteMode((prev) => !prev);
+
+    if (isStretchingOrderDeleteMode && stretchingOrder.length > 1) {
+      let restArray = [...stretchingOrder].filter(
+        (orderList) =>
+          orderList.order !==
+          [...stretchingOrderDeletelist].filter(
+            (deleteOrder) => deleteOrder === orderList.order
+          )[0]
+      );
+      restArray.map((list, index) => (list.order = index + 1));
+      setStretchingOrder([...restArray]);
+    }
+  };
+
+  const handleOnClickDeleteCautionOrder = (order: number) => {
+    if (cautionOrderDeletelist.includes(order)) {
+      setCautionOrderDeletelist((prev) =>
+        prev.filter((item) => item !== order)
+      );
+    } else {
+      setCautionOrderDeletelist((prev) => [...prev, order]);
+    }
+  };
+
+  const handleOnClickCautionDeleteButton = () => {
+    setIsCautionOrderDeleteMode((prev) => !prev);
+
+    if (isCautionOrderDeleteMode) {
+      let restArray = [...cautionOrder].filter(
+        (orderList) =>
+          orderList.order !==
+          [...cautionOrderDeletelist].filter(
+            (deleteOrder) => deleteOrder === orderList.order
+          )[0]
+      );
+      restArray.map((list, index) => (list.order = index + 1));
+      setCautionOrder([...restArray]);
+    }
+  };
+
   return (
     <PageWrapper>
       <Navigator></Navigator>
@@ -67,7 +140,10 @@ const StretchingPostPage = () => {
                 width={"100%"}
               >
                 <Typography variants="heading2">제목＊</Typography>
-                <Input value={inputValue} setValue={setInputValue}></Input>
+                <Input
+                  value={inputValue}
+                  setValue={(e) => setInputValue(e.target.value)}
+                ></Input>
               </Box>
               <Box
                 display="flex"
@@ -120,26 +196,23 @@ const StretchingPostPage = () => {
                 >
                   <ComboBox
                     size="sm"
-                    disabled={!mainValue && !subValue}
                     list={effectsCategory}
-                    value={effectValue}
-                    setValue={setEffectValue}
+                    value={effectValue1}
+                    setValue={setEffectValue1}
                     label="효과1"
                   ></ComboBox>
                   <ComboBox
                     size="sm"
-                    disabled={!mainValue && !subValue}
                     list={effectsCategory}
-                    value={effectValue}
-                    setValue={setEffectValue}
+                    value={effectValue2}
+                    setValue={setEffectValue2}
                     label="효과2"
                   ></ComboBox>
                   <ComboBox
                     size="sm"
-                    disabled={!mainValue && !subValue}
                     list={effectsCategory}
-                    value={effectValue}
-                    setValue={setEffectValue}
+                    value={effectValue3}
+                    setValue={setEffectValue3}
                     label="효과3"
                   ></ComboBox>
                 </Box>
@@ -153,8 +226,8 @@ const StretchingPostPage = () => {
                 width={"100%"}
               >
                 <Typography variants="heading2">이미지＊</Typography>
-                <Box width={120}>
-                  <Button size="sm" variants="secondary">
+                <Box width={80}>
+                  <Button size="xs" variants="secondary">
                     +추가
                   </Button>
                 </Box>
@@ -165,14 +238,74 @@ const StretchingPostPage = () => {
                 gap={16}
                 justifyContent="start"
                 width={"100%"}
+                height={"100%"}
               >
                 <Typography variants="heading2">
                   스트레칭 방법 및 순서＊
                 </Typography>
-                <Box width={120}>
-                  <Button size="sm" variants="secondary">
-                    +추가
-                  </Button>
+                <Box
+                  border={` 1px solid ${colors.g000}`}
+                  display="flex"
+                  flexDirection="column"
+                  borderRadius={8}
+                  overflow="hidden"
+                  gap={1}
+                  backgroundColor={colors.g000}
+                >
+                  {stretchingOrder.map((item) => (
+                    <InputTableItem
+                      order={item.order}
+                      key={`stretching-oreder-${item.order}`}
+                      deleteMode={isStretchingOrderDeleteMode}
+                      onClickDelete={handleOnClickDeleteStretchingOrder}
+                    >
+                      <Input
+                        value={item.detail}
+                        setValue={(e) =>
+                          setStretchingOrder((prev) =>
+                            prev.map((prevItem) =>
+                              prevItem.order === item.order
+                                ? { ...prevItem, detail: e.target.value }
+                                : prevItem
+                            )
+                          )
+                        }
+                        invisible
+                      ></Input>
+                    </InputTableItem>
+                  ))}
+                </Box>
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  justifyContent="start"
+                  gap={4}
+                >
+                  {!isStretchingOrderDeleteMode && (
+                    <Box width={80}>
+                      <Button
+                        size="xs"
+                        variants="secondary"
+                        onClick={() =>
+                          setStretchingOrder((prev) => [
+                            ...prev,
+                            { order: prev.at(-1).order + 1, detail: "" },
+                          ])
+                        }
+                      >
+                        +추가
+                      </Button>
+                    </Box>
+                  )}
+                  <Box width={80}>
+                    <Button
+                      size="xs"
+                      variants="primary"
+                      onClick={handleOnClickStretchingDeleteButton}
+                    >
+                      {isStretchingOrderDeleteMode ? "확인" : "삭제"}
+                    </Button>
+                  </Box>
                 </Box>
               </Box>
               <Box
@@ -197,8 +330,8 @@ const StretchingPostPage = () => {
                   >
                     <Box width={120}>
                       <Input
-                        value={inputValue}
-                        setValue={setInputValue}
+                        value={preferTimeValue}
+                        setValue={setPreferTimeValue}
                       ></Input>
                     </Box>
                     <Typography variants="body1">회</Typography>
@@ -211,8 +344,8 @@ const StretchingPostPage = () => {
                   >
                     <Box width={120}>
                       <Input
-                        value={inputValue}
-                        setValue={setInputValue}
+                        value={preferSetValue}
+                        setValue={setPreferSetValue}
                       ></Input>
                     </Box>
                     <Typography variants="body1">세트</Typography>
@@ -228,41 +361,112 @@ const StretchingPostPage = () => {
                 width={"100%"}
               >
                 <Typography variants="heading2">주의할 점</Typography>
-                <Box width={120}>
-                  <Button size="sm" variants="secondary">
-                    +추가
-                  </Button>
-                </Box>
-              </Box>
-              <Box
-                display="flex"
-                flexDirection="column"
-                gap={16}
-                justifyContent="start"
-                width={"100%"}
-              >
-                <Typography variants="heading2">참고영상 링크</Typography>
+                {cautionOrder.length > 0 && (
+                  <Box
+                    border={` 1px solid ${colors.g000}`}
+                    display="flex"
+                    flexDirection="column"
+                    borderRadius={8}
+                    overflow="hidden"
+                    gap={1}
+                    backgroundColor={colors.g000}
+                  >
+                    {cautionOrder.map((item) => (
+                      <InputTableItem
+                        order={item.order}
+                        key={`caution-oreder-${item.order}`}
+                        deleteMode={isCautionOrderDeleteMode}
+                        onClickDelete={handleOnClickDeleteCautionOrder}
+                      >
+                        <Input
+                          value={item.detail}
+                          setValue={(e) =>
+                            setCautionOrder((prev) =>
+                              prev.map((prevItem) =>
+                                prevItem.order === item.order
+                                  ? { ...prevItem, detail: e.target.value }
+                                  : prevItem
+                              )
+                            )
+                          }
+                          invisible
+                        ></Input>
+                      </InputTableItem>
+                    ))}
+                  </Box>
+                )}
                 <Box
                   display="flex"
+                  flexDirection="row"
                   justifyContent="start"
-                  alignItems="center"
-                  gap={8}
+                  gap={4}
                 >
-                  <FiLink2></FiLink2>
-                  <Box width={500}>
-                    <Input value={inputValue} setValue={setInputValue}></Input>
+                  {!isCautionOrderDeleteMode && (
+                    <Box width={80}>
+                      <Button
+                        size="xs"
+                        variants="secondary"
+                        onClick={() =>
+                          setCautionOrder((prev) => [
+                            ...prev,
+                            {
+                              order: prev.at(-1) ? prev.at(-1).order + 1 : 1,
+                              detail: "",
+                            },
+                          ])
+                        }
+                      >
+                        +추가
+                      </Button>
+                    </Box>
+                  )}
+                  <Box width={80}>
+                    <Button
+                      size="xs"
+                      variants="primary"
+                      onClick={handleOnClickCautionDeleteButton}
+                    >
+                      {isCautionOrderDeleteMode ? "확인" : "삭제"}
+                    </Button>
+                  </Box>
+                </Box>
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  gap={16}
+                  justifyContent="start"
+                  width={"100%"}
+                >
+                  <Typography variants="heading2">참고영상 링크</Typography>
+                  <Box
+                    display="flex"
+                    justifyContent="start"
+                    alignItems="center"
+                    gap={8}
+                  >
+                    <FiLink2></FiLink2>
+                    <Box width={"100%"}>
+                      <Input
+                        value={videoLink}
+                        setValue={(e) => setVideoLink(e.target.value)}
+                      ></Input>
+                    </Box>
                   </Box>
                 </Box>
               </Box>
-            </Box>
-            <Box display="flex" justifyContent="center">
-              <Box display="flex" gap={8} width={320} justifyContent="center">
-                <Button size="md" variants="secondary">
-                  취소
-                </Button>
-                <Button size="md" variants="primary">
-                  등록
-                </Button>
+              <Box display="flex" justifyContent="center">
+                <Box display="flex" gap={8} width={320} justifyContent="center">
+                  <Button
+                    size="md"
+                    variants="secondary"
+                    onClick={() => router.push("/stretching")}
+                  >
+                    취소
+                  </Button>
+                  <Button size="md" variants="primary">
+                    등록
+                  </Button>
+                </Box>
               </Box>
             </Box>
           </Box>
