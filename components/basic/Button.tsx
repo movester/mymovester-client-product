@@ -5,7 +5,7 @@ import { sizesType, variantsType } from "../../constants/types";
 
 interface IProps {
   variants?: variantsType;
-  size: Exclude<sizesType, "xs" | "xl">;
+  size: Exclude<sizesType, "xl">;
   disabled?: boolean;
   width?: number;
   onClick?: () => void;
@@ -40,11 +40,15 @@ const variantsColors: {
 };
 
 const sizes: {
-  [key in Exclude<sizesType, "xs" | "xl">]: {
+  [key in Exclude<sizesType, "xl">]: {
     height: number;
     fontSize: number;
   };
 } = {
+  xs: {
+    height: 32,
+    fontSize: 12,
+  },
   sm: {
     height: 48,
     fontSize: 16,
@@ -103,6 +107,6 @@ const Box = styled.div<IButton>`
   border: ${(props) => `${props.$border}}`};
   outline: none;
   :hover {
-    background-color: red;
+    opacity: 1;
   }
 `;
