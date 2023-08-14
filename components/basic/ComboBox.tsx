@@ -59,6 +59,7 @@ const ComboBox = (props: IProps) => {
           padding: `${variants[size].padding}`,
           height: `${variants[size].height}px`,
           borderRadius: `${isOpend ? "8px 8px 0px 0px" : "8px"}`,
+          opacity: `${disabled ? 0.5 : 1}`,
         }}
         onClick={() => !disabled && setIsOpened((prev) => !prev)}
       >
@@ -131,6 +132,7 @@ const OptionWarpper = styled.div`
   border: 1px solid ${colors.g000};
   border-top: none;
   background-color: ${colors.f000};
+  z-index: 20;
   :hover {
     background-color: ${colors.softPrimaryColor};
     color: #ffffff;
