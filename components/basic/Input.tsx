@@ -4,22 +4,29 @@ import { colors } from "../../constants/style";
 import { MdCancel } from "react-icons/md";
 
 interface IProps {
-  value: string;
-  setValue: Dispatch<SetStateAction<string>>;
+  value: string | number;
+  setValue: (e) => void;
   placeholder?: string;
+  invisible?: boolean;
+  onClear?: () => void;
+}
+
+interface IInput {
+  $invisible: boolean;
 }
 
 const Input = (props: PropsWithChildren<IProps>) => {
-  const { value, setValue, placeholder = "검색어를 적어주세요" } = props;
+  const { value, setValue, placeholder, invisible = false, onClear } = props;
   return (
     <Box>
       <InputBox
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={setValue}
         placeholder={placeholder}
+        $invisible={invisible}
       ></InputBox>
-      {value && (
-        <IconBox onClick={() => setValue("")}>
+      {value && onClear && (
+        <IconBox onClick={onClear}>
           <MdCancel size={24} color={colors.g000}></MdCancel>
         </IconBox>
       )}
@@ -39,12 +46,13 @@ const IconBox = styled.div`
   top: 14px;
 `;
 
-const InputBox = styled.input`
+const InputBox = styled.input<IInput>`
   /* position: absolute; */
   /* top: 0;
   left: 0; */
-  border: 1px solid ${colors.g000};
-  padding: 16px;
+  border: ${({ $invisible }) =>
+    $invisible ? "none" : `1px solid ${colors.g000}`};
+  padding: ${({ $invisible }) => ($invisible ? "0px 16px" : "16px")};
   outline: none;
   border-radius: 8px;
   width: 100%;
