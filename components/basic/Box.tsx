@@ -14,6 +14,7 @@ interface IProps {
   backgroundColor?: string;
   border?: string;
   borderRadius?: number;
+  gridTemplateColumns?: string;
   onClick?: () => void;
   onMouseOver?: () => void;
 }
@@ -29,8 +30,9 @@ interface IBox {
   $display?: "flex" | "block" | "inline" | "grid";
   $overflow?: "scroll" | "hidden";
   $backgroundColor?: string;
-  $border: string;
-  $borderRadius: number;
+  $border?: string;
+  $borderRadius?: number;
+  $gridTemplateColumns?: string;
 }
 
 const Box = (props: PropsWithChildren<IProps>) => {
@@ -41,15 +43,16 @@ const Box = (props: PropsWithChildren<IProps>) => {
     justifyContent,
     alignItems,
     padding = 0,
-    width,
-    height,
+    width = "100%",
+    height = "auto",
     display,
     overflow,
     backgroundColor,
     border,
-    borderRadius,
+    borderRadius = 0,
     onClick,
     onMouseOver,
+    gridTemplateColumns,
   } = props;
   return (
     <BoxWrapper
@@ -65,6 +68,7 @@ const Box = (props: PropsWithChildren<IProps>) => {
       $backgroundColor={backgroundColor}
       $border={border}
       $borderRadius={borderRadius}
+      $gridTemplateColumns={gridTemplateColumns}
       onClick={onClick}
       onMouseOver={onMouseOver}
     >
@@ -91,4 +95,5 @@ const BoxWrapper = styled.div<IBox>`
   background-color: ${({ $backgroundColor }) => $backgroundColor};
   border: ${({ $border }) => $border};
   border-radius: ${({ $borderRadius }) => `${$borderRadius}px`};
+  grid-template-columns: ${({ $gridTemplateColumns }) => $gridTemplateColumns};
 `;

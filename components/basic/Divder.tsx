@@ -13,5 +13,5 @@ const Divider = (props: IProps) => {
 export default Divider;
 
 const Box = styled.div`
-  height: 2px;
+  height: 1px;
 `;
