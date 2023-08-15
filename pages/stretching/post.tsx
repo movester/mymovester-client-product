@@ -11,6 +11,7 @@ import Button from "../../components/basic/Button";
 import { FiLink2 } from "react-icons/fi";
 import InputTableItem from "../../components/utils/InputTableItem";
 import { useRouter } from "next/router";
+import SubTitle from "../../components/utils/SubTitle";
 
 const mainCatergory = [
   { name: "상체", id: "upperBody" },
@@ -139,7 +140,7 @@ const StretchingPostPage = () => {
                 justifyContent="start"
                 width={"100%"}
               >
-                <Typography variants="heading2">제목＊</Typography>
+                <SubTitle required>제목</SubTitle>
                 <Input
                   value={inputValue}
                   setValue={(e) => setInputValue(e.target.value)}
@@ -152,7 +153,7 @@ const StretchingPostPage = () => {
                 justifyContent="start"
                 width={"100%"}
               >
-                <Typography variants="heading2">부위＊</Typography>
+                <SubTitle required>부위</SubTitle>
                 <Box
                   display="flex"
                   justifyContent="start"
@@ -187,7 +188,7 @@ const StretchingPostPage = () => {
                 justifyContent="start"
                 width={"100%"}
               >
-                <Typography variants="heading2">효과</Typography>
+                <SubTitle caption="＊효과1 선택필수">효과</SubTitle>
                 <Box
                   display="flex"
                   justifyContent="start"
@@ -216,7 +217,6 @@ const StretchingPostPage = () => {
                     label="효과3"
                   ></ComboBox>
                 </Box>
-                <Typography variants="caption">＊효과1 선택필수</Typography>
               </Box>
               <Box
                 display="flex"
@@ -225,7 +225,7 @@ const StretchingPostPage = () => {
                 justifyContent="start"
                 width={"100%"}
               >
-                <Typography variants="heading2">이미지＊</Typography>
+                <SubTitle required>이미지</SubTitle>
                 <Box width={80}>
                   <Button size="xs" variants="secondary">
                     +추가
@@ -240,9 +240,7 @@ const StretchingPostPage = () => {
                 width={"100%"}
                 height={"100%"}
               >
-                <Typography variants="heading2">
-                  스트레칭 방법 및 순서＊
-                </Typography>
+                <SubTitle required>스트레칭 방법 및 순서</SubTitle>
                 <Box
                   border={` 1px solid ${colors.g000}`}
                   display="flex"
@@ -315,7 +313,7 @@ const StretchingPostPage = () => {
                 justifyContent="start"
                 width={"100%"}
               >
-                <Typography variants="heading2">권장 횟수＊</Typography>
+                <SubTitle required>권장 횟수</SubTitle>
                 <Box
                   display="flex"
                   justifyContent="start"
@@ -360,7 +358,7 @@ const StretchingPostPage = () => {
                 justifyContent="start"
                 width={"100%"}
               >
-                <Typography variants="heading2">주의할 점</Typography>
+                <SubTitle>주의할 점</SubTitle>
                 {cautionOrder.length > 0 && (
                   <Box
                     border={` 1px solid ${colors.g000}`}
@@ -437,7 +435,7 @@ const StretchingPostPage = () => {
                   justifyContent="start"
                   width={"100%"}
                 >
-                  <Typography variants="heading2">참고영상 링크</Typography>
+                  <SubTitle>참고영상 링크</SubTitle>
                   <Box
                     display="flex"
                     justifyContent="start"
