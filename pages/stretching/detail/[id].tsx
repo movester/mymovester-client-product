@@ -30,20 +30,23 @@ const StretchingDetailPage = () => {
               justifyContent="start"
               alignItems="center"
               gap={4}
+              height={32}
             >
               <Typography variants="heading2">스트레칭</Typography>
               <Typography variants="heading2">{">"}</Typography>
               <Typography variants="heading2">상세</Typography>
             </Box>
-            <Box width={80}>
-              <Button
-                size="xs"
-                variants="secondary"
-                onClick={() => router.push("/stretching")}
-              >
-                {"목록 >"}
-              </Button>
-            </Box>
+            {!modifyMode && (
+              <Box width={80}>
+                <Button
+                  size="xs"
+                  variants="secondary"
+                  onClick={() => router.push("/stretching")}
+                >
+                  {"목록 >"}
+                </Button>
+              </Box>
+            )}
           </BreadCrumb>
         </ShadowBox>
         <Box display="flex" justifyContent="end" alignItems="center" gap={8}>
@@ -68,12 +71,6 @@ const StretchingDetailPage = () => {
         </Box>
 
         <ShadowBox>
-          {/* <Box
-            display="flex"
-            flexDirection="column"
-            gap={120}
-            padding={32}
-          ></Box> */}
           {!modifyMode ? (
             /*상세뷰*/
             <StretchingDetailView></StretchingDetailView>
