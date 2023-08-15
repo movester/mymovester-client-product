@@ -6,11 +6,16 @@ interface IProps {
   gap?: number;
   justifyContent?: "center" | "start" | "end" | "space-between";
   alignItems?: "center" | "start" | "end";
-  padding?: number;
+  padding?: number | string;
   width?: number | string;
   height?: number | string;
   display?: "flex" | "block" | "inline" | "grid";
   overflow?: "scroll" | "hidden";
+  backgroundColor?: string;
+  border?: string;
+  borderRadius?: number;
+  onClick?: () => void;
+  onMouseOver?: () => void;
 }
 
 interface IBox {
@@ -18,25 +23,33 @@ interface IBox {
   $gap?: number;
   $justifyContent?: "center" | "start" | "end" | "space-between";
   $alignItems?: "center" | "start" | "end";
-  $padding?: number;
+  $padding?: number | string;
   $width?: number | string;
   $height?: number | string;
   $display?: "flex" | "block" | "inline" | "grid";
   $overflow?: "scroll" | "hidden";
+  $backgroundColor?: string;
+  $border: string;
+  $borderRadius: number;
 }
 
 const Box = (props: PropsWithChildren<IProps>) => {
   const {
     children,
     flexDirection,
-    gap,
+    gap = 0,
     justifyContent,
     alignItems,
-    padding,
+    padding = 0,
     width,
     height,
     display,
     overflow,
+    backgroundColor,
+    border,
+    borderRadius,
+    onClick,
+    onMouseOver,
   } = props;
   return (
     <BoxWrapper
@@ -49,6 +62,11 @@ const Box = (props: PropsWithChildren<IProps>) => {
       $height={height}
       $display={display}
       $overflow={overflow}
+      $backgroundColor={backgroundColor}
+      $border={border}
+      $borderRadius={borderRadius}
+      onClick={onClick}
+      onMouseOver={onMouseOver}
     >
       {children}
     </BoxWrapper>
@@ -58,14 +76,19 @@ const Box = (props: PropsWithChildren<IProps>) => {
 export default Box;
 
 const BoxWrapper = styled.div<IBox>`
-  width: ${({ $width }) => (Number.isNaN($width) ? $width : `${$width}px `)};
+  width: ${({ $width }) =>
+    typeof $width === "string" ? $width : `${$width}px `};
   height: ${({ $height }) =>
-    Number.isNaN($height) ? $height : `${$height}px `};
+    typeof $height === "string" ? $height : `${$height}px `};
   display: ${({ $display }) => $display};
   flex-direction: ${({ $flexDirection }) => $flexDirection};
   justify-content: ${({ $justifyContent }) => $justifyContent};
   align-items: ${({ $alignItems }) => $alignItems};
-  padding: ${({ $padding }) => `${$padding}px`};
+  padding: ${({ $padding }) =>
+    typeof $padding === "string" ? $padding : `${$padding}px `};
   gap: ${({ $gap }) => `${$gap}px`};
   overflow: ${({ $overflow }) => $overflow};
+  background-color: ${({ $backgroundColor }) => $backgroundColor};
+  border: ${({ $border }) => $border};
+  border-radius: ${({ $borderRadius }) => `${$borderRadius}px`};
 `;

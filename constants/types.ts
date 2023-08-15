@@ -1,4 +1,5 @@
 export type colorsType =
+  | "r000"
   | "softPrimaryColor"
   | "vividPrimaryColor"
   | "f200"

@@ -5,6 +5,7 @@ type IColors = {
 };
 
 export const colors: IColors = {
+  r000: " #f64f59",
   softPrimaryColor: "#6D66AA",
   vividPrimaryColor: "#2A1598",
   f200: "#f2f2f2",
