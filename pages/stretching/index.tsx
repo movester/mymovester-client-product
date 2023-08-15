@@ -9,48 +9,33 @@ import { useState } from "react";
 import Input from "../../components/basic/Input";
 import { useRouter } from "next/router";
 import Box from "../../components/basic/Box";
-
-const mainCatergory = [
-  { name: "전체", id: "total" },
-  { name: "상체", id: "upperBody" },
-  { name: "하체", id: "lowerBody" },
-];
-
-const upperBodyCatergory = [
-  { name: "상체 전체", id: "total" },
-  { name: "목/가슴/어께", id: "u1" },
-  { name: "팔/손/손목", id: "u2" },
-  { name: "등/몸통", id: "u3" },
-];
-
-const lowerBodyCatergory = [
-  { name: "하체 전체", id: "total" },
-  { name: "고관절/둔근", id: "l1" },
-  { name: "종아리/발목/발", id: "l2" },
-  { name: "무릎/허벅지", id: "l3" },
-];
-
-const effectsCategory = [
-  { name: "효과 전체", id: "total" },
-  { name: "통증완화", id: "e1" },
-  { name: "자세개선", id: "e2" },
-  { name: "근육이완", id: "e3" },
-  { name: "혈액순환", id: "e4" },
-  { name: "거북목 완화", id: "e5" },
-  { name: "라운드숄더 완화", id: "e6" },
-];
-
-const listType = [
-  { name: "최신순", id: "latest" },
-  { name: "인기순", id: "famous" },
-];
+import {
+  EFFECT_CATEGORY,
+  IComboBoxType,
+  LIST_ORDER_CATEGORY,
+  LOWER_BODY_CATEGORY,
+  LOWER_BODY_SEARCH_CATEGORY,
+  STRETCHING_MAIN_SEARCH_CATEGORY,
+  UPPER_BODY_SEARCH_CATEGORY,
+} from "../../constants";
+import {
+  StretchingEffectType,
+  StretchingListOrderFilter,
+  StretchingMainCategoryType,
+  StretchingSubCategoryType,
+} from "../../constants/types";
 
 const StrechingPage = () => {
-  const [mainValue, setMainValue] = useState(undefined);
-  const [subValue, setSubValue] = useState(undefined);
-  const [effectValue, setEffectValue] = useState(undefined);
-  const [listTypeValue, setListTypeValue] = useState(listType[0]);
-  const [inputValue, setInputValue] = useState<string>("");
+  const [mainCategoryValue, setMainCategoryValue] =
+    useState<IComboBoxType<StretchingMainCategoryType>>(undefined);
+  const [subCategoryValue, setSubCategoryValue] =
+    useState<IComboBoxType<StretchingSubCategoryType>>(undefined);
+  const [effectValue, setEffectValue] =
+    useState<IComboBoxType<StretchingEffectType>>(undefined);
+  const [listOrderValue, setListOrderValue] = useState<
+    IComboBoxType<StretchingListOrderFilter>
+  >(LIST_ORDER_CATEGORY[0]);
+  const [searchKeywordValue, setSearchKeywordValue] = useState<string>("");
 
   const router = useRouter();
 
@@ -79,27 +64,29 @@ const StrechingPage = () => {
           <Box display="flex" justifyContent="start" alignItems="start" gap={8}>
             <ComboBox
               size="sm"
-              list={mainCatergory}
-              value={mainValue}
-              setValue={setMainValue}
+              list={STRETCHING_MAIN_SEARCH_CATEGORY}
+              value={mainCategoryValue}
+              setValue={setMainCategoryValue}
               label="대분류"
             ></ComboBox>
             <ComboBox
               size="sm"
-              disabled={!mainValue}
+              disabled={!mainCategoryValue}
               list={
-                mainValue?.id === "upperBody"
-                  ? upperBodyCatergory
-                  : lowerBodyCatergory
+                mainCategoryValue?.id === "total"
+                  ? UPPER_BODY_SEARCH_CATEGORY.concat(LOWER_BODY_CATEGORY)
+                  : mainCategoryValue?.id === "UPPER_BODY"
+                  ? UPPER_BODY_SEARCH_CATEGORY
+                  : LOWER_BODY_SEARCH_CATEGORY
               }
-              value={subValue}
-              setValue={setSubValue}
+              value={subCategoryValue}
+              setValue={setSubCategoryValue}
               label="중분류"
             ></ComboBox>
             <ComboBox
               size="sm"
-              disabled={!mainValue && !subValue}
-              list={effectsCategory}
+              disabled={!subCategoryValue}
+              list={EFFECT_CATEGORY}
               value={effectValue}
               setValue={setEffectValue}
               label="효과"
@@ -108,8 +95,8 @@ const StrechingPage = () => {
           <Box width={400}>
             <Input
               placeholder="제목으로 검색"
-              value={inputValue}
-              setValue={(e) => setInputValue(e.target.value)}
+              value={searchKeywordValue}
+              setValue={(e) => setSearchKeywordValue(e.target.value)}
             ></Input>
           </Box>
         </Box>
@@ -132,9 +119,9 @@ const StrechingPage = () => {
               </Typography>
               <ComboBox
                 size="xs"
-                value={listTypeValue}
-                setValue={setListTypeValue}
-                list={listType}
+                value={listOrderValue}
+                setValue={setListOrderValue}
+                list={LIST_ORDER_CATEGORY}
               ></ComboBox>
             </Box>
             <Table>
@@ -166,43 +153,9 @@ const StrechingPage = () => {
                 </TableItem>
               </TableGrid>
               <TableGirdWrapper>
-                <TableGrid>
+                <TableGrid onClick={() => router.push(`stretching/detail/1`)}>
                   <TableItem>
-                    <Typography variants="body1">거북목 스트레칭</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">{"상체 > 등/몸통"}</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">자세개선, 통증완화</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">30</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">2023-08-01</Typography>
-                  </TableItem>
-                </TableGrid>
-                <TableGrid>
-                  <TableItem>
-                    <Typography variants="body1">거북목 스트레칭</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">{"상체 > 등/몸통"}</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">자세개선, 통증완화</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">30</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">2023-08-01</Typography>
-                  </TableItem>
-                </TableGrid>
-                <TableGrid>
-                  <TableItem>
-                    <Typography variants="body1">거북목 스트레칭</Typography>
+                    <Typography variants="heading2">거북목 스트레칭</Typography>
                   </TableItem>
                   <TableItem>
                     <Typography variants="body1">{"상체 > 등/몸통"}</Typography>
@@ -260,6 +213,12 @@ const TableGirdWrapper = styled.div`
   flex-direction: column;
   background-color: ${colors.f200};
   gap: 1px;
+  :hover {
+    div {
+      background-color: ${colors.f100};
+      cursor: pointer;
+    }
+  }
 `;
 
 const TableGrid = styled.div`

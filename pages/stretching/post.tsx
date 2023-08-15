@@ -124,9 +124,16 @@ const StretchingPostPage = () => {
       <ContentWrapper>
         <ShadowBox>
           <BreadCrumb>
-            <Typography variants="heading2">스트레칭</Typography>
-            <Typography variants="heading2">{">"}</Typography>
-            <Typography variants="heading2">스트레칭 등록</Typography>
+            <Box
+              display="flex"
+              justifyContent="start"
+              alignItems="center"
+              gap={4}
+            >
+              <Typography variants="heading2">스트레칭</Typography>
+              <Typography variants="heading2">{">"}</Typography>
+              <Typography variants="heading2">스트레칭 등록</Typography>
+            </Box>
           </BreadCrumb>
         </ShadowBox>
 

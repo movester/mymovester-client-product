@@ -20,3 +20,23 @@ export type typographyType =
   | "body1"
   | "body2"
   | "caption";
+
+export type StretchingMainCategoryType = "UPPER_BODY" | "LOWER_BODY";
+
+export type StretchingSubCategoryType =
+  | "NECK"
+  | "ARM"
+  | "BACK"
+  | "HIP_JOINT"
+  | "CALF"
+  | "KNEE";
+
+export type StretchingEffectType =
+  | "RELIEF_PAIN"
+  | "IMPROVE_POSTURE"
+  | "RELAX_MUSCLE"
+  | "BLOOD_CIRCULATION"
+  | "RELIEF_TURTLE_NECK"
+  | "RELIEF_ROUND_SHOULDER";
+
+export type StretchingListOrderFilter = "RECENT" | "POPULAR";
