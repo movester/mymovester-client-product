@@ -6,6 +6,7 @@ import Divider from "../components/basic/Divder";
 import Typography from "../components/basic/Typography";
 import ListTableItem from "../components/utils/ListTableItem";
 import { colors } from "../constants/style";
+import ShadowBox from "../components/utils/ShadowBox";
 
 const StretchingDetailView = () => {
   return (
@@ -55,6 +56,7 @@ const StretchingDetailView = () => {
           alignItems="center"
           border={` 1px solid ${colors.g000}`}
           borderRadius={8}
+          width={"100%"}
           overflow="hidden"
         >
           <ListTableItem order={1}>
@@ -62,12 +64,14 @@ const StretchingDetailView = () => {
           </ListTableItem>
         </Box>
       </Box>
-      <Box backgroundColor={colors.f200} padding={16} borderRadius={8}>
-        <Typography variants="heading2">✨ 권장 횟수</Typography>
-        <Typography variants="body1">는 </Typography>
-        <Typography variants="heading1">10회 2세트 </Typography>
-        <Typography variants="body1">입니다.</Typography>
-      </Box>
+      <ShadowBox>
+        <Box backgroundColor={colors.f200} padding={16} borderRadius={8}>
+          <Typography variants="heading2">✨ 권장 횟수</Typography>
+          <Typography variants="body1">는 </Typography>
+          <Typography variants="heading1">10회 2세트 </Typography>
+          <Typography variants="body1">입니다.</Typography>
+        </Box>
+      </ShadowBox>
       {/* 주의 사항 */}
       <Box
         display="flex"
@@ -84,6 +88,7 @@ const StretchingDetailView = () => {
           alignItems="center"
           border={` 1px solid ${colors.g000}`}
           borderRadius={8}
+          width={"100%"}
           overflow="hidden"
         >
           <ListTableItem order={1}>
@@ -101,9 +106,9 @@ const StretchingDetailView = () => {
         height={"auto"}
       >
         <Typography variants="heading2">참고영상</Typography>
-        <Box display="flex" justifyContent="center">
+        <Box display="flex" justifyContent="center" width={"100%"}>
           <iframe
-            width={500}
+            width={550}
             height={400}
             allowFullScreen
             src="https://www.youtube.com/embed/Kaapaq3WVQ0"

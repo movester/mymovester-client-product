@@ -166,7 +166,7 @@ const StrechingPage = () => {
                 </TableItem>
               </TableGrid>
               <TableGirdWrapper>
-                <TableGrid>
+                <TableGrid onClick={() => router.push(`stretching/detail/1`)}>
                   <TableItem>
                     <Typography variants="body1">거북목 스트레칭</Typography>
                   </TableItem>

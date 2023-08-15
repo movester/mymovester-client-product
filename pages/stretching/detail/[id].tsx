@@ -25,7 +25,12 @@ const StretchingDetailPage = () => {
       <ContentWrapper>
         <ShadowBox>
           <BreadCrumb>
-            <Box display="flex" justifyContent="start" alignItems="center">
+            <Box
+              display="flex"
+              justifyContent="start"
+              alignItems="center"
+              gap={4}
+            >
               <Typography variants="heading2">스트레칭</Typography>
               <Typography variants="heading2">{">"}</Typography>
               <Typography variants="heading2">상세</Typography>
