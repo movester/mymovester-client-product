@@ -5,9 +5,13 @@ import {
   StretchingSubCategoryType,
 } from "./types";
 
-export interface IComboBoxType<T> {
+export interface ITotalComboxType<T> {
   name: string;
   id: T | "total";
+}
+export interface IComboBoxType<T> {
+  name: string;
+  id: T;
 }
 
 export const STRETCHING_MAIN_CATEGORY: IComboBoxType<StretchingMainCategoryType>[] =
@@ -42,11 +46,11 @@ export const LIST_ORDER_CATEGORY: IComboBoxType<StretchingListOrderFilter>[] = [
   { name: "인기순", id: "POPULAR" },
 ];
 
-export const STRETCHING_MAIN_SEARCH_CATEGORY: IComboBoxType<StretchingMainCategoryType>[] =
+export const STRETCHING_MAIN_SEARCH_CATEGORY: ITotalComboxType<StretchingMainCategoryType>[] =
   [{ name: "전체", id: "total" }, ...STRETCHING_MAIN_CATEGORY];
 
-export const UPPER_BODY_SEARCH_CATEGORY: IComboBoxType<StretchingSubCategoryType>[] =
+export const UPPER_BODY_SEARCH_CATEGORY: ITotalComboxType<StretchingSubCategoryType>[] =
   [{ name: "전체", id: "total" }, ...UPPER_BODY_CATEGORY];
 
-export const LOWER_BODY_SEARCH_CATEGORY: IComboBoxType<StretchingSubCategoryType>[] =
+export const LOWER_BODY_SEARCH_CATEGORY: ITotalComboxType<StretchingSubCategoryType>[] =
   [{ name: "전체", id: "total" }, ...LOWER_BODY_CATEGORY];
