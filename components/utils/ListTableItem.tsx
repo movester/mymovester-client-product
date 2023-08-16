@@ -1,3 +1,4 @@
+import React from "react";
 import { PropsWithChildren } from "react";
 import { colors } from "../../constants/style";
 import Box from "../basic/Box";
