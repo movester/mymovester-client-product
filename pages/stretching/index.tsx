@@ -198,7 +198,10 @@ const StrechingPage = () => {
                       <TableGrid
                         key={`stretching-list-${list.id}`}
                         onClick={() =>
-                          router.push(`stretching/detail/${list.id}`)
+                          router.push({
+                            pathname: `stretching/detail`,
+                            query: { id: list.id },
+                          })
                         }
                       >
                         <TableItem>

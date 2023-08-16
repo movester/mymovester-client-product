@@ -48,7 +48,9 @@ const StretchingModifyView = () => {
   >([]);
   const [isCautionOrderDeleteMode, setIsCautionOrderDeleteMode] =
     useState<boolean>(false);
-  const [cautionOrderDeletelist, setCautionOrderDeletelist] = useState<number[] | undefined>([]);
+  const [cautionOrderDeletelist, setCautionOrderDeletelist] = useState<
+    number[] | undefined
+  >([]);
 
   const handleOnClickDeleteStretchingOrder = (order: number) => {
     if (stretchingOrderDeletelist.includes(order)) {
@@ -82,7 +84,7 @@ const StretchingModifyView = () => {
         prev.filter((item) => item !== order)
       );
     } else {
-      setCautionOrderDeletelist((prev) => prev.length > 0 ? prev.push(order):);
+      setCautionOrderDeletelist((prev) => [...prev, order]);
     }
   };
 

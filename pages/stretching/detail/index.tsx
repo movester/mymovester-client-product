@@ -10,11 +10,20 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import StretchingDetailView from "../../../views/stretchingDetailView";
 import StretchingModifyView from "../../../views/stretchingModifyView";
+import useListDeatilInquiry from "../../../hooks/use-list-detail-inquiry";
 
 const StretchingDetailPage = () => {
   const [modifyMode, setModifyMode] = useState<boolean>(false);
 
   const router = useRouter();
+
+  const STRETCHING_ID = router.query.id
+    ? typeof router.query.id == "string"
+      ? router.query.id
+      : router.query.id[0]
+    : null;
+
+  const data = useListDeatilInquiry({ listId: STRETCHING_ID });
 
   const handleOnClickDeleteButton = () => {
     confirm("정말로 삭제하시겠습니까?");
@@ -74,7 +83,13 @@ const StretchingDetailPage = () => {
         <ShadowBox>
           {!modifyMode ? (
             /*상세뷰*/
-            <StretchingDetailView></StretchingDetailView>
+            <>
+              {data ? (
+                <StretchingDetailView data={data}></StretchingDetailView>
+              ) : (
+                <Typography>결과를 불러오지 못하였습니다.</Typography>
+              )}
+            </>
           ) : (
             /*수정모드*/
             <StretchingModifyView></StretchingModifyView>
