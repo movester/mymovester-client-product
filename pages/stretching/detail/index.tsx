@@ -11,6 +11,7 @@ import { useState } from "react";
 import StretchingDetailView from "../../../views/stretchingDetailView";
 import StretchingModifyView from "../../../views/stretchingModifyView";
 import useListDeatilInquiry from "../../../hooks/use-list-detail-inquiry";
+import useListDelete from "../../../hooks/use-list-delete";
 
 const StretchingDetailPage = () => {
   const [modifyMode, setModifyMode] = useState<boolean>(false);
@@ -25,8 +26,13 @@ const StretchingDetailPage = () => {
 
   const data = useListDeatilInquiry({ listId: STRETCHING_ID });
 
+  const { mutate: deletList } = useListDelete();
+
   const handleOnClickDeleteButton = () => {
-    confirm("정말로 삭제하시겠습니까?");
+    const response = confirm("정말로 삭제하시겠습니까?");
+    if (response && STRETCHING_ID) {
+      deletList(STRETCHING_ID);
+    }
   };
 
   return (
@@ -92,7 +98,7 @@ const StretchingDetailPage = () => {
             </>
           ) : (
             /*수정모드*/
-            <StretchingModifyView></StretchingModifyView>
+            <StretchingModifyView data={data}></StretchingModifyView>
           )}
         </ShadowBox>
       </ContentWrapper>

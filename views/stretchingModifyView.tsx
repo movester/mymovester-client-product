@@ -21,19 +21,47 @@ import {
   StretchingMainCategoryType,
   StretchingSubCategoryType,
 } from "../constants/types";
+import { IDetailData } from "./stretchingDetailView";
+import {
+  STRETCHING_EFFECT_TEXT,
+  STRETCHING_MAIN_CATEGORY_TEXT,
+  STRETCHING_SUB_CATEGORY_TEXT,
+} from "../constants/text";
 
-const StretchingModifyView = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [mainCategoryValue, setMainCategoryValue] =
-    useState<IComboBoxType<StretchingMainCategoryType>>(undefined);
-  const [subCategoryValue, setSubCategoryValue] =
-    useState<IComboBoxType<StretchingSubCategoryType>>(undefined);
-  const [effectValue1, setEffectValue1] = useState(undefined);
-  const [effectValue2, setEffectValue2] = useState(undefined);
-  const [effectValue3, setEffectValue3] = useState(undefined);
-  const [videoLink, setVideoLink] = useState("");
-  const [preferTimeValue, setPreferTimeValue] = useState<number | null>(null);
-  const [preferSetValue, setPreferSetValue] = useState<number | null>(null);
+interface IProps {
+  data: IDetailData;
+}
+
+const StretchingModifyView = (props: IProps) => {
+  const { data } = props;
+  const [inputValue, setInputValue] = useState(data.title);
+  const [mainCategoryValue, setMainCategoryValue] = useState<
+    IComboBoxType<StretchingMainCategoryType>
+  >({
+    id: data.mainCategory,
+    name: STRETCHING_MAIN_CATEGORY_TEXT[data.mainCategory],
+  });
+  const [subCategoryValue, setSubCategoryValue] = useState<
+    IComboBoxType<StretchingSubCategoryType>
+  >({
+    id: data.subCategory,
+    name: STRETCHING_SUB_CATEGORY_TEXT[data.subCategory],
+  });
+  const [effectValue1, setEffectValue1] = useState({
+    id: data.effectList[0],
+    name: STRETCHING_EFFECT_TEXT[data.effectList[0]],
+  });
+  const [effectValue2, setEffectValue2] = useState({
+    id: data.effectList[1],
+    name: STRETCHING_EFFECT_TEXT[data.effectList[1]],
+  });
+  const [effectValue3, setEffectValue3] = useState({
+    id: data.effectList[2],
+    name: STRETCHING_EFFECT_TEXT[data.effectList[2]],
+  });
+  const [videoLink, setVideoLink] = useState(data.videoUrl);
+  const [preferTimeValue, setPreferTimeValue] = useState<number>(data.collect);
+  const [preferSetValue, setPreferSetValue] = useState<number>(data.set);
   const [stretchingOrder, setStretchingOrder] = useState<
     { order: number; detail: string }[]
   >([{ order: 1, detail: "" }]);
