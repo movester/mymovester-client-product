@@ -1,3 +1,4 @@
+import React from "react";
 import { FiLink2 } from "react-icons/fi";
 import Box from "../components/basic/Box";
 import Button from "../components/basic/Button";
@@ -9,36 +10,24 @@ import SubTitle from "../components/utils/SubTitle";
 import { colors } from "../constants/style";
 import { useState } from "react";
 import { useRouter } from "next/router";
-
-const mainCatergory = [
-  { name: "상체", id: "upperBody" },
-  { name: "하체", id: "lowerBody" },
-];
-
-const upperBodyCatergory = [
-  { name: "목/가슴/어께", id: "u1" },
-  { name: "팔/손/손목", id: "u2" },
-  { name: "등/몸통", id: "u3" },
-];
-
-const lowerBodyCatergory = [
-  { name: "고관절/둔근", id: "l1" },
-  { name: "종아리/발목/발", id: "l2" },
-  { name: "무릎/허벅지", id: "l3" },
-];
-const effectsCategory = [
-  { name: "통증완화", id: "e1" },
-  { name: "자세개선", id: "e2" },
-  { name: "근육이완", id: "e3" },
-  { name: "혈액순환", id: "e4" },
-  { name: "거북목 완화", id: "e5" },
-  { name: "라운드숄더 완화", id: "e6" },
-];
+import {
+  STRETCHING_MAIN_CATEGORY,
+  LOWER_BODY_CATEGORY,
+  UPPER_BODY_CATEGORY,
+  EFFECT_CATEGORY,
+  IComboBoxType,
+} from "../constants";
+import {
+  StretchingMainCategoryType,
+  StretchingSubCategoryType,
+} from "../constants/types";
 
 const StretchingModifyView = () => {
   const [inputValue, setInputValue] = useState("");
-  const [mainValue, setMainValue] = useState(undefined);
-  const [subValue, setSubValue] = useState(undefined);
+  const [mainCategoryValue, setMainCategoryValue] =
+    useState<IComboBoxType<StretchingMainCategoryType>>(undefined);
+  const [subCategoryValue, setSubCategoryValue] =
+    useState<IComboBoxType<StretchingSubCategoryType>>(undefined);
   const [effectValue1, setEffectValue1] = useState(undefined);
   const [effectValue2, setEffectValue2] = useState(undefined);
   const [effectValue3, setEffectValue3] = useState(undefined);
@@ -59,9 +48,7 @@ const StretchingModifyView = () => {
   >([]);
   const [isCautionOrderDeleteMode, setIsCautionOrderDeleteMode] =
     useState<boolean>(false);
-  const [cautionOrderDeletelist, setCautionOrderDeletelist] = useState([]);
-
-  const router = useRouter();
+  const [cautionOrderDeletelist, setCautionOrderDeletelist] = useState<number[] | undefined>([]);
 
   const handleOnClickDeleteStretchingOrder = (order: number) => {
     if (stretchingOrderDeletelist.includes(order)) {
@@ -95,7 +82,7 @@ const StretchingModifyView = () => {
         prev.filter((item) => item !== order)
       );
     } else {
-      setCautionOrderDeletelist((prev) => [...prev, order]);
+      setCautionOrderDeletelist((prev) => prev.length > 0 ? prev.push(order):);
     }
   };
 
@@ -141,21 +128,21 @@ const StretchingModifyView = () => {
           <Box display="flex" justifyContent="start" alignItems="start" gap={8}>
             <ComboBox
               size="sm"
-              list={mainCatergory}
-              value={mainValue}
-              setValue={setMainValue}
+              list={STRETCHING_MAIN_CATEGORY}
+              value={mainCategoryValue}
+              setValue={setMainCategoryValue}
               label="대분류"
             ></ComboBox>
             <ComboBox
               size="sm"
-              disabled={!mainValue}
+              disabled={!mainCategoryValue}
               list={
-                mainValue?.id === "upperBody"
-                  ? upperBodyCatergory
-                  : lowerBodyCatergory
+                mainCategoryValue?.id === "UPPER_BODY"
+                  ? UPPER_BODY_CATEGORY
+                  : LOWER_BODY_CATEGORY
               }
-              value={subValue}
-              setValue={setSubValue}
+              value={subCategoryValue}
+              setValue={setSubCategoryValue}
               label="중분류"
             ></ComboBox>
           </Box>
@@ -171,21 +158,21 @@ const StretchingModifyView = () => {
           <Box display="flex" justifyContent="start" alignItems="start" gap={8}>
             <ComboBox
               size="sm"
-              list={effectsCategory}
+              list={EFFECT_CATEGORY}
               value={effectValue1}
               setValue={setEffectValue1}
               label="효과1"
             ></ComboBox>
             <ComboBox
               size="sm"
-              list={effectsCategory}
+              list={EFFECT_CATEGORY}
               value={effectValue2}
               setValue={setEffectValue2}
               label="효과2"
             ></ComboBox>
             <ComboBox
               size="sm"
-              list={effectsCategory}
+              list={EFFECT_CATEGORY}
               value={effectValue3}
               setValue={setEffectValue3}
               label="효과3"

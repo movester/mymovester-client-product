@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import { colors } from "../../../constants/style";
 import ShadowBox from "../../../components/utils/ShadowBox";

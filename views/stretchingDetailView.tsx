@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
+import React from "react";
 import { styled } from "styled-components";
 import Box from "../components/basic/Box";
 import Divider from "../components/basic/Divder";

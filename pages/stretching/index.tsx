@@ -12,9 +12,11 @@ import Box from "../../components/basic/Box";
 import {
   EFFECT_CATEGORY,
   IComboBoxType,
+  ITotalComboxType,
   LIST_ORDER_CATEGORY,
   LOWER_BODY_CATEGORY,
   LOWER_BODY_SEARCH_CATEGORY,
+  STRETCHING_MAIN_CATEGORY,
   STRETCHING_MAIN_SEARCH_CATEGORY,
   UPPER_BODY_SEARCH_CATEGORY,
 } from "../../constants";
@@ -24,20 +26,47 @@ import {
   StretchingMainCategoryType,
   StretchingSubCategoryType,
 } from "../../constants/types";
+import useListInquiry from "../../hooks/use-list-inquiry";
+import {
+  STRETCHING_EFFECT_TEXT,
+  STRETCHING_MAIN_CATEGORY_TEXT,
+  STRETCHING_SUB_CATEGORY_TEXT,
+} from "../../constants/text";
 
 const StrechingPage = () => {
-  const [mainCategoryValue, setMainCategoryValue] =
-    useState<IComboBoxType<StretchingMainCategoryType>>(undefined);
+  const [mainCategoryValue, setMainCategoryValue] = useState<
+    ITotalComboxType<StretchingMainCategoryType>
+  >(STRETCHING_MAIN_SEARCH_CATEGORY[0]);
   const [subCategoryValue, setSubCategoryValue] =
-    useState<IComboBoxType<StretchingSubCategoryType>>(undefined);
+    useState<ITotalComboxType<StretchingSubCategoryType>>(null);
   const [effectValue, setEffectValue] =
-    useState<IComboBoxType<StretchingEffectType>>(undefined);
+    useState<IComboBoxType<StretchingEffectType>>(null);
   const [listOrderValue, setListOrderValue] = useState<
     IComboBoxType<StretchingListOrderFilter>
   >(LIST_ORDER_CATEGORY[0]);
   const [searchKeywordValue, setSearchKeywordValue] = useState<string>("");
+  const [searchQueryKeyword, setSearchKeywordQuery] =
+    useState<string>(searchKeywordValue);
 
   const router = useRouter();
+
+  const getDate = (date: string) => {
+    const newDate = new Date(date);
+    return newDate.toLocaleDateString();
+  };
+
+  const handleOnClickSearchButton = () => {
+    setSearchKeywordQuery(searchKeywordValue);
+  };
+
+  const data = useListInquiry({
+    page: 1,
+    title: searchQueryKeyword,
+    mainCategory:
+      mainCategoryValue?.id === "total" ? null : mainCategoryValue?.id,
+    subCategory: subCategoryValue?.id === "total" ? null : subCategoryValue?.id,
+    orderFilter: listOrderValue?.id,
+  });
 
   return (
     <PageWrapper>
@@ -92,12 +121,23 @@ const StrechingPage = () => {
               label="효과"
             ></ComboBox>
           </Box>
-          <Box width={400}>
-            <Input
-              placeholder="제목으로 검색"
-              value={searchKeywordValue}
-              setValue={(e) => setSearchKeywordValue(e.target.value)}
-            ></Input>
+          <Box display="flex" justifyContent="end" alignItems="center" gap={8}>
+            <Box width={400}>
+              <Input
+                placeholder="제목으로 검색"
+                value={searchKeywordValue}
+                setValue={(e) => setSearchKeywordValue(e.target.value)}
+                onClear={() => setSearchKeywordValue("")}
+              ></Input>
+            </Box>
+            <Button
+              size="sm"
+              variants="primary"
+              onClick={handleOnClickSearchButton}
+              width={80}
+            >
+              검색
+            </Button>
           </Box>
         </Box>
         <ShadowBox>
@@ -115,7 +155,7 @@ const StrechingPage = () => {
               width={"100%"}
             >
               <Typography variants="body2" color={colors.g100}>
-                총 30개
+                {`총 ${data ? data.total : 0}개`}
               </Typography>
               <ComboBox
                 size="xs"
@@ -153,23 +193,52 @@ const StrechingPage = () => {
                 </TableItem>
               </TableGrid>
               <TableGirdWrapper>
-                <TableGrid onClick={() => router.push(`stretching/detail/1`)}>
-                  <TableItem>
-                    <Typography variants="heading2">거북목 스트레칭</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">{"상체 > 등/몸통"}</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">자세개선, 통증완화</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">30</Typography>
-                  </TableItem>
-                  <TableItem>
-                    <Typography variants="body1">2023-08-01</Typography>
-                  </TableItem>
-                </TableGrid>
+                {data && data.total > 0
+                  ? data.stretchingList.map((list) => (
+                      <TableGrid
+                        key={`stretching-list-${list.id}`}
+                        onClick={() =>
+                          router.push(`stretching/detail/${list.id}`)
+                        }
+                      >
+                        <TableItem>
+                          <Typography variants="heading2">
+                            {list.title}
+                          </Typography>
+                        </TableItem>
+                        <TableItem>
+                          <Typography variants="body1">
+                            {STRETCHING_MAIN_CATEGORY_TEXT[list.mainCategory] +
+                              " > " +
+                              STRETCHING_SUB_CATEGORY_TEXT[list.subCategory]}
+                          </Typography>
+                        </TableItem>
+                        <TableItem>
+                          <Typography variants="body1">
+                            {list.effectList
+                              .map((item) => STRETCHING_EFFECT_TEXT[item])
+                              .join(",")}
+                          </Typography>
+                        </TableItem>
+                        <TableItem>
+                          <Box
+                            display="flex"
+                            justifyContent="center"
+                            width={"100%"}
+                          >
+                            <Typography variants="body1">
+                              {list.views}
+                            </Typography>
+                          </Box>
+                        </TableItem>
+                        <TableItem>
+                          <Typography variants="body1">
+                            {getDate(list.createdAt)}
+                          </Typography>
+                        </TableItem>
+                      </TableGrid>
+                    ))
+                  : "검색 결과가 없습니다"}
               </TableGirdWrapper>
             </Table>
           </Box>
@@ -226,7 +295,7 @@ const TableGrid = styled.div`
   gap: 1px;
   display: grid;
   grid-template-columns:
-    minmax(400px, 10fr) minmax(160px, 4fr) minmax(240px, 6fr)
+    minmax(360px, 9fr) minmax(200px, 5fr) minmax(280px, 7fr)
     minmax(80px, 2fr) minmax(120px, 3fr);
   align-items: end;
 `;

@@ -23,7 +23,7 @@ const variantsProperties: {
     fontWeight: 500,
   },
   body2: {
-    fontSize: 8,
+    fontSize: 12,
     fontWeight: 500,
   },
   caption: {
