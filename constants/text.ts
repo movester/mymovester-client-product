@@ -18,5 +18,5 @@ export const STRETCHING_EFFECT_TEXT = {
   RELAX_MUSCLE: "근육이완",
   BLOOD_CIRCULATION: "혈액순환",
   RELIEF_TURTLE_NECK: "거북목 완화",
-  RELIEF_ROUND_SHOULDER: "라운듸숄더 완화",
+  RELIEF_ROUND_SHOULDER: "라운드숄더 완화",
 };
