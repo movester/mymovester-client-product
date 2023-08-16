@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import styled from "styled-components";
 import Box from "../../components/basic/Box";
 import Typography from "../../components/basic/Typography";
@@ -71,6 +73,7 @@ const StretchingPostPage = () => {
     useState<boolean>(false);
   const [cautionOrderDeletelist, setCautionOrderDeletelist] = useState([]);
   const [imageFormData, setImageFormData] = useState([]);
+  const [previewFile, setPreviewFile] = useState([]);
 
   const router = useRouter();
 
@@ -78,40 +81,45 @@ const StretchingPostPage = () => {
 
   const { mutate: createStretch } = useStretchingCreate();
 
-  const { mutate: uploadImage, data: uploadImageResponse } = useImageUpload();
+  const {
+    mutateAsync: uploadImage,
+    data: uploadImageResponse,
+    isLoading,
+    isSuccess,
+  } = useImageUpload();
 
   const handleOnClickImageUploadButton = (e) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
     // console.log(formData.get("image"));
 
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => setPreviewFile((prev) => [...prev, reader.result]);
     setImageFormData((prev) => [...prev, formData]);
   };
 
-  const handleOnClickSubmitButton = () => {
+  const handleOnClickSubmitButton = async () => {
+    let filePathsArray = [];
     if (imageFormData.length > 0) {
-      uploadImage(imageFormData[0]);
+      await uploadImage(imageFormData[0]).then((res) => {
+        filePathsArray.push(res.filePath);
 
-      if (uploadImageResponse) {
-        let imageURL = uploadImageResponse.filePath;
+        const formetedData = {
+          title: inputValue,
+          mainCategory: mainCategoryValue.id,
+          subCategory: subCategoryValue.id,
+          effectList: [effectValue1.id, effectValue2.id, effectValue3.id],
+          imageList: [res.filePath],
+          techniqueList: [...stretchingOrder.map((list) => list.detail)],
+          collect: Number(preferTimeValue),
+          set: Number(preferSetValue),
+          precautionList: [...cautionOrder.map((list) => list.detail)],
+          videoUrl: videoLink,
+        };
 
-        if (imageURL) {
-          const formetedData = {
-            title: inputValue,
-            mainCategory: mainCategoryValue.id,
-            subCategory: subCategoryValue.id,
-            effectList: [effectValue1.id, effectValue2.id, effectValue3.id],
-            imageList: [imageURL],
-            techniqueList: [...stretchingOrder.map((list) => list.detail)],
-            collect: Number(preferTimeValue),
-            set: Number(preferSetValue),
-            precautionList: [...cautionOrder.map((list) => list.detail)],
-            videoUrl: videoLink,
-          };
-
-          createStretch(formetedData);
-        }
-      }
+        createStretch(formetedData);
+      });
     }
   };
 
@@ -282,6 +290,16 @@ const StretchingPostPage = () => {
                 width={"100%"}
               >
                 <SubTitle required>이미지</SubTitle>
+                <Box
+                  display="grid"
+                  gridTemplateColumns="repeat(2,1fr)"
+                  gap={16}
+                >
+                  {previewFile.length > 0 &&
+                    previewFile.map((imageUrl) => (
+                      <img src={imageUrl} key={`upload-img-${imageUrl}`} />
+                    ))}
+                </Box>
                 <Box width={80}>
                   <ImageUploadButton htmlFor="image-upload">
                     +추가

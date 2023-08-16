@@ -14,7 +14,7 @@ const useStretchingCreate = () => {
         body: JSON.stringify(payload),
       }),
     onSuccess: (res) => {
-      router.push({ pathname: "stretching" });
+      router.push("/stretching");
     },
     onError: (error) => {
       console.log(error);
