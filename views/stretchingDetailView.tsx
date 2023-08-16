@@ -116,7 +116,7 @@ const StretchingDetailView = (props: IProps) => {
           <Typography variants="heading2">✨ 권장 횟수</Typography>
           <Typography variants="body1">는 </Typography>
           <Typography variants="heading1">
-            {data.collect}회 {data.set}세트{" "}
+            {data.collect}회 {data.set}세트
           </Typography>
           <Typography variants="body1">입니다.</Typography>
         </Box>

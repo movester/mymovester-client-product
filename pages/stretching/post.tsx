@@ -5,49 +5,56 @@ import ShadowBox from "../../components/utils/ShadowBox";
 import { colors } from "../../constants/style";
 import Navigator from "../../components/utils/Navigator";
 import Input from "../../components/basic/Input";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ComboBox from "../../components/basic/ComboBox";
 import Button from "../../components/basic/Button";
 import { FiLink2 } from "react-icons/fi";
 import InputTableItem from "../../components/utils/InputTableItem";
 import { useRouter } from "next/router";
 import SubTitle from "../../components/utils/SubTitle";
+import {
+  EFFECT_CATEGORY,
+  IComboBoxType,
+  LOWER_BODY_CATEGORY,
+  STRETCHING_MAIN_CATEGORY,
+  UPPER_BODY_CATEGORY,
+} from "../../constants";
+import {
+  StretchingEffectType,
+  StretchingMainCategoryType,
+  StretchingSubCategoryType,
+} from "../../constants/types";
+import useStretchingCreate from "../../hooks/user-stretching-create";
+import useImageUpload from "../../hooks/use-image-upload";
 
-const mainCatergory = [
-  { name: "상체", id: "upperBody" },
-  { name: "하체", id: "lowerBody" },
-];
-
-const upperBodyCatergory = [
-  { name: "목/가슴/어께", id: "u1" },
-  { name: "팔/손/손목", id: "u2" },
-  { name: "등/몸통", id: "u3" },
-];
-
-const lowerBodyCatergory = [
-  { name: "고관절/둔근", id: "l1" },
-  { name: "종아리/발목/발", id: "l2" },
-  { name: "무릎/허벅지", id: "l3" },
-];
-const effectsCategory = [
-  { name: "통증완화", id: "e1" },
-  { name: "자세개선", id: "e2" },
-  { name: "근육이완", id: "e3" },
-  { name: "혈액순환", id: "e4" },
-  { name: "거북목 완화", id: "e5" },
-  { name: "라운드숄더 완화", id: "e6" },
-];
+interface IFormatedData {
+  title: string;
+  mainCategory: StretchingMainCategoryType;
+  subCategory: StretchingSubCategoryType;
+  effectList: StretchingEffectType[];
+  imageList: string[];
+  techniqueList: string[];
+  collect: number;
+  set: number;
+  precautionList: string[];
+  videoUrl: string;
+}
 
 const StretchingPostPage = () => {
-  const [inputValue, setInputValue] = useState("");
-  const [mainValue, setMainValue] = useState(undefined);
-  const [subValue, setSubValue] = useState(undefined);
-  const [effectValue1, setEffectValue1] = useState(undefined);
-  const [effectValue2, setEffectValue2] = useState(undefined);
-  const [effectValue3, setEffectValue3] = useState(undefined);
-  const [videoLink, setVideoLink] = useState("");
-  const [preferTimeValue, setPreferTimeValue] = useState<number | null>(null);
-  const [preferSetValue, setPreferSetValue] = useState<number | null>(null);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [mainCategoryValue, setMainCategoryValue] =
+    useState<IComboBoxType<StretchingMainCategoryType>>(undefined);
+  const [subCategoryValue, setSubCategoryValue] =
+    useState<IComboBoxType<StretchingSubCategoryType>>(undefined);
+  const [effectValue1, setEffectValue1] =
+    useState<IComboBoxType<StretchingEffectType>>(undefined);
+  const [effectValue2, setEffectValue2] =
+    useState<IComboBoxType<StretchingEffectType>>(undefined);
+  const [effectValue3, setEffectValue3] =
+    useState<IComboBoxType<StretchingEffectType>>(undefined);
+  const [videoLink, setVideoLink] = useState<string>("");
+  const [preferTimeValue, setPreferTimeValue] = useState<number>(undefined);
+  const [preferSetValue, setPreferSetValue] = useState<number>(undefined);
   const [stretchingOrder, setStretchingOrder] = useState<
     { order: number; detail: string }[]
   >([{ order: 1, detail: "" }]);
@@ -63,8 +70,50 @@ const StretchingPostPage = () => {
   const [isCautionOrderDeleteMode, setIsCautionOrderDeleteMode] =
     useState<boolean>(false);
   const [cautionOrderDeletelist, setCautionOrderDeletelist] = useState([]);
+  const [imageFormData, setImageFormData] = useState([]);
 
   const router = useRouter();
+
+  const imageInput = useRef();
+
+  const { mutate: createStretch } = useStretchingCreate();
+
+  const { mutate: uploadImage, data: uploadImageResponse } = useImageUpload();
+
+  const handleOnClickImageUploadButton = (e) => {
+    const formData = new FormData();
+    formData.append("file", e.target.files[0]);
+    // console.log(formData.get("image"));
+
+    setImageFormData((prev) => [...prev, formData]);
+  };
+
+  const handleOnClickSubmitButton = () => {
+    if (imageFormData.length > 0) {
+      uploadImage(imageFormData[0]);
+
+      if (uploadImageResponse) {
+        let imageURL = uploadImageResponse.filePath;
+
+        if (imageURL) {
+          const formetedData = {
+            title: inputValue,
+            mainCategory: mainCategoryValue.id,
+            subCategory: subCategoryValue.id,
+            effectList: [effectValue1.id, effectValue2.id, effectValue3.id],
+            imageList: [imageURL],
+            techniqueList: [...stretchingOrder.map((list) => list.detail)],
+            collect: Number(preferTimeValue),
+            set: Number(preferSetValue),
+            precautionList: [...cautionOrder.map((list) => list.detail)],
+            videoUrl: videoLink,
+          };
+
+          createStretch(formetedData);
+        }
+      }
+    }
+  };
 
   const handleOnClickDeleteStretchingOrder = (order: number) => {
     if (stretchingOrderDeletelist.includes(order)) {
@@ -169,21 +218,21 @@ const StretchingPostPage = () => {
                 >
                   <ComboBox
                     size="sm"
-                    list={mainCatergory}
-                    value={mainValue}
-                    setValue={setMainValue}
+                    list={STRETCHING_MAIN_CATEGORY}
+                    value={mainCategoryValue}
+                    setValue={setMainCategoryValue}
                     label="대분류"
                   ></ComboBox>
                   <ComboBox
                     size="sm"
-                    disabled={!mainValue}
+                    disabled={!mainCategoryValue}
                     list={
-                      mainValue?.id === "upperBody"
-                        ? upperBodyCatergory
-                        : lowerBodyCatergory
+                      mainCategoryValue?.id === "UPPER_BODY"
+                        ? UPPER_BODY_CATEGORY
+                        : LOWER_BODY_CATEGORY
                     }
-                    value={subValue}
-                    setValue={setSubValue}
+                    value={subCategoryValue}
+                    setValue={setSubCategoryValue}
                     label="중분류"
                   ></ComboBox>
                 </Box>
@@ -204,21 +253,21 @@ const StretchingPostPage = () => {
                 >
                   <ComboBox
                     size="sm"
-                    list={effectsCategory}
+                    list={EFFECT_CATEGORY}
                     value={effectValue1}
                     setValue={setEffectValue1}
                     label="효과1"
                   ></ComboBox>
                   <ComboBox
                     size="sm"
-                    list={effectsCategory}
+                    list={EFFECT_CATEGORY}
                     value={effectValue2}
                     setValue={setEffectValue2}
                     label="효과2"
                   ></ComboBox>
                   <ComboBox
                     size="sm"
-                    list={effectsCategory}
+                    list={EFFECT_CATEGORY}
                     value={effectValue3}
                     setValue={setEffectValue3}
                     label="효과3"
@@ -234,9 +283,16 @@ const StretchingPostPage = () => {
               >
                 <SubTitle required>이미지</SubTitle>
                 <Box width={80}>
-                  <Button size="xs" variants="secondary">
+                  <ImageUploadButton htmlFor="image-upload">
                     +추가
-                  </Button>
+                  </ImageUploadButton>
+                  <input
+                    type="file"
+                    ref={imageInput}
+                    id="image-upload"
+                    onChange={handleOnClickImageUploadButton}
+                    style={{ display: "none" }}
+                  ></input>
                 </Box>
               </Box>
               <Box
@@ -336,7 +392,7 @@ const StretchingPostPage = () => {
                     <Box width={120}>
                       <Input
                         value={preferTimeValue}
-                        setValue={setPreferTimeValue}
+                        setValue={(e) => setPreferTimeValue(e.target.value)}
                       ></Input>
                     </Box>
                     <Typography variants="body1">회</Typography>
@@ -350,7 +406,7 @@ const StretchingPostPage = () => {
                     <Box width={120}>
                       <Input
                         value={preferSetValue}
-                        setValue={setPreferSetValue}
+                        setValue={(e) => setPreferSetValue(e.target.value)}
                       ></Input>
                     </Box>
                     <Typography variants="body1">세트</Typography>
@@ -468,7 +524,11 @@ const StretchingPostPage = () => {
                   >
                     취소
                   </Button>
-                  <Button size="md" variants="primary">
+                  <Button
+                    size="md"
+                    variants="primary"
+                    onClick={handleOnClickSubmitButton}
+                  >
                     등록
                   </Button>
                 </Box>
@@ -504,4 +564,17 @@ const BreadCrumb = styled.div`
   align-items: center;
   gap: 8px;
   padding: 16px 16px 16px 32px;
+`;
+
+const ImageUploadButton = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  width: 80px;
+  font-size: 12px;
+  color: ${colors.vividPrimaryColor};
+  border: 2px solid ${colors.vividPrimaryColor};
+  border-radius: 8px;
+  font-weight: 700;
 `;
