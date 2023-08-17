@@ -65,16 +65,17 @@ const StretchingDetailPage = () => {
             )}
           </BreadCrumb>
         </ShadowBox>
-        <Box display="flex" justifyContent="end" alignItems="center" gap={8}>
-          <Button
-            width={80}
-            size="xs"
-            variants={!modifyMode ? "secondary" : "primary"}
-            onClick={() => setModifyMode((prev) => !prev)}
-          >
-            {!modifyMode ? "수정" : "확인"}
-          </Button>
-          {!modifyMode && (
+        {!modifyMode && (
+          <Box display="flex" justifyContent="end" alignItems="center" gap={8}>
+            <Button
+              width={80}
+              size="xs"
+              variants={!modifyMode ? "secondary" : "primary"}
+              onClick={() => setModifyMode((prev) => !prev)}
+            >
+              수정
+            </Button>
+
             <Button
               width={80}
               size="xs"
@@ -83,8 +84,8 @@ const StretchingDetailPage = () => {
             >
               삭제
             </Button>
-          )}
-        </Box>
+          </Box>
+        )}
 
         <ShadowBox>
           {!modifyMode ? (

@@ -29,7 +29,7 @@ import {
 import useStretchingCreate from "../../hooks/user-stretching-create";
 import useImageUpload from "../../hooks/use-image-upload";
 
-interface IFormatedData {
+export interface IFormatedData {
   title: string;
   mainCategory: StretchingMainCategoryType;
   subCategory: StretchingSubCategoryType;
@@ -105,7 +105,7 @@ const StretchingPostPage = () => {
       await uploadImage(imageFormData[0]).then((res) => {
         filePathsArray.push(res.filePath);
 
-        const formetedData = {
+        const formetedData: IFormatedData = {
           title: inputValue,
           mainCategory: mainCategoryValue.id,
           subCategory: subCategoryValue.id,
