@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { FiLink2 } from "react-icons/fi";
 import Box from "../components/basic/Box";
 import Button from "../components/basic/Button";
@@ -27,6 +27,8 @@ import {
   STRETCHING_MAIN_CATEGORY_TEXT,
   STRETCHING_SUB_CATEGORY_TEXT,
 } from "../constants/text";
+import useListModify from "../hooks/use-list-modiy";
+import { IFormatedData } from "../pages/stretching/post";
 
 interface IProps {
   data: IDetailData;
@@ -62,23 +64,58 @@ const StretchingModifyView = (props: IProps) => {
   const [videoLink, setVideoLink] = useState(data.videoUrl);
   const [preferTimeValue, setPreferTimeValue] = useState<number>(data.collect);
   const [preferSetValue, setPreferSetValue] = useState<number>(data.set);
-  const [stretchingOrder, setStretchingOrder] = useState<
-    { order: number; detail: string }[]
-  >([{ order: 1, detail: "" }]);
+  const techniqueList = useMemo(
+    () =>
+      data.techniqueList.map((item, index) => ({
+        order: index + 1,
+        detail: item,
+      })),
+    [data]
+  );
+
+  const precautionList = useMemo(
+    () =>
+      data.precautionList.map((item, index) => ({
+        order: index + 1,
+        detail: item,
+      })),
+    [data]
+  );
+
+  const [stretchingOrder, setStretchingOrder] =
+    useState<{ order: number; detail: string }[]>(techniqueList);
   const [isStretchingOrderDeleteMode, setIsStretchingOrderDeleteMode] =
     useState<boolean>(false);
   const [stretchingOrderDeletelist, setStretchingOrderDeletelist] = useState(
     []
   );
 
-  const [cautionOrder, setCautionOrder] = useState<
-    { order: number; detail: string }[]
-  >([]);
+  const [cautionOrder, setCautionOrder] =
+    useState<{ order: number; detail: string }[]>(precautionList);
   const [isCautionOrderDeleteMode, setIsCautionOrderDeleteMode] =
     useState<boolean>(false);
   const [cautionOrderDeletelist, setCautionOrderDeletelist] = useState<
     number[] | undefined
   >([]);
+
+  const { mutate: modiyList } = useListModify();
+
+  const handleOnClickModifyButton = () => {
+    const formattedData: IFormatedData = {
+      title: inputValue,
+      mainCategory: mainCategoryValue.id,
+      subCategory: subCategoryValue.id,
+      effectList: [effectValue1.id, effectValue2.id, effectValue3.id],
+      imageList: [...data.imageList],
+      techniqueList: [...stretchingOrder.map((list) => list.detail)],
+      collect: Number(preferTimeValue),
+      set: Number(preferSetValue),
+      precautionList: [...cautionOrder.map((list) => list.detail)],
+      videoUrl: videoLink,
+    };
+    console.log({ pageId: Number(data.id), formattedData });
+    modiyList({ pageId: Number(data.id), formattedData });
+  };
 
   const handleOnClickDeleteStretchingOrder = (order: number) => {
     if (stretchingOrderDeletelist.includes(order)) {
@@ -134,6 +171,16 @@ const StretchingModifyView = (props: IProps) => {
   return (
     <Box display="flex" flexDirection="column" gap={120} padding={32}>
       <Box gap={24} display="flex" flexDirection="column" width={"100%"}>
+        <Box display="flex" justifyContent="end" alignItems="center" gap={8}>
+          <Button
+            width={80}
+            size="xs"
+            variants={"primary"}
+            onClick={handleOnClickModifyButton}
+          >
+            수정 완료
+          </Button>
+        </Box>
         <Box
           display="flex"
           flexDirection="column"
@@ -217,6 +264,11 @@ const StretchingModifyView = (props: IProps) => {
           width={"100%"}
         >
           <SubTitle required>이미지</SubTitle>
+          <Box display="grid" gridTemplateColumns="repeat(2,1fr)">
+            {data.imageList.map((imgLink, index) => (
+              <img key={`img-detail-${data.id}-${index}`} src={imgLink}></img>
+            ))}
+          </Box>
           <Box width={80}>
             <Button size="xs" variants="secondary">
               +추가
