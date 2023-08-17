@@ -32,6 +32,7 @@ import {
   STRETCHING_MAIN_CATEGORY_TEXT,
   STRETCHING_SUB_CATEGORY_TEXT,
 } from "../../constants/text";
+import Pagination from "../../components/utils/Pagination";
 
 const StrechingPage = () => {
   const [mainCategoryValue, setMainCategoryValue] = useState<
@@ -47,6 +48,7 @@ const StrechingPage = () => {
   const [searchKeywordValue, setSearchKeywordValue] = useState<string>("");
   const [searchQueryKeyword, setSearchKeywordQuery] =
     useState<string>(searchKeywordValue);
+  const [page, setPage] = useState<number>(1);
 
   const router = useRouter();
 
@@ -60,7 +62,7 @@ const StrechingPage = () => {
   };
 
   const data = useListInquiry({
-    page: 1,
+    page: page,
     title: searchQueryKeyword,
     mainCategory:
       mainCategoryValue?.id === "total" ? null : mainCategoryValue?.id,
@@ -244,6 +246,11 @@ const StrechingPage = () => {
                   : "검색 결과가 없습니다"}
               </TableGirdWrapper>
             </Table>
+            <Pagination
+              currentPage={page}
+              setCurrentPage={setPage}
+              total={data?.total}
+            ></Pagination>
           </Box>
         </ShadowBox>
       </ContentWrapper>
