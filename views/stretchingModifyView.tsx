@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { Dispatch, useMemo } from "react";
 import { FiLink2 } from "react-icons/fi";
 import Box from "../components/basic/Box";
 import Button from "../components/basic/Button";
@@ -98,7 +98,9 @@ const StretchingModifyView = (props: IProps) => {
     number[] | undefined
   >([]);
 
-  const { mutate: modiyList } = useListModify();
+  const { mutateAsync: modiyList } = useListModify();
+
+  const router = useRouter();
 
   const handleOnClickModifyButton = () => {
     const formattedData: IFormatedData = {
@@ -113,8 +115,10 @@ const StretchingModifyView = (props: IProps) => {
       precautionList: [...cautionOrder.map((list) => list.detail)],
       videoUrl: videoLink,
     };
-    console.log({ pageId: Number(data.id), formattedData });
-    modiyList({ pageId: Number(data.id), formattedData });
+
+    modiyList({ pageId: Number(data.id), formattedData }).then(() =>
+      router.reload()
+    );
   };
 
   const handleOnClickDeleteStretchingOrder = (order: number) => {
