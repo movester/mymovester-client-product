@@ -19,7 +19,7 @@ import {
   STRETCHING_SUB_CATEGORY_TEXT,
 } from "../constants/text";
 
-interface IDetailData {
+export interface IDetailData {
   adminId: string | null;
   collect: number;
   createdAt: string;
