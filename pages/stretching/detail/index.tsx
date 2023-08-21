@@ -22,7 +22,7 @@ const StretchingDetailPage = () => {
     ? typeof router.query.id == "string"
       ? router.query.id
       : router.query.id[0]
-    : null;
+    : undefined;
 
   const data = useListDeatilInquiry({ listId: STRETCHING_ID });
 

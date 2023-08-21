@@ -77,7 +77,7 @@ const StretchingDetailView = (props: IProps) => {
         </Box>
       </Box>
       {/* 이미지 */}
-      <Box display="grid" gridTemplateColumns="repeat(2,1fr)">
+      <Box display="grid" gridTemplateColumns="repeat(2,350px)" gap={16}>
         {data.imageList.map((imgLink, index) => (
           <img key={`img-detail-${data.id}-${index}`} src={imgLink}></img>
         ))}

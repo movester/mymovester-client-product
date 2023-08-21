@@ -101,16 +101,21 @@ const StretchingPostPage = () => {
 
   const handleOnClickSubmitButton = async () => {
     let filePathsArray = [];
-    if (imageFormData.length > 0) {
-      await uploadImage(imageFormData[0]).then((res) => {
-        filePathsArray.push(res.filePath);
 
+    if (imageFormData.length > 0) {
+      await Promise.all(
+        imageFormData.map((imageList) =>
+          uploadImage(imageList).then((res) =>
+            filePathsArray.push(res.filePath)
+          )
+        )
+      ).then(() => {
         const formetedData: IFormatedData = {
           title: inputValue,
           mainCategory: mainCategoryValue.id,
           subCategory: subCategoryValue.id,
           effectList: [effectValue1.id, effectValue2.id, effectValue3.id],
-          imageList: [res.filePath],
+          imageList: [...filePathsArray],
           techniqueList: [...stretchingOrder.map((list) => list.detail)],
           collect: Number(preferTimeValue),
           set: Number(preferSetValue),
@@ -252,7 +257,7 @@ const StretchingPostPage = () => {
                 justifyContent="start"
                 width={"100%"}
               >
-                <SubTitle caption="＊효과1 선택필수">효과</SubTitle>
+                <SubTitle required>효과</SubTitle>
                 <Box
                   display="flex"
                   justifyContent="start"
@@ -289,10 +294,12 @@ const StretchingPostPage = () => {
                 justifyContent="start"
                 width={"100%"}
               >
-                <SubTitle required>이미지</SubTitle>
+                <SubTitle required caption="최대 2장">
+                  이미지
+                </SubTitle>
                 <Box
                   display="grid"
-                  gridTemplateColumns="repeat(2,1fr)"
+                  gridTemplateColumns="repeat(2,300px)"
                   gap={16}
                 >
                   {previewFile.length > 0 &&
