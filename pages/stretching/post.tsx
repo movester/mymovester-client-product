@@ -28,6 +28,7 @@ import {
 } from "../../constants/types";
 import useStretchingCreate from "../../hooks/user-stretching-create";
 import useImageUpload from "../../hooks/use-image-upload";
+import { AiFillMinusCircle, AiOutlineDelete } from "react-icons/ai";
 
 export interface IFormatedData {
   title: string;
@@ -88,10 +89,14 @@ const StretchingPostPage = () => {
     isSuccess,
   } = useImageUpload();
 
+  const handleOnClickImageDeleteButton = (idx) => {
+    setImageFormData((prev) => [...prev.splice(idx, 1)]);
+    setPreviewFile((prev) => [...prev.splice(idx, 1)]);
+  };
+
   const handleOnClickImageUploadButton = (e) => {
     const formData = new FormData();
     formData.append("file", e.target.files[0]);
-    // console.log(formData.get("image"));
 
     const reader = new FileReader();
     reader.readAsDataURL(e.target.files[0]);
@@ -303,8 +308,18 @@ const StretchingPostPage = () => {
                   gap={16}
                 >
                   {previewFile.length > 0 &&
-                    previewFile.map((imageUrl) => (
-                      <img src={imageUrl} key={`upload-img-${imageUrl}`} />
+                    previewFile.map((imageUrl, idx) => (
+                      <ImageWrapper key={`upload-img-${imageUrl}`}>
+                        <img src={imageUrl} />
+                        <ImageDeleteButton
+                          onClick={() => handleOnClickImageDeleteButton(idx)}
+                        >
+                          <AiFillMinusCircle
+                            size={25}
+                            color={"#b20a2c"}
+                          ></AiFillMinusCircle>
+                        </ImageDeleteButton>
+                      </ImageWrapper>
                     ))}
                 </Box>
                 <Box width={80}>
@@ -602,4 +617,19 @@ const ImageUploadButton = styled.label`
   border: 2px solid ${colors.vividPrimaryColor};
   border-radius: 8px;
   font-weight: 700;
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+  img:hover {
+    filter: brightness(0.9);
+  }
+`;
+const ImageDeleteButton = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  :hover {
+    cursor: pointer;
+  }
 `;
