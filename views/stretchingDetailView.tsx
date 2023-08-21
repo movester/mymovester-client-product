@@ -69,8 +69,8 @@ const StretchingDetailView = (props: IProps) => {
       <Box>
         <Typography variants="heading2">효과</Typography>
         <Box display="flex" justifyContent="start" alignItems="center">
-          {data.effectList.map((item) => (
-            <Typography variants="body1" key={`detail-effect-${item}`}>
+          {data.effectList.map((item, idx) => (
+            <Typography variants="body1" key={`detail-effect-${item}-${idx}`}>
               {STRETCHING_EFFECT_TEXT[item]},
             </Typography>
           ))}
