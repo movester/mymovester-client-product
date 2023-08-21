@@ -17,6 +17,7 @@ interface IProps {
   gridTemplateColumns?: string;
   onClick?: () => void;
   onMouseOver?: () => void;
+  ref?: any;
 }
 
 interface IBox {
@@ -53,6 +54,7 @@ const Box = (props: PropsWithChildren<IProps>) => {
     onClick,
     onMouseOver,
     gridTemplateColumns,
+    ref,
   } = props;
   return (
     <BoxWrapper
@@ -71,6 +73,7 @@ const Box = (props: PropsWithChildren<IProps>) => {
       $gridTemplateColumns={gridTemplateColumns}
       onClick={onClick}
       onMouseOver={onMouseOver}
+      ref={ref}
     >
       {children}
     </BoxWrapper>
