@@ -1,370 +1,127 @@
+"use strict";
 (() => {
 var exports = {};
 exports.id = 820;
 exports.ids = [820];
 exports.modules = {
 
-/***/ 6698:
-/***/ ((module, exports, __webpack_require__) => {
+/***/ 6968:
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-"use strict";
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   config: () => (/* binding */ config),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   getServerSideProps: () => (/* binding */ getServerSideProps),
+/* harmony export */   getStaticPaths: () => (/* binding */ getStaticPaths),
+/* harmony export */   getStaticProps: () => (/* binding */ getStaticProps),
+/* harmony export */   reportWebVitals: () => (/* binding */ reportWebVitals),
+/* harmony export */   routeModule: () => (/* binding */ routeModule),
+/* harmony export */   unstable_getServerProps: () => (/* binding */ unstable_getServerProps),
+/* harmony export */   unstable_getServerSideProps: () => (/* binding */ unstable_getServerSideProps),
+/* harmony export */   unstable_getStaticParams: () => (/* binding */ unstable_getStaticParams),
+/* harmony export */   unstable_getStaticPaths: () => (/* binding */ unstable_getStaticPaths),
+/* harmony export */   unstable_getStaticProps: () => (/* binding */ unstable_getStaticProps)
+/* harmony export */ });
+/* harmony import */ var next_dist_server_future_route_modules_pages_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3185);
+/* harmony import */ var next_dist_server_future_route_modules_pages_module__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_future_route_modules_pages_module__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5244);
+/* harmony import */ var next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7182);
+/* harmony import */ var private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5539);
+/* harmony import */ var private_next_pages_app_tsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3376);
+/* harmony import */ var next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(6698);
+/* harmony import */ var next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([private_next_pages_app_tsx__WEBPACK_IMPORTED_MODULE_4__]);
+private_next_pages_app_tsx__WEBPACK_IMPORTED_MODULE_4__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+// @ts-ignore this need to be imported from next/dist to be external
 
 
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-Object.defineProperty(exports, "default", ({
-  enumerable: true,
-  get: function () {
-    return Error;
-  }
-}));
 
-const _interop_require_default = __webpack_require__(167);
+// Import the app and document modules.
+// @ts-expect-error - replaced by webpack/turbopack loader
 
-const _react = /*#__PURE__*/_interop_require_default._(__webpack_require__(6689));
+// @ts-expect-error - replaced by webpack/turbopack loader
 
-const _head = /*#__PURE__*/_interop_require_default._(__webpack_require__(1597));
+// Import the userland code.
+// @ts-expect-error - replaced by webpack/turbopack loader
 
-const statusCodes = {
-  400: "Bad Request",
-  404: "This page could not be found",
-  405: "Method Not Allowed",
-  500: "Internal Server Error"
-};
+const PagesRouteModule = next_dist_server_future_route_modules_pages_module__WEBPACK_IMPORTED_MODULE_0__.PagesRouteModule;
+// Re-export the component (should be the default export).
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "default"));
+// Re-export methods.
+const getStaticProps = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "getStaticProps");
+const getStaticPaths = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "getStaticPaths");
+const getServerSideProps = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "getServerSideProps");
+const config = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "config");
+const reportWebVitals = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "reportWebVitals");
+// Re-export legacy methods.
+const unstable_getStaticProps = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "unstable_getStaticProps");
+const unstable_getStaticPaths = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "unstable_getStaticPaths");
+const unstable_getStaticParams = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "unstable_getStaticParams");
+const unstable_getServerProps = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "unstable_getServerProps");
+const unstable_getServerSideProps = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__, "unstable_getServerSideProps");
+// Create and export the route module that will be consumed.
+const routeModule = new PagesRouteModule({
+    definition: {
+        kind: next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__/* .RouteKind */ .x.PAGES,
+        page: "/_error",
+        pathname: "/_error",
+        // The following aren't used in production.
+        bundlePath: "",
+        filename: ""
+    },
+    components: {
+        App: private_next_pages_app_tsx__WEBPACK_IMPORTED_MODULE_4__["default"],
+        Document: private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__["default"]
+    },
+    userland: next_dist_pages_error__WEBPACK_IMPORTED_MODULE_5__
+});
 
-function _getInitialProps(param) {
-  let {
-    res,
-    err
-  } = param;
-  const statusCode = res && res.statusCode ? res.statusCode : err ? err.statusCode : 404;
-  return {
-    statusCode
-  };
-}
-
-const styles = {
-  error: {
-    // https://github.com/sindresorhus/modern-normalize/blob/main/modern-normalize.css#L38-L52
-    fontFamily: 'system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"',
-    height: "100vh",
-    textAlign: "center",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  desc: {
-    lineHeight: "48px"
-  },
-  h1: {
-    display: "inline-block",
-    margin: "0 20px 0 0",
-    paddingRight: 23,
-    fontSize: 24,
-    fontWeight: 500,
-    verticalAlign: "top"
-  },
-  h2: {
-    fontSize: 14,
-    fontWeight: 400,
-    lineHeight: "28px"
-  },
-  wrap: {
-    display: "inline-block"
-  }
-};
-
-class Error extends _react.default.Component {
-  render() {
-    const {
-      statusCode,
-      withDarkMode = true
-    } = this.props;
-    const title = this.props.title || statusCodes[statusCode] || "An unexpected error has occurred";
-    return /*#__PURE__*/_react.default.createElement("div", {
-      style: styles.error
-    }, /*#__PURE__*/_react.default.createElement(_head.default, null, /*#__PURE__*/_react.default.createElement("title", null, statusCode ? statusCode + ": " + title : "Application error: a client-side exception has occurred")), /*#__PURE__*/_react.default.createElement("div", {
-      style: styles.desc
-    }, /*#__PURE__*/_react.default.createElement("style", {
-      dangerouslySetInnerHTML: {
-        /* CSS minified from
-        body { margin: 0; color: #000; background: #fff; }
-        .next-error-h1 {
-          border-right: 1px solid rgba(0, 0, 0, .3);
-        }
-         ${
-          withDarkMode
-            ? `@media (prefers-color-scheme: dark) {
-          body { color: #fff; background: #000; }
-          .next-error-h1 {
-            border-right: 1px solid rgba(255, 255, 255, .3);
-          }
-        }`
-            : ''
-        }
-        */
-        __html: "body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}" + (withDarkMode ? "@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}" : "")
-      }
-    }), statusCode ? /*#__PURE__*/_react.default.createElement("h1", {
-      className: "next-error-h1",
-      style: styles.h1
-    }, statusCode) : null, /*#__PURE__*/_react.default.createElement("div", {
-      style: styles.wrap
-    }, /*#__PURE__*/_react.default.createElement("h2", {
-      style: styles.h2
-    }, this.props.title || statusCode ? title : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, "Application error: a client-side exception has occurred (see the browser console for more information)"), "."))));
-  }
-
-}
-
-(() => {
-  Error.displayName = "ErrorPage";
-})();
-
-(() => {
-  Error.getInitialProps = _getInitialProps;
-})();
-
-(() => {
-  Error.origGetInitialProps = _getInitialProps;
-})();
-
-if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
-  Object.defineProperty(exports.default, '__esModule', {
-    value: true
-  });
-  Object.assign(exports.default, exports);
-  module.exports = exports.default;
-}
+//# sourceMappingURL=pages.js.map
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
-/***/ 1597:
-/***/ ((module, exports, __webpack_require__) => {
+/***/ 3076:
+/***/ ((module) => {
 
-"use client";
-"use strict";
+module.exports = require("next/dist/server/future/route-modules/route-module.js");
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+/***/ }),
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+/***/ 4140:
+/***/ ((module) => {
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+module.exports = require("next/dist/server/get-page-files.js");
 
-Object.defineProperty(exports, "__esModule", ({
-  value: true
-}));
-0 && (0);
+/***/ }),
 
-function _export(target, all) {
-  for (var name in all) Object.defineProperty(target, name, {
-    enumerable: true,
-    get: all[name]
-  });
-}
+/***/ 9716:
+/***/ ((module) => {
 
-_export(exports, {
-  defaultHead: function () {
-    return defaultHead;
-  },
-  default: function () {
-    return _default;
-  }
-});
+module.exports = require("next/dist/server/htmlescape.js");
 
-const _interop_require_default = __webpack_require__(167);
+/***/ }),
 
-const _interop_require_wildcard = __webpack_require__(8760);
+/***/ 3100:
+/***/ ((module) => {
 
-const _react = /*#__PURE__*/_interop_require_wildcard._(__webpack_require__(6689));
+module.exports = require("next/dist/server/render.js");
 
-const _sideeffect = /*#__PURE__*/_interop_require_default._(__webpack_require__(2470));
+/***/ }),
 
-const _ampcontext = __webpack_require__(3918);
+/***/ 6368:
+/***/ ((module) => {
 
-const _headmanagercontext = __webpack_require__(2796);
-
-const _ampmode = __webpack_require__(5732);
-
-const _warnonce = __webpack_require__(618);
-
-function defaultHead(inAmpMode) {
-  if (inAmpMode === void 0) inAmpMode = false;
-  const head = [/*#__PURE__*/_react.default.createElement("meta", {
-    charSet: "utf-8"
-  })];
-
-  if (!inAmpMode) {
-    head.push( /*#__PURE__*/_react.default.createElement("meta", {
-      name: "viewport",
-      content: "width=device-width"
-    }));
-  }
-
-  return head;
-}
-
-function onlyReactElement(list, child) {
-  // React children can be "string" or "number" in this case we ignore them for backwards compat
-  if (typeof child === "string" || typeof child === "number") {
-    return list;
-  } // Adds support for React.Fragment
-
-
-  if (child.type === _react.default.Fragment) {
-    return list.concat( // @ts-expect-error @types/react does not remove fragments but this could also return ReactPortal[]
-    _react.default.Children.toArray(child.props.children).reduce( // @ts-expect-error @types/react does not remove fragments but this could also return ReactPortal[]
-    (fragmentList, fragmentChild) => {
-      if (typeof fragmentChild === "string" || typeof fragmentChild === "number") {
-        return fragmentList;
-      }
-
-      return fragmentList.concat(fragmentChild);
-    }, []));
-  }
-
-  return list.concat(child);
-}
-
-const METATYPES = ["name", "httpEquiv", "charSet", "itemProp"];
-/*
- returns a function for filtering head child elements
- which shouldn't be duplicated, like <title/>
- Also adds support for deduplicated `key` properties
-*/
-
-function unique() {
-  const keys = new Set();
-  const tags = new Set();
-  const metaTypes = new Set();
-  const metaCategories = {};
-  return h => {
-    let isUnique = true;
-    let hasKey = false;
-
-    if (h.key && typeof h.key !== "number" && h.key.indexOf("$") > 0) {
-      hasKey = true;
-      const key = h.key.slice(h.key.indexOf("$") + 1);
-
-      if (keys.has(key)) {
-        isUnique = false;
-      } else {
-        keys.add(key);
-      }
-    } // eslint-disable-next-line default-case
-
-
-    switch (h.type) {
-      case "title":
-      case "base":
-        if (tags.has(h.type)) {
-          isUnique = false;
-        } else {
-          tags.add(h.type);
-        }
-
-        break;
-
-      case "meta":
-        for (let i = 0, len = METATYPES.length; i < len; i++) {
-          const metatype = METATYPES[i];
-          if (!h.props.hasOwnProperty(metatype)) continue;
-
-          if (metatype === "charSet") {
-            if (metaTypes.has(metatype)) {
-              isUnique = false;
-            } else {
-              metaTypes.add(metatype);
-            }
-          } else {
-            const category = h.props[metatype];
-            const categories = metaCategories[metatype] || new Set();
-
-            if ((metatype !== "name" || !hasKey) && categories.has(category)) {
-              isUnique = false;
-            } else {
-              categories.add(category);
-              metaCategories[metatype] = categories;
-            }
-          }
-        }
-
-        break;
-    }
-
-    return isUnique;
-  };
-}
-/**
- *
- * @param headChildrenElements List of children of <Head>
- */
-
-
-function reduceComponents(headChildrenElements, props) {
-  const {
-    inAmpMode
-  } = props;
-  return headChildrenElements.reduce(onlyReactElement, []).reverse().concat(defaultHead(inAmpMode).reverse()).filter(unique()).reverse().map((c, i) => {
-    const key = c.key || i;
-
-    if ( true && !inAmpMode) {
-      if (c.type === "link" && c.props["href"] && // TODO(prateekbh@): Replace this with const from `constants` when the tree shaking works.
-      ["https://fonts.googleapis.com/css", "https://use.typekit.net/"].some(url => c.props["href"].startsWith(url))) {
-        const newProps = _objectSpread({}, c.props || {});
-
-        newProps["data-href"] = newProps["href"];
-        newProps["href"] = undefined; // Add this attribute to make it easy to identify optimized tags
-
-        newProps["data-optimized-fonts"] = true;
-        return /*#__PURE__*/_react.default.cloneElement(c, newProps);
-      }
-    }
-
-    if (false) {}
-
-    return /*#__PURE__*/_react.default.cloneElement(c, {
-      key
-    });
-  });
-}
-/**
- * This component injects elements to `<head>` of your page.
- * To avoid duplicated `tags` in `<head>` you can use the `key` property, which will make sure every tag is only rendered once.
- */
-
-
-function Head(param) {
-  let {
-    children
-  } = param;
-  const ampState = (0, _react.useContext)(_ampcontext.AmpStateContext);
-  const headManager = (0, _react.useContext)(_headmanagercontext.HeadManagerContext);
-  return /*#__PURE__*/_react.default.createElement(_sideeffect.default, {
-    reduceComponentsToState: reduceComponents,
-    headManager: headManager,
-    inAmpMode: (0, _ampmode.isInAmpMode)(ampState)
-  }, children);
-}
-
-const _default = Head;
-
-if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
-  Object.defineProperty(exports.default, '__esModule', {
-    value: true
-  });
-  Object.assign(exports.default, exports);
-  module.exports = exports.default;
-}
+module.exports = require("next/dist/server/utils.js");
 
 /***/ }),
 
 /***/ 3918:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("next/dist/shared/lib/amp-context.js");
 
 /***/ }),
@@ -372,23 +129,41 @@ module.exports = require("next/dist/shared/lib/amp-context.js");
 /***/ 5732:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("next/dist/shared/lib/amp-mode.js");
+
+/***/ }),
+
+/***/ 6724:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/constants.js");
 
 /***/ }),
 
 /***/ 2796:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("next/dist/shared/lib/head-manager-context.js");
+
+/***/ }),
+
+/***/ 8743:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/html-context.js");
+
+/***/ }),
+
+/***/ 8524:
+/***/ ((module) => {
+
+module.exports = require("next/dist/shared/lib/is-plain-object.js");
 
 /***/ }),
 
 /***/ 2470:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("next/dist/shared/lib/side-effect.js");
 
 /***/ }),
@@ -396,7 +171,6 @@ module.exports = require("next/dist/shared/lib/side-effect.js");
 /***/ 618:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("next/dist/shared/lib/utils/warn-once.js");
 
 /***/ }),
@@ -404,68 +178,21 @@ module.exports = require("next/dist/shared/lib/utils/warn-once.js");
 /***/ 6689:
 /***/ ((module) => {
 
-"use strict";
 module.exports = require("react");
 
 /***/ }),
 
-/***/ 167:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ 7518:
+/***/ ((module) => {
 
-"use strict";
-
-
-exports._ = exports._interop_require_default = _interop_require_default;
-function _interop_require_default(obj) {
-    return obj && obj.__esModule ? obj : { default: obj };
-}
-
+module.exports = require("styled-components");
 
 /***/ }),
 
-/***/ 8760:
-/***/ ((__unused_webpack_module, exports) => {
+/***/ 9752:
+/***/ ((module) => {
 
-"use strict";
-
-
-function _getRequireWildcardCache(nodeInterop) {
-    if (typeof WeakMap !== "function") return null;
-
-    var cacheBabelInterop = new WeakMap();
-    var cacheNodeInterop = new WeakMap();
-
-    return (_getRequireWildcardCache = function(nodeInterop) {
-        return nodeInterop ? cacheNodeInterop : cacheBabelInterop;
-    })(nodeInterop);
-}
-exports._ = exports._interop_require_wildcard = _interop_require_wildcard;
-function _interop_require_wildcard(obj, nodeInterop) {
-    if (!nodeInterop && obj && obj.__esModule) return obj;
-    if (obj === null || typeof obj !== "object" && typeof obj !== "function") return { default: obj };
-
-    var cache = _getRequireWildcardCache(nodeInterop);
-
-    if (cache && cache.has(obj)) return cache.get(obj);
-
-    var newObj = {};
-    var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor;
-
-    for (var key in obj) {
-        if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) {
-            var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null;
-            if (desc && (desc.get || desc.set)) Object.defineProperty(newObj, key, desc);
-            else newObj[key] = obj[key];
-        }
-    }
-
-    newObj.default = obj;
-
-    if (cache) cache.set(obj, newObj);
-
-    return newObj;
-}
-
+module.exports = import("@tanstack/react-query");;
 
 /***/ })
 
@@ -476,7 +203,7 @@ function _interop_require_wildcard(obj, nodeInterop) {
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = (__webpack_exec__(6698));
+var __webpack_exports__ = __webpack_require__.X(0, [769,698,746], () => (__webpack_exec__(6968)));
 module.exports = __webpack_exports__;
 
 })();

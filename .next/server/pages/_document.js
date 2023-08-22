@@ -5,124 +5,80 @@ exports.id = 660;
 exports.ids = [660];
 exports.modules = {
 
-/***/ 3196:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+/***/ 1194:
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
 
-// ESM COMPAT FLAG
+__webpack_require__.a(module, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   config: () => (/* binding */ config),
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
+/* harmony export */   getServerSideProps: () => (/* binding */ getServerSideProps),
+/* harmony export */   getStaticPaths: () => (/* binding */ getStaticPaths),
+/* harmony export */   getStaticProps: () => (/* binding */ getStaticProps),
+/* harmony export */   reportWebVitals: () => (/* binding */ reportWebVitals),
+/* harmony export */   routeModule: () => (/* binding */ routeModule),
+/* harmony export */   unstable_getServerProps: () => (/* binding */ unstable_getServerProps),
+/* harmony export */   unstable_getServerSideProps: () => (/* binding */ unstable_getServerSideProps),
+/* harmony export */   unstable_getStaticParams: () => (/* binding */ unstable_getStaticParams),
+/* harmony export */   unstable_getStaticPaths: () => (/* binding */ unstable_getStaticPaths),
+/* harmony export */   unstable_getStaticProps: () => (/* binding */ unstable_getStaticProps)
+/* harmony export */ });
+/* harmony import */ var next_dist_server_future_route_modules_pages_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(3185);
+/* harmony import */ var next_dist_server_future_route_modules_pages_module__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(next_dist_server_future_route_modules_pages_module__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(5244);
+/* harmony import */ var next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(7182);
+/* harmony import */ var private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(5539);
+/* harmony import */ var private_next_pages_app_tsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(3376);
+var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([private_next_pages_app_tsx__WEBPACK_IMPORTED_MODULE_4__]);
+private_next_pages_app_tsx__WEBPACK_IMPORTED_MODULE_4__ = (__webpack_async_dependencies__.then ? (await __webpack_async_dependencies__)() : __webpack_async_dependencies__)[0];
+// @ts-ignore this need to be imported from next/dist to be external
 
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, {
-  config: () => (/* binding */ config),
-  "default": () => (/* binding */ next_route_loaderpage_2F_document_absolutePagePath_private_next_pages_2F_document_tsx_preferredRegion_middlewareConfig_e30_3D_),
-  getServerSideProps: () => (/* binding */ getServerSideProps),
-  getStaticPaths: () => (/* binding */ getStaticPaths),
-  getStaticProps: () => (/* binding */ getStaticProps),
-  reportWebVitals: () => (/* binding */ reportWebVitals),
-  routeModule: () => (/* binding */ routeModule),
-  unstable_getServerProps: () => (/* binding */ unstable_getServerProps),
-  unstable_getServerSideProps: () => (/* binding */ unstable_getServerSideProps),
-  unstable_getStaticParams: () => (/* binding */ unstable_getStaticParams),
-  unstable_getStaticPaths: () => (/* binding */ unstable_getStaticPaths),
-  unstable_getStaticProps: () => (/* binding */ unstable_getStaticProps)
+
+
+// Import the app and document modules.
+// @ts-expect-error - replaced by webpack/turbopack loader
+
+// @ts-expect-error - replaced by webpack/turbopack loader
+
+// Import the userland code.
+// @ts-expect-error - replaced by webpack/turbopack loader
+
+const PagesRouteModule = next_dist_server_future_route_modules_pages_module__WEBPACK_IMPORTED_MODULE_0__.PagesRouteModule;
+// Re-export the component (should be the default export).
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "default"));
+// Re-export methods.
+const getStaticProps = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "getStaticProps");
+const getStaticPaths = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "getStaticPaths");
+const getServerSideProps = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "getServerSideProps");
+const config = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "config");
+const reportWebVitals = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "reportWebVitals");
+// Re-export legacy methods.
+const unstable_getStaticProps = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "unstable_getStaticProps");
+const unstable_getStaticPaths = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "unstable_getStaticPaths");
+const unstable_getStaticParams = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "unstable_getStaticParams");
+const unstable_getServerProps = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "unstable_getServerProps");
+const unstable_getServerSideProps = (0,next_dist_build_webpack_loaders_next_route_loader_helpers__WEBPACK_IMPORTED_MODULE_2__/* .hoist */ .l)(private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__, "unstable_getServerSideProps");
+// Create and export the route module that will be consumed.
+const routeModule = new PagesRouteModule({
+    definition: {
+        kind: next_dist_server_future_route_kind__WEBPACK_IMPORTED_MODULE_1__/* .RouteKind */ .x.PAGES,
+        page: "/_document",
+        pathname: "/_document",
+        // The following aren't used in production.
+        bundlePath: "",
+        filename: ""
+    },
+    components: {
+        App: private_next_pages_app_tsx__WEBPACK_IMPORTED_MODULE_4__["default"],
+        Document: private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__["default"]
+    },
+    userland: private_next_pages_document_tsx__WEBPACK_IMPORTED_MODULE_3__
 });
 
-// NAMESPACE OBJECT: ./pages/_document.tsx
-var _document_namespaceObject = {};
-__webpack_require__.r(_document_namespaceObject);
-__webpack_require__.d(_document_namespaceObject, {
-  "default": () => (_document)
-});
-
-// EXTERNAL MODULE: ./node_modules/next/dist/server/future/route-modules/pages/module.js
-var pages_module = __webpack_require__(3185);
-var module_default = /*#__PURE__*/__webpack_require__.n(pages_module);
-// EXTERNAL MODULE: ./node_modules/next/dist/build/webpack/loaders/next-route-loader/helpers.js
-var helpers = __webpack_require__(7182);
-// EXTERNAL MODULE: ./node_modules/next/document.js
-var next_document = __webpack_require__(6859);
-var document_default = /*#__PURE__*/__webpack_require__.n(next_document);
-// EXTERNAL MODULE: external "styled-components"
-var external_styled_components_ = __webpack_require__(7518);
-// EXTERNAL MODULE: ./node_modules/react/jsx-runtime.js
-var jsx_runtime = __webpack_require__(5893);
-;// CONCATENATED MODULE: ./pages/_document.tsx
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-class MyDocument extends (document_default()) {
-  static async getInitialProps(ctx) {
-    const sheet = new external_styled_components_.ServerStyleSheet();
-    const originalRenderPage = ctx.renderPage;
-
-    try {
-      ctx.renderPage = () => originalRenderPage({
-        enhanceApp: App => props => sheet.collectStyles( /*#__PURE__*/jsx_runtime.jsx(App, _objectSpread({}, props)))
-      });
-
-      const initialProps = await document_default().getInitialProps(ctx);
-      return _objectSpread(_objectSpread({}, initialProps), {}, {
-        styles: /*#__PURE__*/(0,jsx_runtime.jsxs)(jsx_runtime.Fragment, {
-          children: [initialProps.styles, sheet.getStyleElement()]
-        })
-      });
-    } finally {
-      sheet.seal();
-    }
-  }
-
-  render() {
-    return /*#__PURE__*/(0,jsx_runtime.jsxs)(next_document.Html, {
-      children: [/*#__PURE__*/jsx_runtime.jsx(next_document.Head, {}), /*#__PURE__*/(0,jsx_runtime.jsxs)("body", {
-        children: [/*#__PURE__*/jsx_runtime.jsx(next_document.Main, {}), /*#__PURE__*/jsx_runtime.jsx(next_document.NextScript, {})]
-      })]
-    });
-  }
-
-}
-
-/* harmony default export */ const _document = (MyDocument);
-;// CONCATENATED MODULE: ./node_modules/next/dist/build/webpack/loaders/next-route-loader/index.js?page=%2F_document&absolutePagePath=private-next-pages%2F_document.tsx&preferredRegion=&middlewareConfig=e30%3D!
-
-        // Next.js Route Loader
-        
-        
-
-        // Import the userland code.
-        
-
-        // Re-export the component (should be the default export).
-        /* harmony default export */ const next_route_loaderpage_2F_document_absolutePagePath_private_next_pages_2F_document_tsx_preferredRegion_middlewareConfig_e30_3D_ = ((0,helpers/* hoist */.l)(_document_namespaceObject, "default"));
-
-        // Re-export methods.
-        const getStaticProps = (0,helpers/* hoist */.l)(_document_namespaceObject, "getStaticProps")
-        const getStaticPaths = (0,helpers/* hoist */.l)(_document_namespaceObject, "getStaticPaths")
-        const getServerSideProps = (0,helpers/* hoist */.l)(_document_namespaceObject, "getServerSideProps")
-        const config = (0,helpers/* hoist */.l)(_document_namespaceObject, "config")
-        const reportWebVitals = (0,helpers/* hoist */.l)(_document_namespaceObject, "reportWebVitals")
-
-        // Re-export legacy methods.
-        const unstable_getStaticProps = (0,helpers/* hoist */.l)(_document_namespaceObject, "unstable_getStaticProps")
-        const unstable_getStaticPaths = (0,helpers/* hoist */.l)(_document_namespaceObject, "unstable_getStaticPaths")
-        const unstable_getStaticParams = (0,helpers/* hoist */.l)(_document_namespaceObject, "unstable_getStaticParams")
-        const unstable_getServerProps = (0,helpers/* hoist */.l)(_document_namespaceObject, "unstable_getServerProps")
-        const unstable_getServerSideProps = (0,helpers/* hoist */.l)(_document_namespaceObject, "unstable_getServerSideProps")
-
-        // Create and export the route module that will be consumed.
-        const options = {"definition":{"kind":"PAGES","page":"/_document","pathname":"/_document","bundlePath":"","filename":""}}
-        const routeModule = new (module_default())({ ...options, userland: _document_namespaceObject })
-        
-        
-    
+//# sourceMappingURL=pages.js.map
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } });
 
 /***/ }),
 
@@ -194,6 +150,13 @@ module.exports = require("react");
 
 module.exports = require("styled-components");
 
+/***/ }),
+
+/***/ 9752:
+/***/ ((module) => {
+
+module.exports = import("@tanstack/react-query");;
+
 /***/ })
 
 };
@@ -203,7 +166,7 @@ module.exports = require("styled-components");
 var __webpack_require__ = require("../webpack-runtime.js");
 __webpack_require__.C(exports);
 var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
-var __webpack_exports__ = __webpack_require__.X(0, [812,859], () => (__webpack_exec__(3196)));
+var __webpack_exports__ = __webpack_require__.X(0, [769,746], () => (__webpack_exec__(1194)));
 module.exports = __webpack_exports__;
 
 })();
