@@ -8,19 +8,7 @@ import { useState } from "react";
 import Input from "../components/basic/Input";
 import Navigator from "../components/utils/Navigator";
 
-const list = [
-  { name: "1번", id: "aaaa" },
-  { name: "2번", id: "bbbbb" },
-  { name: "3번", id: "cccccc" },
-  { name: "4666번", id: "dddd" },
-];
-
 const mainPage = () => {
-  const [comboBoxValue, setComboBoxValue] = useState(undefined);
-  const [inputValue, setInputValue] = useState<string>("");
-
-  console.log(inputValue);
-
   return (
     <>
       <Navigator></Navigator>

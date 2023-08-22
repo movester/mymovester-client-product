@@ -155,7 +155,7 @@ const StretchingModifyView = (props: IProps) => {
     reader.onload = () => setPreviewFile((prev) => [...prev, reader.result]);
     setImageFormData((prev) => [...prev, formData]);
   };
-  console.log("perview", previewFile, "formdata", imageFormData);
+
   const handleOnClickModifyButton = async () => {
     let filePathsArray = [];
 
