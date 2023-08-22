@@ -69,15 +69,15 @@ const StretchingDetailView = (props: IProps) => {
       <Box>
         <Typography variants="heading2">효과</Typography>
         <Box display="flex" justifyContent="start" alignItems="center">
-          {data.effectList.map((item) => (
-            <Typography variants="body1" key={`detail-effect-${item}`}>
+          {data.effectList.map((item, idx) => (
+            <Typography variants="body1" key={`detail-effect-${item}-${idx}`}>
               {STRETCHING_EFFECT_TEXT[item]},
             </Typography>
           ))}
         </Box>
       </Box>
       {/* 이미지 */}
-      <Box display="grid" gridTemplateColumns="repeat(2,1fr)">
+      <Box display="grid" gridTemplateColumns="repeat(2,350px)" gap={16}>
         {data.imageList.map((imgLink, index) => (
           <img key={`img-detail-${data.id}-${index}`} src={imgLink}></img>
         ))}

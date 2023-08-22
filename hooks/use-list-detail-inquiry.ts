@@ -15,6 +15,7 @@ const useListDeatilInquiry = (props: IProps) => {
   const { data } = useQuery({
     queryFn: () => fetch(`/stretchings/${listId}`).then((res) => res.json()),
     queryKey: ["stretching", "detail", listId],
+    enabled: !listId,
   });
 
   return data;

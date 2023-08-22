@@ -8,8 +8,8 @@ import {
 interface IProps {
   page?: number;
   title?: string;
-  mainCategory?: StretchingMainCategoryType | null;
-  subCategory?: StretchingSubCategoryType | null;
+  mainCategory?: StretchingMainCategoryType;
+  subCategory?: StretchingSubCategoryType;
   orderFilter?: StretchingListOrderFilter;
 }
 

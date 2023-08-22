@@ -13,10 +13,10 @@ interface IProps {
 const Pagination = (props: IProps) => {
   const { currentPage, setCurrentPage, total } = props;
 
+  const lastPage = useMemo(() => Math.ceil(total / 10), [total]);
+
   const pageArray = useMemo(() => {
     let array = [];
-
-    const lastPage = Math.ceil(total / 10);
 
     for (let i = 0; i < lastPage; i++) {
       array.push(i + 1);
@@ -25,10 +25,13 @@ const Pagination = (props: IProps) => {
     return array;
   }, [total]);
 
-  // const pageArray = [1, 2, 3, 4, 5];
   return (
     <Box display="flex" alignItems="center" justifyContent="center" gap={4}>
-      <BiChevronLeft></BiChevronLeft>
+      <BiChevronLeft
+        onClick={() =>
+          setCurrentPage((prev) => (prev - 1 > 0 ? prev - 1 : prev))
+        }
+      ></BiChevronLeft>
       {pageArray.map((item, idx) => (
         <Box
           key={`pagination-${idx}`}
@@ -50,7 +53,11 @@ const Pagination = (props: IProps) => {
           </Typography>
         </Box>
       ))}
-      <BiChevronRight></BiChevronRight>
+      <BiChevronRight
+        onClick={() =>
+          setCurrentPage((prev) => (prev + 1 > lastPage ? prev : prev + 1))
+        }
+      ></BiChevronRight>
     </Box>
   );
 };
