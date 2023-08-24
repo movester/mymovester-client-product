@@ -17,12 +17,3 @@ const mainPage = () => {
 };
 
 export default mainPage;
-
-const GridBox = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  gap: 16px;
-`;

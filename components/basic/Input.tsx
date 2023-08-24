@@ -47,9 +47,6 @@ const IconBox = styled.div`
 `;
 
 const InputBox = styled.input<IInput>`
-  /* position: absolute; */
-  /* top: 0;
-  left: 0; */
   border: ${({ $invisible }) =>
     $invisible ? "none" : `1px solid ${colors.g000}`};
   padding: ${({ $invisible }) => ($invisible ? "0px 16px" : "16px")};
