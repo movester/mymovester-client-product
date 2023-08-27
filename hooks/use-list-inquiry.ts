@@ -34,7 +34,9 @@ const useListInquiry = (props: IProps) => {
     queryFn: () =>
       fetch(
         `/api/stretchings?page=${page}&title=${title}&${mainCategorySearchQuery}&${subCategorySearchQuery}&orderFilter=${orderFilter}`
-      ).then((res) => res.json()),
+      )
+        .then((res) => res.json())
+        .catch((error) => error),
     queryKey: [
       "stretching",
       "list",

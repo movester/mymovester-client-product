@@ -9,7 +9,9 @@ const useImageUpload = () => {
           Accept: "*/*",
         },
         body: payload,
-      }).then((res) => res.json()),
+      })
+        .then((res) => res.json())
+        .catch((error) => error),
     onError: (error) => {
       console.log(error);
     },
