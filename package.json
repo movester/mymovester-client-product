@@ -26,7 +26,7 @@
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",
-    "start": "next start -p 7000",
+    "start": "next --experimental-modules start -p 7000",
     "lint": "next lint"
   }
 }
