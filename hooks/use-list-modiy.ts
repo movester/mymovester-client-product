@@ -16,6 +16,9 @@ const useListModify = () => {
           "Content-Type": "application/json",
         },
       }),
+    onError: (error) => {
+      console.log(error);
+    },
   });
 };
 

@@ -44,6 +44,9 @@ const useListInquiry = (props: IProps) => {
       subCategory,
       orderFilter,
     ],
+    onError: (error) => {
+      console.log(error);
+    },
   });
 
   return data;

@@ -10,6 +10,9 @@ const useImageUpload = () => {
         },
         body: payload,
       }).then((res) => res.json()),
+    onError: (error) => {
+      console.log(error);
+    },
   });
 };
 export default useImageUpload;

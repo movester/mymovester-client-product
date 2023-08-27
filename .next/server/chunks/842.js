@@ -220,7 +220,10 @@ const useImageUpload = () => {
         Accept: "*/*"
       },
       body: payload
-    }).then(res => res.json())
+    }).then(res => res.json()),
+    onError: error => {
+      console.log(error);
+    }
   });
 };
 

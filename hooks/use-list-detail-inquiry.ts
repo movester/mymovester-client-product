@@ -17,6 +17,9 @@ const useListDeatilInquiry = (props: IProps) => {
       fetch(`/api/stretchings/${listId}`).then((res) => res.json()),
     queryKey: ["stretching", "detail", listId],
     enabled: Boolean(listId),
+    onError: (error) => {
+      console.log(error);
+    },
   });
 
   return data;

@@ -12,6 +12,9 @@ const useListDelete = () => {
     onSuccess: () => {
       router.push("/stretching");
     },
+    onError: (error) => {
+      console.log(error);
+    },
   });
 };
 

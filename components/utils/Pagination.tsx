@@ -23,7 +23,7 @@ const Pagination = (props: IProps) => {
     }
 
     return array;
-  }, [total]);
+  }, [lastPage]);
 
   return (
     <Box display="flex" alignItems="center" justifyContent="center" gap={4}>
