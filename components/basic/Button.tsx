@@ -105,7 +105,6 @@ const Box = styled.div<IButton>`
   height: ${(props) => `${props.$height}px`};
   font-size: ${(props) => `${props.$fontSize}px`};
   border: ${(props) => `${props.$border}}`};
-  outline: none;
 
   :hover {
     cursor: pointer;

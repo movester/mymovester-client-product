@@ -109,7 +109,6 @@ const Box = styled.div`
 const Select = styled.div`
   border: none;
   background-color: #ffffff;
-  outline: none;
   display: flex;
   justify-content: space-between;
   width: auto;

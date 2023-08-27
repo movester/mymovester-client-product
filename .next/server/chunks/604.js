@@ -160,7 +160,7 @@ const Button = props => {
 const Box = styled_components__WEBPACK_IMPORTED_MODULE_0__.styled.div.withConfig({
   displayName: "Button__Box",
   componentId: "sc-8ctfz2-0"
-})(["border-radius:8px;justify-content:center;align-items:center;text-align:center;display:flex;font-weight:bold;width:", ";box-sizing:border-box;background-color:", ";color:", ";height:", ";font-size:", ";border:", ";outline:none;:hover{cursor:pointer;}"], props => props.$width ? `${props.$width}px` : "100%", props => props.$backgroundColor, props => props.$color, props => `${props.$height}px`, props => `${props.$fontSize}px`, props => `${props.$border}}`);
+})(["border-radius:8px;justify-content:center;align-items:center;text-align:center;display:flex;font-weight:bold;width:", ";box-sizing:border-box;background-color:", ";color:", ";height:", ";font-size:", ";border:", ";:hover{cursor:pointer;}"], props => props.$width ? `${props.$width}px` : "100%", props => props.$backgroundColor, props => props.$color, props => `${props.$height}px`, props => `${props.$fontSize}px`, props => `${props.$border}}`);
 
 /***/ }),
 
@@ -265,7 +265,7 @@ const Box = styled_components__WEBPACK_IMPORTED_MODULE_1__.styled.div.withConfig
 const Select = styled_components__WEBPACK_IMPORTED_MODULE_1__.styled.div.withConfig({
   displayName: "ComboBox__Select",
   componentId: "sc-m874bd-1"
-})(["border:none;background-color:#ffffff;outline:none;display:flex;justify-content:space-between;width:auto;align-items:center;&:hover{cursor:pointer;}"]);
+})(["border:none;background-color:#ffffff;display:flex;justify-content:space-between;width:auto;align-items:center;&:hover{cursor:pointer;}"]);
 const Span = styled_components__WEBPACK_IMPORTED_MODULE_1__.styled.span.withConfig({
   displayName: "ComboBox__Span",
   componentId: "sc-m874bd-2"
