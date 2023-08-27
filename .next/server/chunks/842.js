@@ -214,7 +214,7 @@ _tanstack_react_query__WEBPACK_IMPORTED_MODULE_0__ = (__webpack_async_dependenci
 
 const useImageUpload = () => {
   return (0,_tanstack_react_query__WEBPACK_IMPORTED_MODULE_0__.useMutation)({
-    mutationFn: payload => fetch("/uploads", {
+    mutationFn: payload => fetch("/api/uploads", {
       method: "POST",
       headers: {
         Accept: "*/*"

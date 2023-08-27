@@ -9,7 +9,7 @@ interface IPayload {
 const useListModify = () => {
   return useMutation({
     mutationFn: (payload: IPayload) =>
-      fetch(`/stretchings/${payload.pageId}`, {
+      fetch(`/api/stretchings/${payload.pageId}`, {
         method: "PUT",
         body: JSON.stringify(payload.formattedData),
         headers: {

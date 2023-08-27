@@ -7,7 +7,7 @@ const useStretchingCreate = () => {
 
   return useMutation({
     mutationFn: (payload: IFormatedData) =>
-      fetch("/stretchings", {
+      fetch("/api/stretchings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

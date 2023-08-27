@@ -33,7 +33,7 @@ const useListInquiry = (props: IProps) => {
   const { data } = useQuery({
     queryFn: () =>
       fetch(
-        `/stretchings?page=${page}&title=${title}&${mainCategorySearchQuery}&${subCategorySearchQuery}&orderFilter=${orderFilter}`
+        `/api/stretchings?page=${page}&title=${title}&${mainCategorySearchQuery}&${subCategorySearchQuery}&orderFilter=${orderFilter}`
       ).then((res) => res.json()),
     queryKey: [
       "stretching",

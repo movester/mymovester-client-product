@@ -6,7 +6,7 @@ const useListDelete = () => {
 
   return useMutation({
     mutationFn: (payload: string | number) =>
-      fetch(`/stretchings/${payload}`, {
+      fetch(`/api/stretchings/${payload}`, {
         method: "DELETE",
       }),
     onSuccess: () => {

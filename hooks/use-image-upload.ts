@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 const useImageUpload = () => {
   return useMutation({
     mutationFn: (payload: FormData) =>
-      fetch("/uploads", {
+      fetch("/api/uploads", {
         method: "POST",
         headers: {
           Accept: "*/*",
