@@ -1,11 +1,12 @@
 import { UseMutationResult, useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/router";
+import { IFormatedData } from "../pages/stretching/post";
 
 const useStretchingCreate = () => {
   const router = useRouter();
 
   return useMutation({
-    mutationFn: (payload: any) =>
+    mutationFn: (payload: IFormatedData) =>
       fetch("/stretchings", {
         method: "POST",
         headers: {
