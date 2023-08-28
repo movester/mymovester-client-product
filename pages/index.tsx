@@ -11,7 +11,7 @@ import Navigator from "../components/utils/Navigator";
 const mainPage = () => {
   return (
     <>
-      <Navigator></Navigator>
+      <div>work?</div>
     </>
   );
 };
