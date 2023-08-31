@@ -184,10 +184,9 @@ const StretchingModifyView = (props: IProps) => {
           videoUrl: videoLink,
         };
 
-        modiyList({ pageId: Number(data.id), formattedData });
-        // .then(() =>
-        // router.reload()
-        // );
+        modiyList({ pageId: Number(data.id), formattedData }).then(() =>
+          router.reload()
+        );
       });
     }
   };
