@@ -7,7 +7,7 @@ import ShadowBox from "../../components/utils/ShadowBox";
 import { colors } from "../../constants/style";
 import Navigator from "../../components/utils/Navigator";
 import Input from "../../components/basic/Input";
-import { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ComboBox from "../../components/basic/ComboBox";
 import Button from "../../components/basic/Button";
 import { FiLink2 } from "react-icons/fi";
@@ -133,6 +133,8 @@ const StretchingPostPage = () => {
     setImageFormData((prev) => [...prev, formData]);
   };
 
+  console.log(imageFormData);
+
   const handleOnClickSubmitButton = async () => {
     let filePathsArray = [];
 
@@ -148,7 +150,11 @@ const StretchingPostPage = () => {
           title: inputValue,
           mainCategory: mainCategoryValue.id,
           subCategory: subCategoryValue.id,
-          effectList: [effectValue1.id, effectValue2.id, effectValue3.id],
+          effectList: [
+            effectValue1?.id,
+            effectValue2?.id,
+            effectValue3?.id,
+          ].filter((item) => Boolean(item)),
           imageList: [...filePathsArray],
           techniqueList: [...stretchingOrder.map((list) => list.detail)],
           collect: Number(preferTimeValue),
