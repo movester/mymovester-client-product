@@ -56,6 +56,7 @@ const Box = (props: PropsWithChildren<IProps>) => {
     gridTemplateColumns,
     ref,
   } = props;
+
   return (
     <BoxWrapper
       $flexDirection={flexDirection}
