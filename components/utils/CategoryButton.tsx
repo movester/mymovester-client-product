@@ -36,6 +36,7 @@ const CategoryButton = (props: IProps) => {
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
+            boxSahdow="4px 4px 8px rgba(0, 0, 0, 0.1)"
             backgroundColor={
               selectedItem.labelId === item.labelId
                 ? colors.softPrimaryColor

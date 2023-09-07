@@ -17,8 +17,10 @@ export type variantsType = "primary" | "secondary";
 export type typographyType =
   | "heading1"
   | "heading2"
+  | "heading3"
   | "body1"
   | "body2"
+  | "body3"
   | "caption";
 
 export type StretchingMainCategoryType = "UPPER_BODY" | "LOWER_BODY";
@@ -40,3 +42,13 @@ export type StretchingEffectType =
   | "RELIEF_ROUND_SHOULDER";
 
 export type StretchingListOrderFilter = "RECENT" | "POPULAR";
+
+export type StretchingQueryItemType = {
+  id: number;
+  title: string;
+  mainCategory: StretchingMainCategoryType;
+  subCategory: StretchingSubCategoryType;
+  createdAt: string;
+  effect: StretchingEffectType;
+  imageUrl: string;
+};

@@ -12,30 +12,15 @@ import Box from "../../components/basic/Box";
 import {
   EFFECT_CATEGORY,
   IComboBoxType,
-  ITotalComboxType,
   LIST_ORDER_CATEGORY,
-  LOWER_BODY_CATEGORY,
-  LOWER_BODY_SEARCH_CATEGORY,
-  STRETCHING_MAIN_CATEGORY,
-  STRETCHING_MAIN_SEARCH_CATEGORY,
   STRETCHING_TOTAL_CATEGORY,
-  UPPER_BODY_SEARCH_CATEGORY,
 } from "../../constants";
-import {
-  StretchingEffectType,
-  StretchingListOrderFilter,
-  StretchingMainCategoryType,
-  StretchingSubCategoryType,
-} from "../../constants/types";
-
-import {
-  STRETCHING_EFFECT_TEXT,
-  STRETCHING_MAIN_CATEGORY_TEXT,
-  STRETCHING_SUB_CATEGORY_TEXT,
-} from "../../constants/text";
 import CategoryButton from "../../components/utils/CategoryButton";
 import useIsMobile from "../../hooks/utils/useIsMobile";
 import StretchingCategoryMenu from "../../components/utils/StretchingCategoryMenu";
+import useStretchingInquiry from "../../hooks/api/useStretchingInquiry";
+import DetailThumnailItem from "../../components/utils/DetailThumnailItem";
+import { StretchingListOrderFilter } from "../../constants/types";
 
 export type labeItemType = { label: string; labelId: string };
 
@@ -48,36 +33,69 @@ const StrechingPage = () => {
   const isMobile = useIsMobile();
 
   const [selectedItem, setSelectedItem] = useState<labeItemType>(labelItems[0]);
+  const [listOrder, setListOreder] = useState<
+    IComboBoxType<StretchingListOrderFilter>
+  >(LIST_ORDER_CATEGORY[0]);
+
+  const data = useStretchingInquiry({
+    page: 1,
+    size: 15,
+  });
 
   return (
     <PageWrapper>
       <Navigator></Navigator>
       <ContentWrapper>
-        <CategoryButton
-          labelItems={labelItems}
-          selectedItem={selectedItem}
-          setSelectedItem={setSelectedItem}
-        ></CategoryButton>
-
         <Box
           display="flex"
-          flexDirection="row"
-          justifyContent="start"
-          alignItems="start"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+          gap={32}
         >
-          {selectedItem.labelId === "sections"
-            ? STRETCHING_TOTAL_CATEGORY.map((categoryItem) => (
-                <StretchingCategoryMenu
-                  key={`category-item-id-${categoryItem.id}`}
-                  menuItem={categoryItem}
-                ></StretchingCategoryMenu>
-              ))
-            : EFFECT_CATEGORY.map((categoryItem) => (
-                <StretchingCategoryMenu
-                  key={`category-item-id-${categoryItem.id}`}
-                  menuItem={categoryItem}
-                ></StretchingCategoryMenu>
+          <CategoryButton
+            labelItems={labelItems}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+          ></CategoryButton>
+
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="start"
+            alignItems="start"
+          >
+            {selectedItem.labelId === "sections"
+              ? STRETCHING_TOTAL_CATEGORY.map((categoryItem) => (
+                  <StretchingCategoryMenu
+                    key={`category-item-id-${categoryItem.id}`}
+                    menuItem={categoryItem}
+                  ></StretchingCategoryMenu>
+                ))
+              : EFFECT_CATEGORY.map((categoryItem) => (
+                  <StretchingCategoryMenu
+                    key={`category-item-id-${categoryItem.id}`}
+                    menuItem={categoryItem}
+                  ></StretchingCategoryMenu>
+                ))}
+          </Box>
+        </Box>
+        <Box>
+          <ComboBox
+            size="xs"
+            list={LIST_ORDER_CATEGORY}
+            value={listOrder}
+            setValue={setListOreder}
+          ></ComboBox>
+          <ItemGrid>
+            {data?.stretchingList &&
+              data.stretchingList.map((item) => (
+                <DetailThumnailItem
+                  stretchingItem={item}
+                  key={`${item.id}-thumnail-list`}
+                ></DetailThumnailItem>
               ))}
+          </ItemGrid>
         </Box>
       </ContentWrapper>
     </PageWrapper>
@@ -92,59 +110,26 @@ const PageWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  padding-top: 100px;
+  padding-top: 120px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
-  gap: 32px;
+  gap: 72px;
   height: 100%;
   overflow-x: scroll;
+  max-width: 2480px;
+  padding-left: 64px;
+  padding-right: 64px;
+  padding-bottom: 64px;
 `;
 
-const BreadCrumb = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 16px 16px 32px;
-`;
-
-const Table = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${colors.g300};
-  gap: 1px;
-`;
-
-const TableGirdWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: ${colors.f200};
-  gap: 1px;
-  :hover {
-    div {
-      background-color: ${colors.f100};
-      cursor: pointer;
-    }
-  }
-`;
-
-const TableGrid = styled.div`
-  background-color: ${colors.f200};
-  gap: 1px;
+const ItemGrid = styled.div`
   display: grid;
-  grid-template-columns:
-    minmax(360px, 9fr) minmax(200px, 5fr) minmax(280px, 7fr)
-    minmax(80px, 2fr) minmax(120px, 3fr);
-  align-items: end;
-`;
-const TableItem = styled.div`
-  background-color: ${colors.f000};
-  width: 100%;
-  padding: 16px;
-  height: 100%;
-  text-align: start;
-  display: flex;
-  align-items: center;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `;
