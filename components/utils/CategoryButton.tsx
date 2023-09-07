@@ -3,6 +3,7 @@ import { colors } from "../../constants/style";
 import Box from "../basic/Box";
 import Typography from "../basic/Typography";
 import { labeItemType } from "../../pages/stretchings";
+import useIsMobile from "../../hooks/utils/useIsMobile";
 
 interface IProps {
   labelItems: labeItemType[];
@@ -12,6 +13,8 @@ interface IProps {
 
 const CategoryButton = (props: IProps) => {
   const { labelItems, selectedItem, setSelectedItem } = props;
+
+  const isMobile = useIsMobile();
 
   return (
     <Box
@@ -27,8 +30,8 @@ const CategoryButton = (props: IProps) => {
       {labelItems.length > 0 &&
         labelItems.map((item) => (
           <Box
-            width={200}
-            height={40}
+            width={!isMobile ? 200 : 120}
+            height={!isMobile ? 40 : 30}
             display="flex"
             flexDirection="column"
             alignItems="center"
@@ -42,7 +45,7 @@ const CategoryButton = (props: IProps) => {
             onClick={() => setSelectedItem(item)}
           >
             <Typography
-              variants="body1"
+              variants={!isMobile ? "body1" : "body2"}
               color={
                 selectedItem.labelId === item.labelId
                   ? colors.f000

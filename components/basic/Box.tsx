@@ -105,4 +105,5 @@ const BoxWrapper = styled.div<IBox>`
   border-radius: ${({ $borderRadius }) => `${$borderRadius}px`};
   grid-template-columns: ${({ $gridTemplateColumns }) => $gridTemplateColumns};
   box-shadow: ${({ $boxSahdow }) => $boxSahdow};
+  word-break: break-all;
 `;

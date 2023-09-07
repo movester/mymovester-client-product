@@ -12,6 +12,7 @@ import {
 } from "../../constants/types";
 import Box from "../basic/Box";
 import Typography from "../basic/Typography";
+import useIsMobile from "../../hooks/utils/useIsMobile";
 
 interface IProps {
   menuItem: IComboBoxType<
@@ -24,6 +25,8 @@ interface IProps {
 const StretchingCategoryMenu = (props: IProps) => {
   const { menuItem } = props;
 
+  const isMobile = useIsMobile();
+
   return (
     <Wrapper>
       <Box
@@ -31,13 +34,14 @@ const StretchingCategoryMenu = (props: IProps) => {
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
-        width={80}
+        width={!isMobile ? 80 : 70}
+        gap={4}
       >
         <Box
           backgroundColor={colors.f000}
           borderRadius={30}
-          width={60}
-          height={60}
+          width={!isMobile ? 60 : 50}
+          height={!isMobile ? 60 : 50}
           boxSahdow="4px 4px 8px rgba(0, 0, 0, 0.1)"
         ></Box>
         <Typography variants="body2">{menuItem.name}</Typography>

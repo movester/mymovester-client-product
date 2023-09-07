@@ -53,18 +53,17 @@ const StrechingPage = () => {
     <PageWrapper>
       <Navigator></Navigator>
       <ContentWrapper>
-        {!isMobile && (
-          <CategoryButton
-            labelItems={labelItems}
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
-          ></CategoryButton>
-        )}
+        <CategoryButton
+          labelItems={labelItems}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        ></CategoryButton>
+
         <Box
           display="flex"
           flexDirection="row"
-          justifyContent="center"
-          alignItems="center"
+          justifyContent="start"
+          alignItems="start"
         >
           {selectedItem.labelId === "sections"
             ? STRETCHING_TOTAL_CATEGORY.map((categoryItem) => (
@@ -97,10 +96,11 @@ const ContentWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   gap: 32px;
   height: 100%;
+  overflow-x: scroll;
 `;
 
 const BreadCrumb = styled.div`
