@@ -1,18 +1,17 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { colors } from "../../constants/style";
 import Box from "../basic/Box";
 import Typography from "../basic/Typography";
-
-type labeItemType = { label: string; labelId: string };
+import { labeItemType } from "../../pages/stretchings";
 
 interface IProps {
   labelItems: labeItemType[];
+  selectedItem: labeItemType;
+  setSelectedItem: Dispatch<SetStateAction<labeItemType>>;
 }
 
 const CategoryButton = (props: IProps) => {
-  const { labelItems } = props;
-
-  const [selectedItem, setSelectedItem] = useState<labeItemType>(labelItems[0]);
+  const { labelItems, selectedItem, setSelectedItem } = props;
 
   return (
     <Box

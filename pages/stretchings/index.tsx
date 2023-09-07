@@ -18,6 +18,7 @@ import {
   LOWER_BODY_SEARCH_CATEGORY,
   STRETCHING_MAIN_CATEGORY,
   STRETCHING_MAIN_SEARCH_CATEGORY,
+  STRETCHING_TOTAL_CATEGORY,
   UPPER_BODY_SEARCH_CATEGORY,
 } from "../../constants";
 import {
@@ -34,6 +35,9 @@ import {
 } from "../../constants/text";
 import CategoryButton from "../../components/utils/CategoryButton";
 import useIsMobile from "../../hooks/utils/useIsMobile";
+import StretchingCategoryMenu from "../../components/utils/StretchingCategoryMenu";
+
+export type labeItemType = { label: string; labelId: string };
 
 const StrechingPage = () => {
   const labelItems = [
@@ -43,11 +47,39 @@ const StrechingPage = () => {
 
   const isMobile = useIsMobile();
 
+  const [selectedItem, setSelectedItem] = useState<labeItemType>(labelItems[0]);
+
   return (
     <PageWrapper>
       <Navigator></Navigator>
       <ContentWrapper>
-        {!isMobile && <CategoryButton labelItems={labelItems}></CategoryButton>}
+        {!isMobile && (
+          <CategoryButton
+            labelItems={labelItems}
+            selectedItem={selectedItem}
+            setSelectedItem={setSelectedItem}
+          ></CategoryButton>
+        )}
+        <Box
+          display="flex"
+          flexDirection="row"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {selectedItem.labelId === "sections"
+            ? STRETCHING_TOTAL_CATEGORY.map((categoryItem) => (
+                <StretchingCategoryMenu
+                  key={`category-item-id-${categoryItem.id}`}
+                  menuItem={categoryItem}
+                ></StretchingCategoryMenu>
+              ))
+            : EFFECT_CATEGORY.map((categoryItem) => (
+                <StretchingCategoryMenu
+                  key={`category-item-id-${categoryItem.id}`}
+                  menuItem={categoryItem}
+                ></StretchingCategoryMenu>
+              ))}
+        </Box>
       </ContentWrapper>
     </PageWrapper>
   );
@@ -68,6 +100,7 @@ const ContentWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 32px;
+  height: 100%;
 `;
 
 const BreadCrumb = styled.div`
