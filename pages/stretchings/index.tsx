@@ -5,7 +5,7 @@ import ShadowBox from "../../components/utils/ShadowBox";
 import Typography from "../../components/basic/Typography";
 import Button from "../../components/basic/Button";
 import ComboBox from "../../components/basic/ComboBox";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../components/basic/Input";
 import { useRouter } from "next/router";
 import Box from "../../components/basic/Box";
@@ -20,7 +20,12 @@ import useIsMobile from "../../hooks/utils/useIsMobile";
 import StretchingCategoryMenu from "../../components/utils/StretchingCategoryMenu";
 import useStretchingInquiry from "../../hooks/api/useStretchingInquiry";
 import DetailThumnailItem from "../../components/utils/DetailThumnailItem";
-import { StretchingListOrderFilter } from "../../constants/types";
+import {
+  StretchingEffectType,
+  StretchingListOrderFilter,
+  StretchingMainCategoryType,
+  StretchingSubCategoryType,
+} from "../../constants/types";
 
 export type labeItemType = { label: string; labelId: string };
 
@@ -32,15 +37,26 @@ const StrechingPage = () => {
 
   const isMobile = useIsMobile();
 
-  const [selectedItem, setSelectedItem] = useState<labeItemType>(labelItems[0]);
+  const [selectedCategoryButtonItem, setSelectedCategoryButtonItem] =
+    useState<labeItemType>(labelItems[0]);
   const [listOrder, setListOreder] = useState<
     IComboBoxType<StretchingListOrderFilter>
   >(LIST_ORDER_CATEGORY[0]);
+  const [selectedCategoryItem, setSelectedCategoryItem] =
+    useState<IComboBoxType<
+      | StretchingMainCategoryType
+      | StretchingSubCategoryType
+      | StretchingEffectType
+    > | null>(null);
 
   const data = useStretchingInquiry({
     page: 1,
     size: 15,
   });
+
+  useEffect(() => {
+    setSelectedCategoryItem(null);
+  }, [selectedCategoryButtonItem]);
 
   return (
     <PageWrapper>
@@ -55,8 +71,8 @@ const StrechingPage = () => {
         >
           <CategoryButton
             labelItems={labelItems}
-            selectedItem={selectedItem}
-            setSelectedItem={setSelectedItem}
+            selectedItem={selectedCategoryButtonItem}
+            setSelectedItem={setSelectedCategoryButtonItem}
           ></CategoryButton>
 
           <Box
@@ -65,22 +81,32 @@ const StrechingPage = () => {
             justifyContent="start"
             alignItems="start"
           >
-            {selectedItem.labelId === "sections"
+            {selectedCategoryButtonItem.labelId === "sections"
               ? STRETCHING_TOTAL_CATEGORY.map((categoryItem) => (
                   <StretchingCategoryMenu
                     key={`category-item-id-${categoryItem.id}`}
                     menuItem={categoryItem}
+                    isSelected={categoryItem.id === selectedCategoryItem?.id}
+                    setSelectedItem={setSelectedCategoryItem}
                   ></StretchingCategoryMenu>
                 ))
               : EFFECT_CATEGORY.map((categoryItem) => (
                   <StretchingCategoryMenu
                     key={`category-item-id-${categoryItem.id}`}
                     menuItem={categoryItem}
+                    isSelected={categoryItem.id === selectedCategoryItem?.id}
+                    setSelectedItem={setSelectedCategoryItem}
                   ></StretchingCategoryMenu>
                 ))}
           </Box>
         </Box>
-        <Box>
+        <Box
+          display="flex"
+          flexDirection="column"
+          justifyContent="start"
+          alignItems="start"
+          gap={16}
+        >
           <ComboBox
             size="xs"
             list={LIST_ORDER_CATEGORY}

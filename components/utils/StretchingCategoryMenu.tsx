@@ -13,6 +13,7 @@ import {
 import Box from "../basic/Box";
 import Typography from "../basic/Typography";
 import useIsMobile from "../../hooks/utils/useIsMobile";
+import { Dispatch, SetStateAction, useState } from "react";
 
 interface IProps {
   menuItem: IComboBoxType<
@@ -20,10 +21,20 @@ interface IProps {
     | StretchingSubCategoryType
     | StretchingEffectType
   >;
+  isSelected: boolean;
+  setSelectedItem: Dispatch<
+    SetStateAction<
+      IComboBoxType<
+        | StretchingMainCategoryType
+        | StretchingSubCategoryType
+        | StretchingEffectType
+      >
+    >
+  >;
 }
 
 const StretchingCategoryMenu = (props: IProps) => {
-  const { menuItem } = props;
+  const { menuItem, isSelected, setSelectedItem } = props;
 
   const isMobile = useIsMobile();
 
@@ -36,15 +47,18 @@ const StretchingCategoryMenu = (props: IProps) => {
         alignItems="center"
         width={!isMobile ? 80 : 70}
         gap={4}
+        onClick={() => setSelectedItem(menuItem)}
       >
         <Box
-          backgroundColor={colors.f000}
+          backgroundColor={isSelected ? colors.softPrimaryColor : colors.f300}
           borderRadius={30}
           width={!isMobile ? 60 : 50}
           height={!isMobile ? 60 : 50}
           boxSahdow="4px 4px 8px rgba(0, 0, 0, 0.1)"
         ></Box>
-        <Typography variants="body2">{menuItem.name}</Typography>
+        <Typography variants={isSelected ? "heading3" : "body2"}>
+          {menuItem.name}
+        </Typography>
       </Box>
     </Wrapper>
   );
