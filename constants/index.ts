@@ -14,6 +14,19 @@ export interface IComboBoxType<T> {
   id: T;
 }
 
+export const STRETCHING_TOTAL_CATEGORY: IComboBoxType<
+  StretchingMainCategoryType | StretchingSubCategoryType
+>[] = [
+  { name: "상체 전체", id: "UPPER_BODY" },
+  { name: "목/가슴/어께", id: "NECK" },
+  { name: "팔/손/손목", id: "ARM" },
+  { name: "등/몸통", id: "BACK" },
+  { name: "하체 전체", id: "LOWER_BODY" },
+  { name: "고관절/둔근", id: "HIP_JOINT" },
+  { name: "종아리/발목/발", id: "CALF" },
+  { name: "무릎/허벅지", id: "KNEE" },
+];
+
 export const STRETCHING_MAIN_CATEGORY: IComboBoxType<StretchingMainCategoryType>[] =
   [
     { name: "상체", id: "UPPER_BODY" },
@@ -43,7 +56,7 @@ export const EFFECT_CATEGORY: IComboBoxType<StretchingEffectType>[] = [
 
 export const LIST_ORDER_CATEGORY: IComboBoxType<StretchingListOrderFilter>[] = [
   { name: "최신순", id: "RECENT" },
-  { name: "인기순", id: "POPULAR" },
+  { name: "조회순", id: "POPULAR" },
 ];
 
 export const STRETCHING_MAIN_SEARCH_CATEGORY: ITotalComboxType<StretchingMainCategoryType>[] =

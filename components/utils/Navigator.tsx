@@ -2,40 +2,40 @@ import { styled } from "styled-components";
 import Typography from "../basic/Typography";
 import { colors } from "../../constants/style";
 import { useRouter } from "next/router";
+import Box from "../basic/Box";
+import useIsMobile from "../../hooks/utils/useIsMobile";
+
+interface IStyledProps {
+  ismobile: boolean;
+}
 
 const Navigator = () => {
   const router = useRouter();
+  const isMobile = useIsMobile();
   return (
-    <Wrapper>
-      <Box>
-        <Typography variants="heading2">Movester - backoffice</Typography>
-      </Box>
-      <NavigatorBox onClick={() => router.push("/stretching")}>
-        <Typography variants="heading2" color={colors.f000}>
-          스트레칭
+    <Wrapper ismobile={isMobile}>
+      <Box
+        flexDirection="column"
+        justifyContent="start"
+        alignItems="center"
+        onClick={() => router.push("/stretchings")}
+      >
+        <Typography variants="heading2" color={colors.vividPrimaryColor}>
+          {isMobile ? "M" : "MOVESTER"}
         </Typography>
-      </NavigatorBox>
+      </Box>
     </Wrapper>
   );
 };
 
 export default Navigator;
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<IStyledProps>`
   background-color: ${colors.f000};
   height: auto;
-  padding: 16px;
-  width: 300px;
-`;
-
-const Box = styled.div`
-  padding: 32px 0;
-`;
-
-const NavigatorBox = styled.div`
-  background-color: ${colors.softPrimaryColor};
+  padding: ${(props) => (props.ismobile ? "8px 16px" : "16px")};
   width: 100%;
-  padding: 8px 8px 8px 16px;
-  border-radius: 4px;
-  align-items: center;
+  position: fixed;
+  top: 0;
+  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
 `;
