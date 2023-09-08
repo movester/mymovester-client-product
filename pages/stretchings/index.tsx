@@ -44,18 +44,31 @@ const StrechingPage = () => {
   >(LIST_ORDER_CATEGORY[0]);
   const [selectedCategoryItem, setSelectedCategoryItem] =
     useState<IComboBoxType<
-      | StretchingMainCategoryType
-      | StretchingSubCategoryType
-      | StretchingEffectType
+      StretchingMainCategoryType | StretchingSubCategoryType
     > | null>(null);
+  const [seletedEffectItem, setSeletedEffectItem] =
+    useState<IComboBoxType<StretchingEffectType> | null>(null);
 
   const data = useStretchingInquiry({
     page: 1,
     size: 15,
+    orderFilter: listOrder.id,
+    effect: seletedEffectItem?.id,
+    mainCategory:
+      selectedCategoryItem?.id === "UPPER_BODY" ||
+      selectedCategoryItem?.id === "LOWER_BODY"
+        ? selectedCategoryItem?.id
+        : null,
+    subCategory:
+      selectedCategoryItem?.id !== "UPPER_BODY" &&
+      selectedCategoryItem?.id !== "LOWER_BODY"
+        ? selectedCategoryItem?.id
+        : null,
   });
 
   useEffect(() => {
     setSelectedCategoryItem(null);
+    setSeletedEffectItem(null);
   }, [selectedCategoryButtonItem]);
 
   return (
@@ -94,8 +107,8 @@ const StrechingPage = () => {
                   <StretchingCategoryMenu
                     key={`category-item-id-${categoryItem.id}`}
                     menuItem={categoryItem}
-                    isSelected={categoryItem.id === selectedCategoryItem?.id}
-                    setSelectedItem={setSelectedCategoryItem}
+                    isSelected={categoryItem.id === seletedEffectItem?.id}
+                    setSelectedItem={setSeletedEffectItem}
                   ></StretchingCategoryMenu>
                 ))}
           </Box>
