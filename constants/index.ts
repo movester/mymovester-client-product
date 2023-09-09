@@ -23,14 +23,14 @@ export interface ICategoryIconBoxType<T> {
 export const STRETCHING_TOTAL_CATEGORY: ICategoryIconBoxType<
   StretchingMainCategoryType | StretchingSubCategoryType
 >[] = [
-  { name: "상체 전체", id: "UPPER_BODY", img: "/icons/upper_body.png" },
-  { name: "목/가슴/어께", id: "NECK", img: "/icons/neck.png" },
-  { name: "팔/손/손목", id: "ARM", img: "/icons/arm.png" },
-  { name: "등/몸통", id: "BACK", img: "/icons/back.png" },
-  { name: "하체 전체", id: "LOWER_BODY", img: "/icons/lower_body.png" },
-  { name: "고관절/둔근", id: "HIP_JOINT", img: "/icons/hip_joint.png" },
-  { name: "종아리/발목/발", id: "CALF", img: "/icons/calf.png" },
-  { name: "무릎/허벅지", id: "KNEE", img: "/icons/knee.png" },
+  { name: "상체 전체", id: "UPPER_BODY", img: "/upper_body.png" },
+  { name: "목/가슴/어께", id: "NECK", img: "/neck.png" },
+  { name: "팔/손/손목", id: "ARM", img: "/arm.png" },
+  { name: "등/몸통", id: "BACK", img: "/back.png" },
+  { name: "하체 전체", id: "LOWER_BODY", img: "/lower_body.png" },
+  { name: "고관절/둔근", id: "HIP_JOINT", img: "/hip_joint.png" },
+  { name: "종아리/발목/발", id: "CALF", img: "/calf.png" },
+  { name: "무릎/허벅지", id: "KNEE", img: "/knee.png" },
 ];
 
 export const STRETCHING_MAIN_CATEGORY: IComboBoxType<StretchingMainCategoryType>[] =

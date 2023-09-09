@@ -1,15 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { colors } from "../../../constants/style";
-import ShadowBox from "../../../components/utils/ShadowBox";
-import Typography from "../../../components/basic/Typography";
-import Box from "../../../components/basic/Box";
-import Navigator from "../../../components/utils/Navigator";
-import Button from "../../../components/basic/Button";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import StretchingDetailView from "../../../views/stretchingDetailView";
-import StretchingModifyView from "../../../views/stretchingModifyView";
 import useIsMobile from "../../../hooks/utils/useIsMobile";
 import StretchingDetailMobilView from "../../../views/stretchingDetailMobileView";
 import StretchingDetailPcView from "../../../views/stretchingDetailPcView";

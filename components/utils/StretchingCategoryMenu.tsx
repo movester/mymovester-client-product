@@ -16,6 +16,7 @@ import Box from "../basic/Box";
 import Typography from "../basic/Typography";
 import useIsMobile from "../../hooks/utils/useIsMobile";
 import { Dispatch, SetStateAction, useState } from "react";
+import Image from "next/image";
 
 interface IProps {
   menuItem: ICategoryIconBoxType<
@@ -61,7 +62,12 @@ const StretchingCategoryMenu = (props: IProps) => {
           justifyContent="center"
           boxSahdow="4px 4px 8px rgba(0, 0, 0, 0.1)"
         >
-          <img src={menuItem.img} width={!isMobile ? 50 : 40}></img>
+          <Image
+            src={menuItem.img}
+            width={!isMobile ? 50 : 40}
+            height={!isMobile ? 50 : 40}
+            alt={""}
+          ></Image>
         </Box>
         <Typography variants={isSelected ? "heading3" : "body2"}>
           {menuItem.name}
