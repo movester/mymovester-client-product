@@ -6,10 +6,24 @@ import Typography from "../basic/Typography";
 
 interface IProps {
   order: number;
+  size?: "sm" | "md";
 }
 
+const sizeProps = {
+  sm: {
+    height: 32,
+    width: 30,
+    padding: 8,
+  },
+  md: {
+    height: 48,
+    width: 44,
+    padding: 16,
+  },
+};
+
 const ListTableItem = (props: PropsWithChildren<IProps>) => {
-  const { order, children } = props;
+  const { order, size = "md", children } = props;
   return (
     <Box
       display="flex"
@@ -18,7 +32,7 @@ const ListTableItem = (props: PropsWithChildren<IProps>) => {
       backgroundColor={colors.g000}
       width={"100%"}
       alignItems="center"
-      height={48}
+      height={sizeProps[size].height}
     >
       <Box
         backgroundColor={colors.f000}
@@ -26,9 +40,11 @@ const ListTableItem = (props: PropsWithChildren<IProps>) => {
         display="flex"
         alignItems="center"
         justifyContent="center"
-        width={44}
+        width={sizeProps[size].width}
       >
-        <Typography variants="body1">{order}</Typography>
+        <Typography variants={size === "md" ? "body1" : "body2"}>
+          {order}
+        </Typography>
       </Box>
       <Box
         backgroundColor={colors.f000}
@@ -36,7 +52,7 @@ const ListTableItem = (props: PropsWithChildren<IProps>) => {
         height={"100%"}
         alignItems="center"
         display="flex"
-        padding={16}
+        padding={sizeProps[size].padding}
       >
         {children}
       </Box>

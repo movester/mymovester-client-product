@@ -38,4 +38,5 @@ const Wrapper = styled.div<IStyledProps>`
   position: fixed;
   top: 0;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 300;
 `;

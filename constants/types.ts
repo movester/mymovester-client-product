@@ -53,3 +53,17 @@ export type StretchingQueryItemType = {
   effect: StretchingEffectType;
   imageUrl: string;
 };
+
+export type StretchingDetailQueryItemType = {
+  id: number;
+  title: string;
+  mainCategory: StretchingMainCategoryType;
+  subCategory: StretchingSubCategoryType;
+  effectList: StretchingEffectType[];
+  imageList: string[];
+  techniqueList: string[];
+  collect: number;
+  set: number;
+  precautionList: string[];
+  videoUrl: string;
+};

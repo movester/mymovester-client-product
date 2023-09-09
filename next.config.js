@@ -5,6 +5,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  disableSaticImages: false,
   async rewrites() {
     return [
       {
