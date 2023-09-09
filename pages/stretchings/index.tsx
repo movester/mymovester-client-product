@@ -24,6 +24,8 @@ import {
 } from "../../constants/types";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { useRouter } from "next/router";
+import path from "path";
 
 const PAGE_SIZE = 10;
 
@@ -40,6 +42,8 @@ const StrechingPage = () => {
   ];
 
   const isMobile = useIsMobile();
+
+  const router = useRouter();
 
   const [selectedCategoryButtonItem, setSelectedCategoryButtonItem] =
     useState<labeItemType>(labelItems[0]);
@@ -68,6 +72,13 @@ const StrechingPage = () => {
         ? selectedCategoryItem?.id
         : null,
   });
+
+  const handleOnClickStretchingItem = (stretchingId) => {
+    router.push({
+      pathname: "stretchings/detail",
+      query: { id: stretchingId },
+    });
+  };
 
   useEffect(() => {
     setSelectedCategoryItem(null);
@@ -122,16 +133,24 @@ const StrechingPage = () => {
         <Box
           display="flex"
           flexDirection="column"
-          justifyContent="start"
-          alignItems="start"
+          justifyContent="center"
+          alignItems="center"
           gap={16}
         >
-          <ComboBox
-            size="xs"
-            list={LIST_ORDER_CATEGORY}
-            value={listOrder}
-            setValue={setListOreder}
-          ></ComboBox>
+          <Box
+            display="flex"
+            flexDirection="column"
+            justifyContent="start"
+            alignItems="start"
+            width={"100%"}
+          >
+            <ComboBox
+              size="xs"
+              list={LIST_ORDER_CATEGORY}
+              value={listOrder}
+              setValue={setListOreder}
+            ></ComboBox>
+          </Box>
           {data && (
             <InfiniteScroll
               dataLength={data.pages[0].data.length}
@@ -145,6 +164,7 @@ const StrechingPage = () => {
                     <DetailThumnailItem
                       stretchingItem={item}
                       key={`${item.id}-thumnail-list`}
+                      onClick={handleOnClickStretchingItem}
                     ></DetailThumnailItem>
                   ))
                 )}
@@ -162,10 +182,13 @@ export default StrechingPage;
 const PageWrapper = styled.div`
   display: flex;
   background-color: ${colors.f000};
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ContentWrapper = styled.div<styleType>`
-  padding-top: 120px;
+  padding-top: ${(props) => (props.isMobile ? "80px" : "120px")};
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -174,7 +197,7 @@ const ContentWrapper = styled.div<styleType>`
   gap: 72px;
   height: 100%;
   overflow-x: scroll;
-  max-width: 2480px;
+  max-width: 2560px;
   padding-left: ${(props) => (props.isMobile ? "16px" : "64px")};
   padding-right: ${(props) => (props.isMobile ? "16px" : "64px")};
   padding-bottom: 64px;

@@ -13,12 +13,13 @@ import {
 
 interface IProps {
   stretchingItem: StretchingQueryItemType;
+  onClick: (stretchingId: number) => void;
 }
 
 const DetailThumnailItem = (props: IProps) => {
-  const { stretchingItem } = props;
+  const { stretchingItem, onClick } = props;
   return (
-    <Wrapper>
+    <Wrapper onClick={() => onClick(stretchingItem.id)}>
       <Box
         display="flex"
         flexDirection="column"
@@ -27,12 +28,7 @@ const DetailThumnailItem = (props: IProps) => {
         width={"100%"}
         gap={8}
       >
-        <Box
-          width={"100%"}
-          backgroundColor={colors.f300}
-          borderRadius={8}
-          boxSahdow="4px 4px 8px rgba(0, 0, 0, 0.1)"
-        >
+        <Box width={"100%"} backgroundColor={colors.f300} borderRadius={8}>
           <img src={stretchingItem.imageUrl}></img>
         </Box>
         <Box

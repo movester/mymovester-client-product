@@ -10,11 +10,36 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import StretchingDetailView from "../../../views/stretchingDetailView";
 import StretchingModifyView from "../../../views/stretchingModifyView";
+import useIsMobile from "../../../hooks/utils/useIsMobile";
+import StretchingDetailMobilView from "../../../views/stretchingDetailMobileView";
+import StretchingDetailPcView from "../../../views/stretchingDetailPcView";
+import useStretchingDetailInquiry from "../../../hooks/api/useStretchingDetailInquiry";
 
 const StretchingDetailPage = () => {
+  const router = useRouter();
+
+  const isMobile = useIsMobile();
+
+  const STRETCHING_ID = router.query.id
+    ? typeof router.query.id == "string"
+      ? router.query.id
+      : router.query.id[0]
+    : undefined;
+
+  const { data } = useStretchingDetailInquiry({ id: STRETCHING_ID });
+  console.log(data);
+
   return (
     <PageWrapper>
-      <Navigator></Navigator>
+      {data && (
+        <>
+          {isMobile ? (
+            <StretchingDetailMobilView></StretchingDetailMobilView>
+          ) : (
+            <StretchingDetailPcView data={data}></StretchingDetailPcView>
+          )}
+        </>
+      )}
     </PageWrapper>
   );
 };
@@ -23,7 +48,7 @@ export default StretchingDetailPage;
 
 const PageWrapper = styled.div`
   display: flex;
-  background-color: ${colors.f100};
+  background-color: ${colors.f000};
   height: 100%;
 `;
 
