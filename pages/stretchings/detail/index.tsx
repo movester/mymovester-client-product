@@ -27,7 +27,6 @@ const StretchingDetailPage = () => {
     : undefined;
 
   const { data } = useStretchingDetailInquiry({ id: STRETCHING_ID });
-  console.log(data);
 
   return (
     <PageWrapper>

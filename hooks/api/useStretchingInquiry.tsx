@@ -35,7 +35,7 @@ const getFetchItems = async (
     "mainCategory",
     mainCategory
   );
-  // console.log("page", page);
+
   const subCategorySearchQuery = formatSearchQuery("subCategory", subCategory);
 
   const effectSearchQuery = formatSearchQuery("effect", effect);
