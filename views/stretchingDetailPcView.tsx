@@ -95,7 +95,10 @@ const StretchingDetailPcView = (props: IProps) => {
             gap={1}
           >
             {data.techniqueList.map((list, index) => (
-              <ListTableItem key={`technique-list-${list}`} order={index + 1}>
+              <ListTableItem
+                key={`technique-list-${list}-${index}`}
+                order={index + 1}
+              >
                 <Typography variants="body1">{list}</Typography>
               </ListTableItem>
             ))}

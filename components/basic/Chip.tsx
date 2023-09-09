@@ -5,7 +5,13 @@ import Typography from "./Typography";
 
 interface IProps {
   variants?: "primary" | "secondary";
+  size?: "sm" | "md";
 }
+
+const sizeProps = {
+  sm: { height: 24, borderRadius: 12, padding: "0 8px" },
+  md: { height: 30, borderRadius: 15, padding: "0 16px" },
+};
 
 const variantsProps = {
   primary: {
@@ -21,21 +27,24 @@ const variantsProps = {
 };
 
 const Chip = (props: PropsWithChildren<IProps>) => {
-  const { children, variants = "primary" } = props;
+  const { children, variants = "primary", size = "md" } = props;
   return (
     <Box
       backgroundColor={variantsProps[variants].backgroundColor}
       border={variantsProps[variants].border}
       width={"fit-content"}
-      height={30}
-      borderRadius={15}
-      padding={"0px 16px"}
+      height={sizeProps[size].height}
+      borderRadius={sizeProps[size].borderRadius}
+      padding={sizeProps[size].padding}
       display="flex"
       alignItems="center"
       justifyContent="center"
       boxSahdow="4px 4px 4px rgba(0,0,0,0.1)"
     >
-      <Typography variants="heading3" color={variantsProps[variants].color}>
+      <Typography
+        variants={size == "md" ? "heading3" : "body2"}
+        color={variantsProps[variants].color}
+      >
         {children}
       </Typography>
     </Box>

@@ -1,3 +1,6 @@
+@import "slick-carousel/slick/slick.css";
+@import "slick-carousel/slick/slick-theme.css";
+
 html,
 body {
   padding: 0;
@@ -24,4 +27,9 @@ a:hover {
 img {
   max-width: 100%;
   display: block;
+}
+
+.slick-dots {
+  position: absolute;
+  bottom: 12px;
 }

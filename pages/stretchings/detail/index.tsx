@@ -34,7 +34,7 @@ const StretchingDetailPage = () => {
       {data && (
         <>
           {isMobile ? (
-            <StretchingDetailMobilView></StretchingDetailMobilView>
+            <StretchingDetailMobilView data={data}></StretchingDetailMobilView>
           ) : (
             <StretchingDetailPcView data={data}></StretchingDetailPcView>
           )}
