@@ -1,13 +1,8 @@
 import { styled } from "styled-components";
 import Navigator from "../../components/utils/Navigator";
 import { colors } from "../../constants/style";
-import ShadowBox from "../../components/utils/ShadowBox";
-import Typography from "../../components/basic/Typography";
-import Button from "../../components/basic/Button";
 import ComboBox from "../../components/basic/ComboBox";
-import { useEffect, useState } from "react";
-import Input from "../../components/basic/Input";
-import { useRouter } from "next/router";
+import { useEffect, useMemo, useState } from "react";
 import Box from "../../components/basic/Box";
 import {
   EFFECT_CATEGORY,
@@ -26,8 +21,16 @@ import {
   StretchingMainCategoryType,
   StretchingSubCategoryType,
 } from "../../constants/types";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+const PAGE_SIZE = 10;
 
 export type labeItemType = { label: string; labelId: string };
+
+interface styleType {
+  isMobile: boolean;
+}
 
 const StrechingPage = () => {
   const labelItems = [
@@ -49,9 +52,8 @@ const StrechingPage = () => {
   const [seletedEffectItem, setSeletedEffectItem] =
     useState<IComboBoxType<StretchingEffectType> | null>(null);
 
-  const data = useStretchingInquiry({
-    page: 1,
-    size: 15,
+  const { data, fetchNextPage, hasNextPage } = useStretchingInquiry({
+    size: PAGE_SIZE,
     orderFilter: listOrder.id,
     effect: seletedEffectItem?.id,
     mainCategory:
@@ -66,6 +68,7 @@ const StrechingPage = () => {
         : null,
   });
 
+  console.log(data?.pages, hasNextPage);
   useEffect(() => {
     setSelectedCategoryItem(null);
     setSeletedEffectItem(null);
@@ -74,13 +77,14 @@ const StrechingPage = () => {
   return (
     <PageWrapper>
       <Navigator></Navigator>
-      <ContentWrapper>
+      <ContentWrapper isMobile={isMobile}>
         <Box
           display="flex"
           flexDirection="column"
-          justifyContent="center"
+          justifyContent="start"
           alignItems="center"
           gap={32}
+          width={"100%"}
         >
           <CategoryButton
             labelItems={labelItems}
@@ -91,8 +95,10 @@ const StrechingPage = () => {
           <Box
             display="flex"
             flexDirection="row"
-            justifyContent="start"
+            justifyContent={!isMobile ? "center" : "start"}
             alignItems="start"
+            width={"100vw"}
+            overflow="scroll"
           >
             {selectedCategoryButtonItem.labelId === "sections"
               ? STRETCHING_TOTAL_CATEGORY.map((categoryItem) => (
@@ -126,15 +132,25 @@ const StrechingPage = () => {
             value={listOrder}
             setValue={setListOreder}
           ></ComboBox>
-          <ItemGrid>
-            {data?.stretchingList &&
-              data.stretchingList.map((item) => (
-                <DetailThumnailItem
-                  stretchingItem={item}
-                  key={`${item.id}-thumnail-list`}
-                ></DetailThumnailItem>
-              ))}
-          </ItemGrid>
+          {data && (
+            <InfiniteScroll
+              dataLength={data.pages[0].data.length}
+              next={() => fetchNextPage()}
+              hasMore={hasNextPage}
+              loader={<div>로딩중</div>}
+            >
+              <ItemGrid>
+                {data.pages.map((queryItem) =>
+                  queryItem?.data.map((item) => (
+                    <DetailThumnailItem
+                      stretchingItem={item}
+                      key={`${item.id}-thumnail-list`}
+                    ></DetailThumnailItem>
+                  ))
+                )}
+              </ItemGrid>
+            </InfiniteScroll>
+          )}
         </Box>
       </ContentWrapper>
     </PageWrapper>
@@ -148,7 +164,7 @@ const PageWrapper = styled.div`
   background-color: ${colors.f000};
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<styleType>`
   padding-top: 120px;
   width: 100%;
   display: flex;
@@ -159,8 +175,8 @@ const ContentWrapper = styled.div`
   height: 100%;
   overflow-x: scroll;
   max-width: 2480px;
-  padding-left: 64px;
-  padding-right: 64px;
+  padding-left: ${(props) => (props.isMobile ? "16px" : "64px")};
+  padding-right: ${(props) => (props.isMobile ? "16px" : "64px")};
   padding-bottom: 64px;
 `;
 
@@ -170,5 +186,9 @@ const ItemGrid = styled.div`
   gap: 16px;
   @media screen and (max-width: 900px) {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
   }
 `;

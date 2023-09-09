@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import { styled } from "styled-components";
 import { IComboBoxType } from "../../constants";
 import { colors } from "../../constants/style";
@@ -50,12 +52,17 @@ const StretchingCategoryMenu = (props: IProps) => {
         onClick={() => setSelectedItem(menuItem)}
       >
         <Box
-          backgroundColor={isSelected ? colors.softPrimaryColor : colors.f300}
+          backgroundColor={isSelected ? "#A6A0D2" : colors.f300}
           borderRadius={30}
           width={!isMobile ? 60 : 50}
           height={!isMobile ? 60 : 50}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
           boxSahdow="4px 4px 8px rgba(0, 0, 0, 0.1)"
-        ></Box>
+        >
+          <img src={"/icon1.png"} width={!isMobile ? 50 : 40}></img>
+        </Box>
         <Typography variants={isSelected ? "heading3" : "body2"}>
           {menuItem.name}
         </Typography>

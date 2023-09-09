@@ -1,13 +1,14 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import {
   StretchingEffectType,
   StretchingListOrderFilter,
   StretchingMainCategoryType,
   StretchingSubCategoryType,
 } from "../../constants/types";
+import { useState } from "react";
 
 interface IProps {
-  page: number;
+  // page: number;
   size: number;
   mainCategory?: StretchingMainCategoryType;
   subCategory?: StretchingSubCategoryType;
@@ -15,9 +16,14 @@ interface IProps {
   orderFilter?: StretchingListOrderFilter;
 }
 
-const useStretchingInquiry = (props: IProps) => {
-  const { page, size, mainCategory, subCategory, orderFilter, effect } = props;
-
+const getFetchItems = async (
+  pageParam,
+  size,
+  mainCategory,
+  subCategory,
+  effect,
+  orderFilter
+) => {
   const formatSearchQuery = (catergory: string, keyword) => {
     if (keyword) {
       return `${catergory}=${keyword}`;
@@ -29,33 +35,61 @@ const useStretchingInquiry = (props: IProps) => {
     "mainCategory",
     mainCategory
   );
-
+  // console.log("page", page);
   const subCategorySearchQuery = formatSearchQuery("subCategory", subCategory);
 
   const effectSearchQuery = formatSearchQuery("effect", effect);
+  const res = await fetch(
+    `/api/stretchings?page=${pageParam}&size=${size}&${mainCategorySearchQuery}&${subCategorySearchQuery}&${effectSearchQuery}&orderFilter=${orderFilter}`
+  )
+    .then((res) => res.json())
+    .catch((error) => error);
+  return {
+    data: [...res.stretchingList],
+    total: res.total,
+    pagePrams: pageParam,
+  };
+};
 
-  const { data } = useQuery({
-    queryFn: () =>
-      fetch(
-        `/api/stretchings?page=${page}&size=${size}&${mainCategorySearchQuery}&${subCategorySearchQuery}&${effectSearchQuery}&orderFilter=${orderFilter}`
-      )
-        .then((res) => res.json())
-        .catch((error) => error),
+const useStretchingInquiry = (props: IProps) => {
+  const { size, mainCategory, subCategory, orderFilter, effect } = props;
+
+  const res = useInfiniteQuery({
     queryKey: [
       "stretching",
       "list",
-      page,
+      size,
       mainCategory,
       subCategory,
       effect,
       orderFilter,
     ],
+    queryFn: ({ pageParam = 1 }) =>
+      getFetchItems(
+        pageParam,
+        size,
+        mainCategory,
+        subCategory,
+        effect,
+        orderFilter
+      ),
+    getNextPageParam: (lastPage) => {
+      // console.log(lastPage, allPages);
+      if (lastPage === undefined) return false;
+      if (lastPage.pagePrams + 1 <= Math.ceil(lastPage.total / 10)) {
+        // setPage((prev) => prev + 1);
+
+        return lastPage.pagePrams + 1;
+      }
+
+      return false;
+    },
     onError: (error) => {
       console.log(error);
     },
   });
 
-  return data;
+  return res;
 };
 
 export default useStretchingInquiry;
