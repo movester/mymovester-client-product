@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import Box from "../../components/basic/Box";
 import {
   EFFECT_CATEGORY,
+  ICategoryIconBoxType,
   IComboBoxType,
   LIST_ORDER_CATEGORY,
   STRETCHING_TOTAL_CATEGORY,
@@ -46,11 +47,11 @@ const StrechingPage = () => {
     IComboBoxType<StretchingListOrderFilter>
   >(LIST_ORDER_CATEGORY[0]);
   const [selectedCategoryItem, setSelectedCategoryItem] =
-    useState<IComboBoxType<
+    useState<ICategoryIconBoxType<
       StretchingMainCategoryType | StretchingSubCategoryType
     > | null>(null);
   const [seletedEffectItem, setSeletedEffectItem] =
-    useState<IComboBoxType<StretchingEffectType> | null>(null);
+    useState<ICategoryIconBoxType<StretchingEffectType> | null>(null);
 
   const { data, fetchNextPage, hasNextPage } = useStretchingInquiry({
     size: PAGE_SIZE,
@@ -68,7 +69,6 @@ const StrechingPage = () => {
         : null,
   });
 
-  console.log(data?.pages, hasNextPage);
   useEffect(() => {
     setSelectedCategoryItem(null);
     setSeletedEffectItem(null);

@@ -74,14 +74,10 @@ const useStretchingInquiry = (props: IProps) => {
         orderFilter
       ),
     getNextPageParam: (lastPage) => {
-      // console.log(lastPage, allPages);
       if (lastPage === undefined) return false;
       if (lastPage.pagePrams + 1 <= Math.ceil(lastPage.total / 10)) {
-        // setPage((prev) => prev + 1);
-
         return lastPage.pagePrams + 1;
       }
-
       return false;
     },
     onError: (error) => {

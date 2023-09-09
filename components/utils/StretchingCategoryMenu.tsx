@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { styled } from "styled-components";
-import { IComboBoxType } from "../../constants";
+import { ICategoryIconBoxType, IComboBoxType } from "../../constants";
 import { colors } from "../../constants/style";
 import {
   STRETCHING_SUB_CATEGORY_TEXT,
@@ -18,7 +18,7 @@ import useIsMobile from "../../hooks/utils/useIsMobile";
 import { Dispatch, SetStateAction, useState } from "react";
 
 interface IProps {
-  menuItem: IComboBoxType<
+  menuItem: ICategoryIconBoxType<
     | StretchingMainCategoryType
     | StretchingSubCategoryType
     | StretchingEffectType
@@ -26,7 +26,7 @@ interface IProps {
   isSelected: boolean;
   setSelectedItem: Dispatch<
     SetStateAction<
-      IComboBoxType<
+      ICategoryIconBoxType<
         | StretchingMainCategoryType
         | StretchingSubCategoryType
         | StretchingEffectType
@@ -61,7 +61,7 @@ const StretchingCategoryMenu = (props: IProps) => {
           justifyContent="center"
           boxSahdow="4px 4px 8px rgba(0, 0, 0, 0.1)"
         >
-          <img src={"/icon1.png"} width={!isMobile ? 50 : 40}></img>
+          <img src={menuItem.img} width={!isMobile ? 50 : 40}></img>
         </Box>
         <Typography variants={isSelected ? "heading3" : "body2"}>
           {menuItem.name}

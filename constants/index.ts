@@ -14,17 +14,23 @@ export interface IComboBoxType<T> {
   id: T;
 }
 
-export const STRETCHING_TOTAL_CATEGORY: IComboBoxType<
+export interface ICategoryIconBoxType<T> {
+  name: string;
+  id: T;
+  img: string;
+}
+
+export const STRETCHING_TOTAL_CATEGORY: ICategoryIconBoxType<
   StretchingMainCategoryType | StretchingSubCategoryType
 >[] = [
-  { name: "상체 전체", id: "UPPER_BODY" },
-  { name: "목/가슴/어께", id: "NECK" },
-  { name: "팔/손/손목", id: "ARM" },
-  { name: "등/몸통", id: "BACK" },
-  { name: "하체 전체", id: "LOWER_BODY" },
-  { name: "고관절/둔근", id: "HIP_JOINT" },
-  { name: "종아리/발목/발", id: "CALF" },
-  { name: "무릎/허벅지", id: "KNEE" },
+  { name: "상체 전체", id: "UPPER_BODY", img: "/icons/upper_body.png" },
+  { name: "목/가슴/어께", id: "NECK", img: "/icons/neck.png" },
+  { name: "팔/손/손목", id: "ARM", img: "/icons/arm.png" },
+  { name: "등/몸통", id: "BACK", img: "/icons/back.png" },
+  { name: "하체 전체", id: "LOWER_BODY", img: "/icons/lower_body.png" },
+  { name: "고관절/둔근", id: "HIP_JOINT", img: "/icons/hip_joint.png" },
+  { name: "종아리/발목/발", id: "CALF", img: "/icons/calf.png" },
+  { name: "무릎/허벅지", id: "KNEE", img: "/icons/knee.png" },
 ];
 
 export const STRETCHING_MAIN_CATEGORY: IComboBoxType<StretchingMainCategoryType>[] =
@@ -45,13 +51,21 @@ export const LOWER_BODY_CATEGORY: IComboBoxType<StretchingSubCategoryType>[] = [
   { name: "무릎/허벅지", id: "KNEE" },
 ];
 
-export const EFFECT_CATEGORY: IComboBoxType<StretchingEffectType>[] = [
-  { name: "통증완화", id: "RELIEF_PAIN" },
-  { name: "자세개선", id: "IMPROVE_POSTURE" },
-  { name: "근육이완", id: "RELAX_MUSCLE" },
-  { name: "혈액순환", id: "BLOOD_CIRCULATION" },
-  { name: "거북목 완화", id: "RELIEF_TURTLE_NECK" },
-  { name: "라운드숄더 완화", id: "RELIEF_ROUND_SHOULDER" },
+export const EFFECT_CATEGORY: ICategoryIconBoxType<StretchingEffectType>[] = [
+  { name: "통증완화", id: "RELIEF_PAIN", img: "/icons/upper_body.png" },
+  { name: "자세개선", id: "IMPROVE_POSTURE", img: "/icons/upper_body.png" },
+  { name: "근육이완", id: "RELAX_MUSCLE", img: "/icons/upper_body.png" },
+  { name: "혈액순환", id: "BLOOD_CIRCULATION", img: "/icons/upper_body.png" },
+  {
+    name: "거북목 완화",
+    id: "RELIEF_TURTLE_NECK",
+    img: "/icons/upper_body.png",
+  },
+  {
+    name: "라운드숄더 완화",
+    id: "RELIEF_ROUND_SHOULDER",
+    img: "/icons/upper_body.png",
+  },
 ];
 
 export const LIST_ORDER_CATEGORY: IComboBoxType<StretchingListOrderFilter>[] = [
