@@ -138,6 +138,13 @@ module.exports = require("next/dist/shared/lib/is-plain-object.js");
 
 /***/ }),
 
+/***/ 968:
+/***/ ((module) => {
+
+module.exports = require("next/head");
+
+/***/ }),
+
 /***/ 6689:
 /***/ ((module) => {
 

@@ -112,7 +112,7 @@ const variantsProperties = {
     fontWeight: 800
   },
   heading3: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 800
   },
   body1: {
@@ -120,7 +120,7 @@ const variantsProperties = {
     fontWeight: 500
   },
   body2: {
-    fontSize: 12,
+    fontSize: 14,
     fontWeight: 500
   },
   body3: {

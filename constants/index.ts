@@ -70,7 +70,7 @@ export const EFFECT_CATEGORY: ICategoryIconBoxType<StretchingEffectType>[] = [
 
 export const LIST_ORDER_CATEGORY: IComboBoxType<StretchingListOrderFilter>[] = [
   { name: "최신순", id: "RECENT" },
-  { name: "조회순", id: "POPULAR" },
+  { name: "조회순", id: "VIEW" },
 ];
 
 export const STRETCHING_MAIN_SEARCH_CATEGORY: ITotalComboxType<StretchingMainCategoryType>[] =

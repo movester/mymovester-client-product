@@ -42,7 +42,7 @@ export type StretchingEffectType =
   | "RELIEF_TURTLE_NECK"
   | "RELIEF_ROUND_SHOULDER";
 
-export type StretchingListOrderFilter = "RECENT" | "POPULAR";
+export type StretchingListOrderFilter = "RECENT" | "VIEW";
 
 export type StretchingQueryItemType = {
   id: number;
