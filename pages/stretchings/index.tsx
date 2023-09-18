@@ -25,7 +25,7 @@ import {
 import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useRouter } from "next/router";
-import path from "path";
+import Skeleton from "react-loading-skeleton";
 
 const PAGE_SIZE = 10;
 
@@ -151,6 +151,9 @@ const StrechingPage = () => {
               setValue={setListOreder}
             ></ComboBox>
           </Box>
+          {/* <Box>
+            <Skeleton count={3} baseColor={colors.g000} width={300}></Skeleton>
+          </Box> */}
           {data && (
             <InfiniteScroll
               dataLength={data.pages[0].data.length}
