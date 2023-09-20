@@ -6,6 +6,9 @@ const nextConfig = {
     ignoreDuringBuilds: true,
   },
   disableSaticImages: false,
+  images: {
+    domains: ["mymovester-product.s3.ap-northeast-2.amazonaws.com"],
+  },
   async rewrites() {
     return [
       {

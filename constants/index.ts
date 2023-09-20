@@ -23,14 +23,46 @@ export interface ICategoryIconBoxType<T> {
 export const STRETCHING_TOTAL_CATEGORY: ICategoryIconBoxType<
   StretchingMainCategoryType | StretchingSubCategoryType
 >[] = [
-  { name: "상체 전체", id: "UPPER_BODY", img: "/upper_body.png" },
-  { name: "목/가슴/어께", id: "NECK", img: "/neck.png" },
-  { name: "팔/손/손목", id: "ARM", img: "/arm.png" },
-  { name: "등/몸통", id: "BACK", img: "/back.png" },
-  { name: "하체 전체", id: "LOWER_BODY", img: "/lower_body.png" },
-  { name: "고관절/둔근", id: "HIP_JOINT", img: "/hip_joint.png" },
-  { name: "종아리/발목/발", id: "CALF", img: "/calf.png" },
-  { name: "무릎/허벅지", id: "KNEE", img: "/knee.png" },
+  {
+    name: "상체 전체",
+    id: "UPPER_BODY",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/category_upperBody.PNG",
+  },
+  {
+    name: "목/가슴/어께",
+    id: "NECK",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/category_neck.png",
+  },
+  {
+    name: "팔/손/손목",
+    id: "ARM",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/category_arm.PNG",
+  },
+  {
+    name: "등/몸통",
+    id: "BACK",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/category_back.PNG",
+  },
+  {
+    name: "하체 전체",
+    id: "LOWER_BODY",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/category_lowerBody.PNG",
+  },
+  {
+    name: "고관절/둔근",
+    id: "HIP_JOINT",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/category_hipJoint.PNG",
+  },
+  {
+    name: "종아리/발목/발",
+    id: "CALF",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/category_calf.PNG",
+  },
+  {
+    name: "무릎/허벅지",
+    id: "KNEE",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/category_knee.PNG",
+  },
 ];
 
 export const STRETCHING_MAIN_CATEGORY: IComboBoxType<StretchingMainCategoryType>[] =
@@ -52,19 +84,35 @@ export const LOWER_BODY_CATEGORY: IComboBoxType<StretchingSubCategoryType>[] = [
 ];
 
 export const EFFECT_CATEGORY: ICategoryIconBoxType<StretchingEffectType>[] = [
-  { name: "통증완화", id: "RELIEF_PAIN", img: "/icons/upper_body.png" },
-  { name: "자세개선", id: "IMPROVE_POSTURE", img: "/icons/upper_body.png" },
-  { name: "근육이완", id: "RELAX_MUSCLE", img: "/icons/upper_body.png" },
-  { name: "혈액순환", id: "BLOOD_CIRCULATION", img: "/icons/upper_body.png" },
+  {
+    name: "통증완화",
+    id: "RELIEF_PAIN",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/effect_reliefPain.PNG",
+  },
+  {
+    name: "자세개선",
+    id: "IMPROVE_POSTURE",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/effect_improvePosture.PNG",
+  },
+  {
+    name: "근육이완",
+    id: "RELAX_MUSCLE",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/effect_relaxMuscle.PNG",
+  },
+  {
+    name: "혈액순환",
+    id: "BLOOD_CIRCULATION",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/effect_bloodCirculation.PNG",
+  },
   {
     name: "거북목 완화",
     id: "RELIEF_TURTLE_NECK",
-    img: "/icons/upper_body.png",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/effect_turtleNeck.PNG",
   },
   {
     name: "라운드숄더 완화",
     id: "RELIEF_ROUND_SHOULDER",
-    img: "/icons/upper_body.png",
+    img: "https://mymovester-product.s3.ap-northeast-2.amazonaws.com/icons/effect_roundShoulder.PNG",
   },
 ];
 
