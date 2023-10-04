@@ -4,6 +4,7 @@ import { colors } from "../../constants/style";
 import { useRouter } from "next/router";
 import Box from "../basic/Box";
 import useIsMobile from "../../hooks/utils/useIsMobile";
+import Image from "next/image";
 
 interface IStyledProps {
   ismobile: boolean;
@@ -20,9 +21,12 @@ const Navigator = () => {
         alignItems="center"
         onClick={() => router.push("/stretchings")}
       >
-        <Typography variants="heading2" color={colors.vividPrimaryColor}>
-          {isMobile ? "M" : "MOVESTER"}
-        </Typography>
+        <Image
+          src={isMobile ? "/favicon.ico" : "/logo.png"}
+          width={isMobile ? 16 : 120}
+          height={isMobile ? 16 : 32}
+          alt={""}
+        ></Image>
       </Box>
     </Wrapper>
   );
@@ -39,4 +43,7 @@ const Wrapper = styled.div<IStyledProps>`
   top: 0;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 300;
+  :hover {
+    cursor: pointer;
+  }
 `;

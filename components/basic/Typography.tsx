@@ -10,6 +10,10 @@ interface IProps {
 const variantsProperties: {
   [key in typographyType]: { fontSize: number; fontWeight: number };
 } = {
+  title1: {
+    fontSize: 36,
+    fontWeight: 800,
+  },
   heading1: {
     fontSize: 24,
     fontWeight: 800,

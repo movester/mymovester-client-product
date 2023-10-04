@@ -1,11 +1,12 @@
 import { styled } from "styled-components";
+import { colors } from "../../constants/style";
 
 interface IProps {
   color?: string;
 }
 
 const Divider = (props: IProps) => {
-  const { color = "#C4C4C4" } = props;
+  const { color = colors.g200 } = props;
 
   return <Box style={{ backgroundColor: `${color}` }}></Box>;
 };

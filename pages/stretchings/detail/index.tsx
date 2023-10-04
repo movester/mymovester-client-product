@@ -41,6 +41,8 @@ const PageWrapper = styled.div`
   display: flex;
   background-color: ${colors.f000};
   height: 100%;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ContentWrapper = styled.div`

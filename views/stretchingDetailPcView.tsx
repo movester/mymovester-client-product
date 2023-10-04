@@ -23,22 +23,37 @@ interface IProps {
 const StretchingDetailPcView = (props: IProps) => {
   const { data } = props;
   return (
-    <ContentWrapper>
+    <PageWrapper>
       <Navigator></Navigator>
-      <Box
-        display="flex"
-        flexDirection="column"
-        gap={32}
-        padding={"120px 32px 32px 32px "}
-        height={"100%"}
-        width={"100%"}
-      >
+      <ContentWrapper>
         <Box display="flex" flexDirection="column" gap={16}>
-          <Typography variants="heading1">{data.title}</Typography>
+          <Box padding={"88px 0px"}>
+            <Typography variants="title1">{data.title}</Typography>
+          </Box>
+          <Box
+            display="flex"
+            justifyContent="start"
+            alignItems="center"
+            gap={8}
+          >
+            <Chip>{STRETCHING_SUB_CATEGORY_TEXT[data.subCategory]}</Chip>
+            {data.effectList.map((item, idx) => (
+              <Chip variants="secondary" key={`detail-effect-${item}-${idx}`}>
+                {STRETCHING_EFFECT_TEXT[item]}
+              </Chip>
+            ))}
+          </Box>
           <Divider></Divider>
         </Box>
+
         {/* 이미지 */}
-        <Box display="grid" gridTemplateColumns="repeat(2,350px)" gap={16}>
+        <Box
+          display="grid"
+          gridTemplateColumns="repeat(2,350px)"
+          gap={8}
+          justifyContent="center"
+          alignItems="center"
+        >
           {data.imageList.map((imgLink, index) => (
             <Box
               backgroundColor={colors.f300}
@@ -48,30 +63,6 @@ const StretchingDetailPcView = (props: IProps) => {
             </Box>
           ))}
         </Box>
-        {/* 부위 */}
-        <Box display="flex" flexDirection="column" gap={12}>
-          <Typography variants="heading2">타겟 부위</Typography>
-          <Box display="flex" justifyContent="start" alignItems="center">
-            <Chip>{STRETCHING_SUB_CATEGORY_TEXT[data.subCategory]}</Chip>
-          </Box>
-        </Box>
-        {/* 효과 */}
-        <Box display="flex" flexDirection="column" gap={12}>
-          <Typography variants="heading2">기대 효과</Typography>
-          <Box
-            display="flex"
-            justifyContent="start"
-            alignItems="center"
-            gap={8}
-          >
-            {data.effectList.map((item, idx) => (
-              <Chip variants="secondary" key={`detail-effect-${item}-${idx}`}>
-                {STRETCHING_EFFECT_TEXT[item]}
-              </Chip>
-            ))}
-          </Box>
-        </Box>
-
         {/* 스트레칭 방법 및 순서 */}
         <Box
           display="flex"
@@ -166,21 +157,30 @@ const StretchingDetailPcView = (props: IProps) => {
             </Box>
           </Box>
         )}
-      </Box>
-    </ContentWrapper>
+      </ContentWrapper>
+    </PageWrapper>
   );
 };
 
 export default StretchingDetailPcView;
 
 const ContentWrapper = styled.div`
+  max-width: 768px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 72px 32px 32px 32px;
+  height: 100%;
+  width: 100%;
+`;
+
+const PageWrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   height: 100%;
   overflow-x: scroll;
-  max-width: 2560px;
   padding-bottom: 64px;
 `;
