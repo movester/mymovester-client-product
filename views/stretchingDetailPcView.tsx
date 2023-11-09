@@ -12,6 +12,9 @@ import {
   STRETCHING_SUB_CATEGORY_TEXT,
 } from "../constants/text";
 import { Box, Chip, Divider, Typography } from "movester-design-system";
+import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
+import { useState } from "react";
+import { useRouter } from "next/router";
 
 interface IProps {
   data?: StretchingDetailQueryItemType;
@@ -19,10 +22,47 @@ interface IProps {
 
 const StretchingDetailPcView = (props: IProps) => {
   const { data } = props;
+  const [heartClicked, setHeartClicked] = useState<boolean>(false);
+  const router = useRouter();
+  const handleOnClickShareURL = () => {
+    // console.log(router);
+    navigator.clipboard.writeText(`${router.basePath}${router.asPath}`);
+  };
+
   return (
     <PageWrapper>
       <Navigator></Navigator>
       <ContentWrapper>
+        <SocialBoxWrapper>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            gap={4}
+          >
+            <IconBox onClick={() => setHeartClicked((prev) => !prev)}>
+              {heartClicked ? (
+                <AiFillHeart size={28} color="red"></AiFillHeart>
+              ) : (
+                <AiOutlineHeart size={28}></AiOutlineHeart>
+              )}
+            </IconBox>
+            <Typography variants="caption">123</Typography>
+          </Box>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            gap={4}
+          >
+            <IconBox onClick={handleOnClickShareURL}>
+              <AiOutlineShareAlt size={28}></AiOutlineShareAlt>
+            </IconBox>
+            <Typography variants="caption">123</Typography>
+          </Box>
+        </SocialBoxWrapper>
         <Box display="flex" flexDirection="column" gap={16}>
           <Box padding={"72px 0px"}>
             <Typography variants="title1">{data.title}</Typography>
@@ -176,6 +216,17 @@ const ContentWrapper = styled.div`
   padding: 72px 32px 32px 32px;
   height: 100%;
   width: 100%;
+  position: relative;
+`;
+
+const SocialBoxWrapper = styled.div`
+  position: fixed;
+  right: calc((100% - 768px - 120px) / 2);
+  top: 360px;
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 `;
 
 const PageWrapper = styled.div`
@@ -187,4 +238,19 @@ const PageWrapper = styled.div`
   height: 100%;
   overflow-x: scroll;
   padding-bottom: 64px;
+`;
+
+const IconBox = styled.div`
+  background-color: ${colors.f000};
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+  :hover {
+    cursor: pointer;
+  }
 `;
