@@ -1,15 +1,16 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { styled } from "styled-components";
-import Box from "../basic/Box";
+
 import { colors } from "../../constants/style";
-import Typography from "../basic/Typography";
+
 import { StretchingQueryItemType } from "../../constants/types";
 import {
   STRETCHING_EFFECT_TEXT,
   STRETCHING_MAIN_CATEGORY_TEXT,
   STRETCHING_SUB_CATEGORY_TEXT,
 } from "../../constants/text";
+import { Box, Typography } from "movester-design-system";
 
 interface IProps {
   stretchingItem: StretchingQueryItemType;

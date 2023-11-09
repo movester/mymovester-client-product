@@ -1,6 +1,5 @@
+import { Box, Typography } from "movester-design-system";
 import { PropsWithChildren } from "react";
-import Box from "../basic/Box";
-import Typography from "../basic/Typography";
 
 interface IProps {
   caption?: string;

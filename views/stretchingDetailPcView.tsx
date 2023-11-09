@@ -1,20 +1,17 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { styled } from "styled-components";
-import Typography from "../components/basic/Typography";
 import Navigator from "../components/utils/Navigator";
 import { StretchingDetailQueryItemType } from "../constants/types";
-import Box from "../components/basic/Box";
 import { colors } from "../constants/style";
 import ListTableItem from "../components/utils/ListTableItem";
 import ShadowBox from "../components/utils/ShadowBox";
-import Divider from "../components/basic/Divder";
 import {
   STRETCHING_EFFECT_TEXT,
   STRETCHING_MAIN_CATEGORY_TEXT,
   STRETCHING_SUB_CATEGORY_TEXT,
 } from "../constants/text";
-import Chip from "../components/basic/Chip";
+import { Box, Chip, Divider, Typography } from "movester-design-system";
 
 interface IProps {
   data?: StretchingDetailQueryItemType;

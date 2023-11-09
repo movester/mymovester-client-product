@@ -1,10 +1,9 @@
 import { styled } from "styled-components";
-import Typography from "../basic/Typography";
 import { colors } from "../../constants/style";
 import { useRouter } from "next/router";
-import Box from "../basic/Box";
 import useIsMobile from "../../hooks/utils/useIsMobile";
 import Image from "next/image";
+import { Box } from "movester-design-system";
 
 interface IStyledProps {
   ismobile: boolean;

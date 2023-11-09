@@ -2,12 +2,9 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { styled } from "styled-components";
-import Typography from "../components/basic/Typography";
 import { StretchingDetailQueryItemType } from "../constants/types";
-import Box from "../components/basic/Box";
 import { colors } from "../constants/style";
 import Slider from "react-slick";
-import Chip from "../components/basic/Chip";
 import {
   STRETCHING_EFFECT_TEXT,
   STRETCHING_SUB_CATEGORY_TEXT,
@@ -19,6 +16,7 @@ import { AiOutlineHeart } from "react-icons/ai";
 import { LuShare } from "react-icons/lu";
 import { useRouter } from "next/router";
 import DevelopOngoingSign from "../components/utils/DevelopOngoingSign";
+import { Box, Chip, Typography } from "movester-design-system";
 
 interface IProps {
   data: StretchingDetailQueryItemType;

@@ -1,8 +1,9 @@
 import { Dispatch, SetStateAction, useMemo, useState } from "react";
-import Box from "../basic/Box";
+
 import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
-import Typography from "../basic/Typography";
+
 import { colors } from "../../constants/style";
+import { Box, Typography } from "movester-design-system";
 
 interface IProps {
   currentPage: number;
