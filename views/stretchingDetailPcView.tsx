@@ -27,7 +27,7 @@ const StretchingDetailPcView = (props: IProps) => {
       <Navigator></Navigator>
       <ContentWrapper>
         <Box display="flex" flexDirection="column" gap={16}>
-          <Box padding={"88px 0px"}>
+          <Box padding={"72px 0px"}>
             <Typography variants="title1">{data.title}</Typography>
           </Box>
           <Box
@@ -49,10 +49,13 @@ const StretchingDetailPcView = (props: IProps) => {
         {/* 이미지 */}
         <Box
           display="grid"
-          gridTemplateColumns="repeat(2,350px)"
+          gridTemplateColumns={`repeat(${
+            data.imageList.length > 1 ? 2 : 1
+          },350px)`}
           gap={8}
           justifyContent="center"
           alignItems="center"
+          backgroundColor={data.imageList.length > 1 ? "none" : colors.f300}
         >
           {data.imageList.map((imgLink, index) => (
             <Box
@@ -63,6 +66,21 @@ const StretchingDetailPcView = (props: IProps) => {
             </Box>
           ))}
         </Box>
+        {/* 권장 횟수 */}
+        <ShadowBox>
+          <Box
+            backgroundColor={colors.f200}
+            padding={32}
+            borderRadius={8}
+            display="flex"
+            flexDirection="column"
+          >
+            <Typography variants="heading2">권장 횟수</Typography>
+            <Typography variants="heading2">
+              {`${data.collect}회 X ${data.set}세트`}
+            </Typography>
+          </Box>
+        </ShadowBox>
         {/* 스트레칭 방법 및 순서 */}
         <Box
           display="flex"
@@ -71,7 +89,7 @@ const StretchingDetailPcView = (props: IProps) => {
           justifyContent="start"
           gap={16}
         >
-          <Typography variants="heading2">🧘🏻‍♀️ 스트레칭 방법 및 순서</Typography>
+          <Typography variants="heading2">스트레칭 방법 및 순서</Typography>
 
           <Box
             display="flex"
@@ -95,16 +113,7 @@ const StretchingDetailPcView = (props: IProps) => {
             ))}
           </Box>
         </Box>
-        <ShadowBox>
-          <Box backgroundColor={colors.f200} padding={16} borderRadius={8}>
-            <Typography variants="heading2">✨ 권장 횟수</Typography>
-            <Typography variants="body1">는 </Typography>
-            <Typography variants="heading1">
-              {`${data.collect}회 ${data.set}세트`}
-            </Typography>
-            <Typography variants="body1">입니다.</Typography>
-          </Box>
-        </ShadowBox>
+
         {/* 주의 사항 */}
         {data.precautionList.length > 0 && (
           <Box
@@ -112,26 +121,24 @@ const StretchingDetailPcView = (props: IProps) => {
             flexDirection="column"
             alignItems="start"
             justifyContent="start"
+            borderRadius={8}
             gap={16}
+            backgroundColor={colors.f200}
+            padding={32}
           >
-            <Typography variants="heading2">⛔️ 주의 사항</Typography>
+            <Typography variants="heading2">주의 사항</Typography>
 
             <Box
               display="flex"
               justifyContent="start"
-              alignItems="center"
-              border={` 1px solid ${colors.g000}`}
-              borderRadius={8}
-              width={"100%"}
-              overflow="hidden"
+              alignItems="start"
               flexDirection="column"
-              backgroundColor={colors.g000}
-              gap={1}
+              gap={4}
             >
               {data.precautionList.map((list, index) => (
-                <ListTableItem key={`technique-list-${list}`} order={index + 1}>
-                  <Typography variants="body1">{list}</Typography>
-                </ListTableItem>
+                <Typography variants="body1" key={`technique-list-${list}`}>
+                  {"✔️ " + list}
+                </Typography>
               ))}
             </Box>
           </Box>
