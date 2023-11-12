@@ -1,8 +1,8 @@
 import { PropsWithChildren, useState } from "react";
 import { colors } from "../../constants/style";
-import Box from "../basic/Box";
-import Typography from "../basic/Typography";
+
 import { AiFillCheckCircle } from "react-icons/ai";
+import { Box, Typography } from "movester-design-system";
 
 interface IProps {
   order: number;

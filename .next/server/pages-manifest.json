@@ -1,9 +1,7 @@
 {
   "/_app": "pages/_app.js",
-  "/_document": "pages/_document.js",
-  "/": "pages/index.html",
-  "/stretchings/detail": "pages/stretchings/detail.html",
-  "/stretchings": "pages/stretchings.html",
   "/_error": "pages/_error.js",
-  "/404": "pages/404.html"
+  "/_document": "pages/_document.js",
+  "/stretchings/detail": "pages/stretchings/detail.js",
+  "/stretchings": "pages/stretchings.js"
 }

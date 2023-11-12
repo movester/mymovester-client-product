@@ -1,9 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import { colors } from "../../constants/style";
-import Box from "../basic/Box";
-import Typography from "../basic/Typography";
 import { labeItemType } from "../../pages/stretchings";
 import useIsMobile from "../../hooks/utils/useIsMobile";
+import { Box, Typography } from "movester-design-system";
 
 interface IProps {
   labelItems: labeItemType[];

@@ -1,9 +1,9 @@
 import { styled } from "styled-components";
 import Navigator from "../../components/utils/Navigator";
 import { colors } from "../../constants/style";
-import ComboBox from "../../components/basic/ComboBox";
+
 import { useEffect, useMemo, useState } from "react";
-import Box from "../../components/basic/Box";
+
 import {
   EFFECT_CATEGORY,
   ICategoryIconBoxType,
@@ -26,6 +26,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useRouter } from "next/router";
 import Skeleton from "react-loading-skeleton";
+import { Box, ComboBox } from "movester-design-system";
 
 const PAGE_SIZE = 10;
 

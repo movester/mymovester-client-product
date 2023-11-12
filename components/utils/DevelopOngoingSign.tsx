@@ -1,5 +1,5 @@
+import { Typography } from "movester-design-system";
 import { colors } from "../../constants/style";
-import Typography from "../basic/Typography";
 import { styled } from "styled-components";
 
 const DevelopOngoingSign = () => {

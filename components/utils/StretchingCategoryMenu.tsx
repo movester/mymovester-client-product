@@ -12,11 +12,11 @@ import {
   StretchingMainCategoryType,
   StretchingSubCategoryType,
 } from "../../constants/types";
-import Box from "../basic/Box";
-import Typography from "../basic/Typography";
+
 import useIsMobile from "../../hooks/utils/useIsMobile";
 import { Dispatch, SetStateAction, useState } from "react";
 import Image from "next/image";
+import { Box, Typography } from "movester-design-system";
 
 interface IProps {
   menuItem: ICategoryIconBoxType<
