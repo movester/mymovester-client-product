@@ -24,9 +24,10 @@ const StretchingDetailPcView = (props: IProps) => {
   const { data } = props;
   const [heartClicked, setHeartClicked] = useState<boolean>(false);
   const router = useRouter();
+
   const handleOnClickShareURL = () => {
-    // console.log(router);
     navigator.clipboard.writeText(`${router.basePath}${router.asPath}`);
+    window.alert("링크가 복사되었습니다!");
   };
 
   return (
@@ -43,9 +44,9 @@ const StretchingDetailPcView = (props: IProps) => {
           >
             <IconBox onClick={() => setHeartClicked((prev) => !prev)}>
               {heartClicked ? (
-                <AiFillHeart size={28} color="red"></AiFillHeart>
+                <AiFillHeart size={28} color={colors.r000} />
               ) : (
-                <AiOutlineHeart size={28}></AiOutlineHeart>
+                <AiOutlineHeart size={28} />
               )}
             </IconBox>
             <Typography variants="caption">123</Typography>
@@ -190,7 +191,7 @@ const StretchingDetailPcView = (props: IProps) => {
             gap={16}
             height={"auto"}
           >
-            <Typography variants="heading2">📺 참고영상</Typography>
+            <Typography variants="heading2">참고영상</Typography>
             <Box display="flex" justifyContent="center" width={"100%"}>
               <iframe
                 width={550}

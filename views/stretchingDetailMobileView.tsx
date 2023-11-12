@@ -12,7 +12,7 @@ import {
 import ListTableItem from "../components/utils/ListTableItem";
 import ShadowBox from "../components/utils/ShadowBox";
 import { BiChevronLeft } from "react-icons/bi";
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { LuShare } from "react-icons/lu";
 import { useRouter } from "next/router";
 import DevelopOngoingSign from "../components/utils/DevelopOngoingSign";
@@ -24,10 +24,13 @@ interface IProps {
 
 const StretchingDetailMobilView = (props: IProps) => {
   const { data } = props;
-
+  const [heartClicked, setHeartClicked] = useState<boolean>(false);
   const router = useRouter();
 
-  const [isVisible, setIsVisible] = useState(false);
+  const handleOnClickShareURL = () => {
+    navigator.clipboard.writeText(`${router.basePath}${router.asPath}`);
+    window.alert("링크가 복사되었습니다!");
+  };
 
   const settings = {
     dots: true,
@@ -54,8 +57,8 @@ const StretchingDetailMobilView = (props: IProps) => {
         >
           <BiChevronLeft size={20}></BiChevronLeft>
         </Box>
-        <DevelopOngoingWrapper>
-          {isVisible && <DevelopOngoingSign></DevelopOngoingSign>}
+        <SocialBoxWrapper>
+          {/* {isVisible && <DevelopOngoingSign></DevelopOngoingSign>} */}
           <Box
             width={32}
             height={32}
@@ -66,7 +69,7 @@ const StretchingDetailMobilView = (props: IProps) => {
             alignItems="center"
             borderRadius={16}
             boxSahdow="4px 4px 4px rgba(0,0,0,0.1)"
-            onClick={() => setIsVisible((prev) => !prev)}
+            onClick={handleOnClickShareURL}
           >
             <LuShare size={16}></LuShare>
           </Box>
@@ -80,11 +83,15 @@ const StretchingDetailMobilView = (props: IProps) => {
             alignItems="center"
             borderRadius={16}
             boxSahdow="4px 4px 4px rgba(0,0,0,0.1)"
-            onClick={() => setIsVisible((prev) => !prev)}
+            onClick={() => setHeartClicked((prev) => !prev)}
           >
-            <AiOutlineHeart size={16}></AiOutlineHeart>
+            {heartClicked ? (
+              <AiFillHeart size={16} color={colors.r000}></AiFillHeart>
+            ) : (
+              <AiOutlineHeart size={16}></AiOutlineHeart>
+            )}
           </Box>
-        </DevelopOngoingWrapper>
+        </SocialBoxWrapper>
       </NavigatorBar>
       {/* 이미지 */}
       <Box width={"100%"}>
@@ -132,6 +139,22 @@ const StretchingDetailMobilView = (props: IProps) => {
             </Chip>
           ))}
         </Box>
+        {/* 권장횟수 */}
+        <ShadowBox>
+          <Box
+            backgroundColor={colors.f200}
+            padding={16}
+            borderRadius={8}
+            display="flex"
+            flexDirection="column"
+          >
+            <Typography variants="heading3">권장 횟수</Typography>
+            <Typography variants="heading3">
+              {`${data.collect}회 X ${data.set}세트`}
+            </Typography>
+          </Box>
+        </ShadowBox>
+
         {/* 스트레칭 순서 */}
         <Box
           display="flex"
@@ -140,7 +163,7 @@ const StretchingDetailMobilView = (props: IProps) => {
           justifyContent="start"
           gap={8}
         >
-          <Typography variants="heading3">🧘🏻‍♀️ 스트레칭 방법 및 순서</Typography>
+          <Typography variants="heading3">스트레칭 방법 및 순서</Typography>
 
           <Box
             display="flex"
@@ -165,17 +188,6 @@ const StretchingDetailMobilView = (props: IProps) => {
             ))}
           </Box>
         </Box>
-        {/* 권장 횟수 */}
-        <ShadowBox>
-          <Box backgroundColor={colors.f200} padding={8} borderRadius={8}>
-            <Typography variants="heading3">✨ 권장 횟수</Typography>
-            <Typography variants="body2">는 </Typography>
-            <Typography variants="heading3">
-              {`${data.collect}회 ${data.set}세트`}
-            </Typography>
-            <Typography variants="body2"> 입니다.</Typography>
-          </Box>
-        </ShadowBox>
         {/* 주의 사항 */}
         {data.precautionList.length > 0 && (
           <Box
@@ -183,30 +195,23 @@ const StretchingDetailMobilView = (props: IProps) => {
             flexDirection="column"
             alignItems="start"
             justifyContent="start"
-            gap={8}
+            gap={3}
+            borderRadius={8}
+            backgroundColor={colors.f200}
+            padding={16}
           >
-            <Typography variants="heading3">⛔️ 주의 사항</Typography>
+            <Typography variants="heading3">주의 사항</Typography>
 
             <Box
               display="flex"
               justifyContent="start"
-              alignItems="center"
-              border={` 1px solid ${colors.g000}`}
-              borderRadius={8}
-              width={"100%"}
-              overflow="hidden"
+              alignItems="start"
               flexDirection="column"
-              backgroundColor={colors.g000}
-              gap={1}
             >
               {data.precautionList.map((list, index) => (
-                <ListTableItem
-                  key={`technique-list-${list}`}
-                  order={index + 1}
-                  size="sm"
-                >
-                  <Typography variants="body3">{list}</Typography>
-                </ListTableItem>
+                <Typography key={`technique-list-${list}`} variants="body2">
+                  <Typography variants="body3"> {"✔️ " + list}</Typography>
+                </Typography>
               ))}
             </Box>
           </Box>
@@ -221,7 +226,7 @@ const StretchingDetailMobilView = (props: IProps) => {
             gap={8}
             height={"auto"}
           >
-            <Typography variants="heading3">📺 참고영상</Typography>
+            <Typography variants="heading3">참고영상</Typography>
             <Box display="flex" justifyContent="center" width={"100%"}>
               <iframe
                 width={550}
@@ -264,7 +269,7 @@ const NavigatorBar = styled.div`
   width: 100%;
 `;
 
-const DevelopOngoingWrapper = styled.div`
+const SocialBoxWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: end;
