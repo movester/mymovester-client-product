@@ -11,6 +11,8 @@ interface IStyledProps {
   ismobile: boolean;
 }
 
+const USERID = "123";
+
 const Navigator = () => {
   const router = useRouter();
   const isMobile = useIsMobile();
@@ -37,7 +39,9 @@ const Navigator = () => {
             >
               <Typography variants="body3">movcoco님</Typography>
             </Box>
-            <MyPageModalListItem>
+            <MyPageModalListItem
+              onClick={() => router.push(`/users/${USERID}`)}
+            >
               <Typography variants="body3">마이페이지</Typography>
             </MyPageModalListItem>
             <MyPageModalListItem>
@@ -94,7 +98,7 @@ const Wrapper = styled.div<IStyledProps>`
   height: auto;
   padding: ${(props) => (props.ismobile ? "8px 16px" : "16px")};
   width: 100%;
-  position: fixed;
+  position: sticky;
   top: 0;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 300;
@@ -108,7 +112,7 @@ const AccountWrapper = styled.div`
   /* position: relative; */
   padding-right: 32px;
 `;
-const FullWrapper = styled.div``;
+
 const MyPageModal = styled.div`
   position: absolute;
   right: 32px;

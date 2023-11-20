@@ -2,5 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/stretchings": "pages/stretchings.js"
+  "/users/[userId]/edit": "pages/users/[userId]/edit.js",
+  "/withdrawal": "pages/withdrawal.js",
+  "/users/[userId]": "pages/users/[userId].js"
 }
