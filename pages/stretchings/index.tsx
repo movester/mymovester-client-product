@@ -192,7 +192,7 @@ const PageWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div<styleType>`
-  padding-top: ${(props) => (props.isMobile ? "80px" : "120px")};
+  padding-top: ${(props) => (props.isMobile ? "40px" : "80px")};
   width: 100%;
   display: flex;
   flex-direction: column;

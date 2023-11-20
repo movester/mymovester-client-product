@@ -22,15 +22,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/stretchings": [
+    "/users/[userId]/edit": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/stretchings.js"
+      "static/chunks/pages/users/[userId]/edit.js"
     ],
-    "/stretchings/detail": [
+    "/withdrawal": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/stretchings/detail.js"
+      "static/chunks/pages/withdrawal.js"
     ]
   },
   "ampFirstPages": []
