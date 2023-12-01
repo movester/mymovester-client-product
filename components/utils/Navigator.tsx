@@ -16,7 +16,7 @@ const USERID = "123";
 const Navigator = () => {
   const router = useRouter();
   const isMobile = useIsMobile();
-  const [isLoggined, setIsLoggined] = useState(true);
+  const [isLoggined, setIsLoggined] = useState(false);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -81,8 +81,8 @@ const Navigator = () => {
               ></Box>
             </>
           ) : (
-            <Box>
-              <Typography variants="body3">로그인 | 회원가입</Typography>
+            <Box onClick={() => router.push("/login")}>
+              <Typography variants="body2">로그인 | 회원가입</Typography>
             </Box>
           )}
         </AccountWrapper>

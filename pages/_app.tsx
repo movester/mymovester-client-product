@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../styles/global.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { DragDropContext } from "react-beautiful-dnd";
@@ -16,9 +16,10 @@ function MyApp({ Component, pageProps }) {
   const queryClient = new QueryClient();
 
   function kakaoInit() {
-    window.Kakao.init(process.env.NEXT_PUBLICK_KAKAO_KEY);
+    window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
     console.log("카카오", window.Kakao.isInitialized());
   }
+
   return (
     <>
       <Head>
