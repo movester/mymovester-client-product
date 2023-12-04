@@ -75,7 +75,7 @@ const UserMyPage = () => {
               alignItems="center"
             >
               <WithdrawalButton onClick={() => router.push("/withdrawal")}>
-                <Typography variants="caption" color={colors.r000}>
+                <Typography variants="body3" color={colors.r000}>
                   탈퇴하기
                 </Typography>
               </WithdrawalButton>

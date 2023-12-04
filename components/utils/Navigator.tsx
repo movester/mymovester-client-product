@@ -16,7 +16,7 @@ const USERID = "123";
 const Navigator = () => {
   const router = useRouter();
   const isMobile = useIsMobile();
-  const [isLoggined, setIsLoggined] = useState(false);
+  const [isLoggined, setIsLoggined] = useState(true);
   const [isModalOpened, setIsModalOpened] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -37,15 +37,15 @@ const Navigator = () => {
               justifyContent="center"
               padding={8}
             >
-              <Typography variants="body3">movcoco님</Typography>
+              <Typography variants="body2">movcoco님</Typography>
             </Box>
             <MyPageModalListItem
               onClick={() => router.push(`/users/${USERID}`)}
             >
-              <Typography variants="body3">마이페이지</Typography>
+              <Typography variants="body2">마이페이지</Typography>
             </MyPageModalListItem>
             <MyPageModalListItem>
-              <Typography variants="body3">로그아웃</Typography>
+              <Typography variants="body2">로그아웃</Typography>
             </MyPageModalListItem>
           </MyPageModal>
         </Modal>

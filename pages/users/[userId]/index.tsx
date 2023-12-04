@@ -54,7 +54,7 @@ const UserMyPage = () => {
               height={24}
               width={40}
             >
-              <Typography variants="caption">설정</Typography>
+              <Typography variants="body3">설정</Typography>
             </Box>
           </Box>
         </ContentArea>
