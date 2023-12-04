@@ -31,7 +31,6 @@ function MyApp({ Component, pageProps }) {
         crossOrigin="anonymous"
         onLoad={kakaoInit}
       ></Script>
-
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
       </QueryClientProvider>
