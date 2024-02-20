@@ -22,15 +22,25 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
+    "/login": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/login.js"
+    ],
+    "/stretchings": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/stretchings.js"
+    ],
+    "/users/[userId]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/users/[userId].js"
+    ],
     "/users/[userId]/edit": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/users/[userId]/edit.js"
-    ],
-    "/withdrawal": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/withdrawal.js"
     ]
   },
   "ampFirstPages": []

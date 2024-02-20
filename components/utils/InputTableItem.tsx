@@ -12,7 +12,7 @@ interface IProps {
 const InputTableItem = (props: PropsWithChildren<IProps>) => {
   const { order, children, deleteMode = false, onClickDelete } = props;
 
-  const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [isclicked, setIsclicked] = useState<boolean>(false);
   return (
     <Box
       display="flex"
@@ -31,7 +31,7 @@ const InputTableItem = (props: PropsWithChildren<IProps>) => {
         justifyContent="center"
         onClick={() => {
           if (deleteMode) {
-            setIsClicked((prev) => !prev);
+            setIsclicked((prev) => !prev);
             onClickDelete(order);
           }
         }}
@@ -39,7 +39,7 @@ const InputTableItem = (props: PropsWithChildren<IProps>) => {
       >
         {deleteMode ? (
           <AiFillCheckCircle
-            color={isClicked ? colors.r000 : colors.g000}
+            color={isclicked ? colors.r000 : colors.g000}
           ></AiFillCheckCircle>
         ) : (
           <Typography variants="body1">{order}</Typography>

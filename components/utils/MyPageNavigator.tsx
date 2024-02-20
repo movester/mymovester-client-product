@@ -5,7 +5,7 @@ import { Router, useRouter } from "next/router";
 import { myPageTabType } from "../../constants/types";
 
 interface IStyleProps {
-  isClicked: boolean;
+  isclicked: boolean;
 }
 
 interface IProps {
@@ -35,13 +35,13 @@ const MyPageNavigator = (props: IProps) => {
           계정 설정
         </Typography>
         <SubNavigatorListItem
-          isClicked={currentTab === "PROFILE"}
+          isclicked={currentTab === "PROFILE"}
           onClick={() => handleOnClickTabItem("PROFILE")}
         >
           <Typography variants="body2">나의 프로필</Typography>
         </SubNavigatorListItem>
         <SubNavigatorListItem
-          isClicked={currentTab === "EDIT"}
+          isclicked={currentTab === "EDIT"}
           onClick={() => handleOnClickTabItem("EDIT")}
         >
           <Typography variants="body2">회원정보 수정</Typography>
@@ -52,7 +52,7 @@ const MyPageNavigator = (props: IProps) => {
           활동
         </Typography>
         <SubNavigatorListItem
-          isClicked={currentTab === "LIKES"}
+          isclicked={currentTab === "LIKES"}
           onClick={() => handleOnClickTabItem("LIKES")}
         >
           <Typography variants="body2">좋아요</Typography>
@@ -85,8 +85,8 @@ const SubNavigatorListItem = styled.button<IStyleProps>`
   border-radius: 4px;
   outline: none;
   border: 0;
-  background-color: ${({ isClicked }) =>
-    isClicked ? " rgba(0, 0, 0, 0.1)" : "transparent"};
+  background-color: ${({ isclicked }) =>
+    isclicked ? " rgba(0, 0, 0, 0.1)" : "transparent"};
   width: 100%;
   &:hover {
     cursor: pointer;

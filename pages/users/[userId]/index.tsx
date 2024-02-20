@@ -1,16 +1,21 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import { styled } from "styled-components";
 import { colors } from "../../../constants/style";
-import Navigator from "../../../components/utils/Navigator";
+import Navigator, {
+  KakaoProfileInfoType,
+} from "../../../components/utils/Navigator";
 import { Box, Typography } from "movester-design-system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MyPageNavigator from "../../../components/utils/MyPageNavigator";
 import { myPageTabType } from "../../../constants/types";
 import { useRouter } from "next/router";
+import { useRecoilState } from "recoil";
+import { userProfile } from "../../../recoil/user/atom";
 
 const UserMyPage = () => {
   const [currentTab, _] = useState<myPageTabType>("PROFILE");
-
-  const router = useRouter();
+  const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
 
   return (
     <PageWrapper>
@@ -36,13 +41,16 @@ const UserMyPage = () => {
               justifyContent="center"
               alignItems="center"
             >
-              <Box
-                width={100}
-                height={100}
-                borderRadius={50}
-                backgroundColor={colors.g200}
-              ></Box>
-              <Typography variants="heading3">movcoco</Typography>
+              <Box width={160} height={160} borderRadius={80} overflow="hidden">
+                <img
+                  width={160}
+                  height={160}
+                  src={userProfileState?.profileUrl}
+                ></img>
+              </Box>
+              <Typography variants="heading3">
+                {userProfileState?.nickName + "님"}
+              </Typography>
             </Box>
             <Box
               // padding={"0px 8px"}
