@@ -44,20 +44,3 @@ const PageWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-const ContentWrapper = styled.div`
-  padding: 16px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-`;
-
-const BreadCrumb = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 16px 16px 32px;
-`;

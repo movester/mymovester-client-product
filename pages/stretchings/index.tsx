@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
-import Navigator from "../../components/utils/Navigator";
+import { MemorizedNavigator } from "../../components/utils/Navigator";
 import { colors } from "../../constants/style";
-
 import { useEffect, useMemo, useState } from "react";
 
 import {
@@ -27,6 +26,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { useRouter } from "next/router";
 import Skeleton from "react-loading-skeleton";
 import { Box, ComboBox } from "movester-design-system";
+import dynamic from "next/dynamic";
 
 const PAGE_SIZE = 10;
 
@@ -88,7 +88,8 @@ const StrechingPage = () => {
 
   return (
     <PageWrapper>
-      <Navigator></Navigator>
+      {/* <Navigator></Navigator> */}
+      <MemorizedNavigator></MemorizedNavigator>
       <ContentWrapper isMobile={isMobile}>
         <Box
           display="flex"

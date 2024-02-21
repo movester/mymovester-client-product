@@ -1,30 +1,77 @@
+/* eslint-disable @next/next/no-img-element */
 import { styled } from "styled-components";
 import { colors } from "../../constants/style";
 import { useRouter } from "next/router";
 import useIsMobile from "../../hooks/utils/useIsMobile";
-import Image from "next/image";
+
 import { Box, Typography } from "movester-design-system";
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Modal from "./Modal";
+import { useRecoilState } from "recoil";
+import { userProfile } from "../../recoil/user/atom";
+
+import {
+  getAccessToken,
+  isLoggined,
+  removeToken,
+} from "../../hooks/utils/manage-token";
+import { FaUser } from "react-icons/fa";
+import useUserInfoInquiry from "../../hooks/api/useUserInfoInquiry";
+import React from "react";
 
 interface IStyledProps {
   ismobile: boolean;
 }
 
-const USERID = "123";
+export type KakaoProfileInfoType = {
+  nickName: string;
+  profileImageURL: string;
+  thumbnailURL: string;
+};
 
 const Navigator = () => {
   const router = useRouter();
   const isMobile = useIsMobile();
-  const [isLoggined, setIsLoggined] = useState(false);
-  const [isModalOpened, setIsModalOpened] = useState(false);
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
+  const [USERID, setUserID] = useState<number | string | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
+
   const modalRef = useRef<HTMLDivElement>(null);
+
+  const checkIsLoggined = isLoggined();
 
   const modalOutSideClick = (e: any) => {
     if (modalRef.current === e.target) {
       setIsModalOpened(false);
     }
   };
+
+  const handleKakaoLogout = async () => {
+    removeToken();
+    router.replace("/stretchings");
+  };
+
+  const { data } = useUserInfoInquiry({ token: accessToken });
+
+  useEffect(() => {
+    if (isLoggined && !userProfileState) {
+      const accessToken = getAccessToken();
+      setAccessToken(accessToken);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoggined, userProfileState]);
+
+  useEffect(() => {
+    setUserProfileState(data);
+  }, [data, setUserProfileState]);
+
+  useEffect(() => {
+    if (isLoggined && userProfileState) {
+      setUserID(userProfileState.id);
+    }
+  }, [userProfileState]);
+
   return (
     <>
       {isModalOpened && (
@@ -37,48 +84,55 @@ const Navigator = () => {
               justifyContent="center"
               padding={8}
             >
-              <Typography variants="body3">movcoco님</Typography>
+              <Typography variants="body2">
+                {userProfileState?.nickName + "님"}
+              </Typography>
             </Box>
             <MyPageModalListItem
               onClick={() => router.push(`/users/${USERID}`)}
             >
-              <Typography variants="body3">마이페이지</Typography>
+              <Typography variants="body2">마이페이지</Typography>
             </MyPageModalListItem>
-            <MyPageModalListItem>
-              <Typography variants="body3">로그아웃</Typography>
+            <MyPageModalListItem onClick={handleKakaoLogout}>
+              <Typography variants="body2">로그아웃</Typography>
             </MyPageModalListItem>
           </MyPageModal>
         </Modal>
       )}
       <Wrapper ismobile={isMobile}>
         <Box
+          display="flex"
           flexDirection="row"
-          justifyContent="start"
+          justifyContent="center"
           alignItems="center"
+          height={"100%"}
           onClick={() => router.push("/stretchings")}
         >
-          <Image
+          <img
             src={isMobile ? "/favicon.ico" : "/logo.png"}
             width={isMobile ? 16 : 120}
             height={isMobile ? 16 : 32}
             alt={""}
-          ></Image>
+          ></img>
         </Box>
         <AccountWrapper>
-          {isLoggined ? (
+          {checkIsLoggined ? (
             <>
-              <Box
-                width={30}
-                height={30}
-                borderRadius={15}
-                backgroundColor={colors.g000}
-                border={
-                  isModalOpened
-                    ? `1px solid ${colors.vividPrimaryColor}`
-                    : "none"
-                }
+              <ProfileWrapper
+                ismobile={isMobile}
                 onClick={() => setIsModalOpened((prev) => !prev)}
-              ></Box>
+              >
+                {userProfileState?.profileUrl ? (
+                  <img
+                    width={"100%"}
+                    height={"100%"}
+                    src={userProfileState.profileUrl}
+                    alt={""}
+                  ></img>
+                ) : (
+                  <FaUser></FaUser>
+                )}
+              </ProfileWrapper>
             </>
           ) : (
             <Box onClick={() => router.push("/login")}>
@@ -91,32 +145,34 @@ const Navigator = () => {
   );
 };
 
-export default Navigator;
+export const MemorizedNavigator = React.memo(Navigator);
 
 const Wrapper = styled.div<IStyledProps>`
   background-color: ${colors.f000};
   height: auto;
   padding: ${(props) => (props.ismobile ? "8px 16px" : "16px")};
   width: 100%;
+  height: ${(props) => (props.ismobile ? "50px" : "70px")};
   position: sticky;
   top: 0;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 300;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   :hover {
     cursor: pointer;
   }
 `;
 const AccountWrapper = styled.div`
   /* position: relative; */
-  padding-right: 32px;
+  /* padding-right: 32px; */
 `;
 
 const MyPageModal = styled.div`
   position: absolute;
   right: 32px;
-  top: 48px;
+  top: 60px;
   background-color: ${colors.f000};
   border: 1px solid ${colors.g200};
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
@@ -143,4 +199,15 @@ const MyPageModalListItem = styled.button`
     background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
   }
+`;
+
+const ProfileWrapper = styled.div<IStyledProps>`
+  width: ${(props) => (props.ismobile ? "30px" : "40px")};
+  height: ${(props) => (props.ismobile ? "30px" : "40px")};
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: ${colors.g200};
 `;

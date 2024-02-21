@@ -1,20 +1,33 @@
+/* eslint-disable jsx-a11y/alt-text */
+/* eslint-disable @next/next/no-img-element */
 import { styled } from "styled-components";
 import { colors } from "../../../constants/style";
-import Navigator from "../../../components/utils/Navigator";
+import { MemorizedNavigator } from "../../../components/utils/Navigator";
 import { Box, Typography } from "movester-design-system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MyPageNavigator from "../../../components/utils/MyPageNavigator";
 import { myPageTabType } from "../../../constants/types";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
+import { useRecoilState } from "recoil";
+import { userProfile } from "../../../recoil/user/atom";
+import { FaUser } from "react-icons/fa";
 
 const UserMyPage = () => {
   const [currentTab, _] = useState<myPageTabType>("PROFILE");
+  const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
+  const pathName = usePathname();
 
-  const router = useRouter();
+  //   useEffect(() => {
+  //       if(pathName){
+
+  //       }
+
+  // },[])
+  // console.log(pathName);
 
   return (
     <PageWrapper>
-      <Navigator></Navigator>
+      <MemorizedNavigator></MemorizedNavigator>
       <ContentWrapper>
         <MyPageNavigator currentTab={currentTab}></MyPageNavigator>
         <ContentArea>
@@ -36,16 +49,22 @@ const UserMyPage = () => {
               justifyContent="center"
               alignItems="center"
             >
-              <Box
-                width={100}
-                height={100}
-                borderRadius={50}
-                backgroundColor={colors.g200}
-              ></Box>
-              <Typography variants="heading3">movcoco</Typography>
+              <Box width={160} height={160} borderRadius={80} overflow="hidden">
+                {userProfileState?.profileUrl ? (
+                  <img
+                    width={160}
+                    height={160}
+                    src={userProfileState?.profileUrl}
+                  ></img>
+                ) : (
+                  <FaUser></FaUser>
+                )}
+              </Box>
+              <Typography variants="heading3">
+                {userProfileState?.nickName + "님"}
+              </Typography>
             </Box>
             <Box
-              // padding={"0px 8px"}
               border={`1px solid ${colors.g000}`}
               borderRadius={4}
               display="flex"
@@ -54,7 +73,7 @@ const UserMyPage = () => {
               height={24}
               width={40}
             >
-              <Typography variants="caption">설정</Typography>
+              <Typography variants="body3">설정</Typography>
             </Box>
           </Box>
         </ContentArea>

@@ -2,12 +2,16 @@
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+
   eslint: {
     ignoreDuringBuilds: true,
   },
   disableSaticImages: false,
   images: {
     domains: ["mymovester-product.s3.ap-northeast-2.amazonaws.com"],
+  },
+  compiler: {
+    styledComponents: true,
   },
   async rewrites() {
     return [

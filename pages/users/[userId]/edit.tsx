@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { colors } from "../../../constants/style";
 import Navigator from "../../../components/utils/Navigator";
 import { Box, Button, Input, Typography } from "movester-design-system";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MyPageNavigator from "../../../components/utils/MyPageNavigator";
 import { myPageTabType } from "../../../constants/types";
 import { useRouter } from "next/router";
@@ -12,6 +12,21 @@ const UserMyPage = () => {
   const [userName, setUserName] = useState<string>("movcoco");
 
   const router = useRouter();
+
+  const handleUserInfo = async () => {
+    await window.Kakao.API.request({
+      url: "/v2/user/me",
+      data: {
+        property_keys: ["kakao_account.email"],
+      },
+    }).then((res) => console.log(res));
+  };
+
+  useEffect(() => {
+    if (window.Kakao) {
+      handleUserInfo();
+    }
+  }, []);
 
   return (
     <PageWrapper>
@@ -58,7 +73,7 @@ const UserMyPage = () => {
               display="flex"
               justifyContent="start"
               alignItems="center"
-              gap={16}
+              gap={32}
             >
               <Box width={80}>
                 <Typography variants="body2">이름</Typography>
@@ -75,14 +90,14 @@ const UserMyPage = () => {
               alignItems="center"
             >
               <WithdrawalButton onClick={() => router.push("/withdrawal")}>
-                <Typography variants="caption" color={colors.r000}>
+                <Typography variants="body2" color={colors.r000}>
                   탈퇴하기
                 </Typography>
               </WithdrawalButton>
             </Box>
             <Box width={"100%"} display="flex" justifyContent="center">
               <Box width={240}>
-                <Button variants="primary" size="xs">
+                <Button variants="primary" size="xs" disabled={true}>
                   회원정보 수정
                 </Button>
               </Box>
