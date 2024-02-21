@@ -1,7 +1,6 @@
 import { styled } from "styled-components";
-import Navigator from "../../components/utils/Navigator";
+import { MemorizedNavigator } from "../../components/utils/Navigator";
 import { colors } from "../../constants/style";
-
 import { useEffect, useMemo, useState } from "react";
 
 import {
@@ -87,18 +86,10 @@ const StrechingPage = () => {
     setSeletedEffectItem(null);
   }, [selectedCategoryButtonItem]);
 
-  const NavigatorComponent = dynamic(
-    import("../../components/utils/Navigator"),
-    {
-      loading: () => <div>서버사이드</div>,
-      ssr: false,
-    }
-  );
-
   return (
     <PageWrapper>
       {/* <Navigator></Navigator> */}
-      <NavigatorComponent></NavigatorComponent>
+      <MemorizedNavigator></MemorizedNavigator>
       <ContentWrapper isMobile={isMobile}>
         <Box
           display="flex"

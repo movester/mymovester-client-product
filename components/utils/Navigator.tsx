@@ -3,12 +3,12 @@ import { styled } from "styled-components";
 import { colors } from "../../constants/style";
 import { useRouter } from "next/router";
 import useIsMobile from "../../hooks/utils/useIsMobile";
-import Image from "next/image";
+
 import { Box, Typography } from "movester-design-system";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Modal from "./Modal";
 import { useRecoilState } from "recoil";
-import { IUserProfileType, userProfile } from "../../recoil/user/atom";
+import { userProfile } from "../../recoil/user/atom";
 
 import {
   getAccessToken,
@@ -16,6 +16,8 @@ import {
   removeToken,
 } from "../../hooks/utils/manage-token";
 import { FaUser } from "react-icons/fa";
+import useUserInfoInquiry from "../../hooks/api/useUserInfoInquiry";
+import React from "react";
 
 interface IStyledProps {
   ismobile: boolean;
@@ -27,13 +29,13 @@ export type KakaoProfileInfoType = {
   thumbnailURL: string;
 };
 
-const USERID = "123";
-
 const Navigator = () => {
   const router = useRouter();
   const isMobile = useIsMobile();
   const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
   const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
+  const [USERID, setUserID] = useState<number | string | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -46,34 +48,29 @@ const Navigator = () => {
   };
 
   const handleKakaoLogout = async () => {
-    await window.Kakao.Auth.logout().then((res) => {
-      removeToken();
-      router.replace("/stretchings");
-    });
+    removeToken();
+    router.replace("/stretchings");
   };
 
-  const getUserInfo = async (token: string) => {
-    const res: IUserProfileType = await fetch("/api/user", {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }).then((res) => res.json());
-    setUserProfileState(res);
-  };
+  const { data } = useUserInfoInquiry({ token: accessToken });
 
   useEffect(() => {
-    const accessToken = getAccessToken();
     if (isLoggined && !userProfileState) {
-      getUserInfo(accessToken);
+      const accessToken = getAccessToken();
+      setAccessToken(accessToken);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoggined]);
+  }, [isLoggined, userProfileState]);
 
-  // const profileInfo = { name: "김희진", profile_image: "" };
-  // ${JSON.parse(
-  //   window.localStorage.getItem("_uToken")["access_key"]
-  // )}
+  useEffect(() => {
+    setUserProfileState(data);
+  }, [data, setUserProfileState]);
+
+  useEffect(() => {
+    if (isLoggined && userProfileState) {
+      setUserID(userProfileState.id);
+    }
+  }, [userProfileState]);
 
   return (
     <>
@@ -104,9 +101,11 @@ const Navigator = () => {
       )}
       <Wrapper ismobile={isMobile}>
         <Box
+          display="flex"
           flexDirection="row"
-          justifyContent="start"
+          justifyContent="center"
           alignItems="center"
+          height={"100%"}
           onClick={() => router.push("/stretchings")}
         >
           <img
@@ -146,7 +145,7 @@ const Navigator = () => {
   );
 };
 
-export default Navigator;
+export const MemorizedNavigator = React.memo(Navigator);
 
 const Wrapper = styled.div<IStyledProps>`
   background-color: ${colors.f000};
@@ -167,7 +166,7 @@ const Wrapper = styled.div<IStyledProps>`
 `;
 const AccountWrapper = styled.div`
   /* position: relative; */
-  padding-right: 32px;
+  /* padding-right: 32px; */
 `;
 
 const MyPageModal = styled.div`
@@ -210,4 +209,5 @@ const ProfileWrapper = styled.div<IStyledProps>`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: ${colors.g200};
 `;

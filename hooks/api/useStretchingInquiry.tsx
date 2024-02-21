@@ -5,7 +5,6 @@ import {
   StretchingMainCategoryType,
   StretchingSubCategoryType,
 } from "../../constants/types";
-import { useState } from "react";
 
 interface IProps {
   // page: number;

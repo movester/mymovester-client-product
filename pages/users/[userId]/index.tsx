@@ -2,24 +2,32 @@
 /* eslint-disable @next/next/no-img-element */
 import { styled } from "styled-components";
 import { colors } from "../../../constants/style";
-import Navigator, {
-  KakaoProfileInfoType,
-} from "../../../components/utils/Navigator";
+import { MemorizedNavigator } from "../../../components/utils/Navigator";
 import { Box, Typography } from "movester-design-system";
 import { useEffect, useState } from "react";
 import MyPageNavigator from "../../../components/utils/MyPageNavigator";
 import { myPageTabType } from "../../../constants/types";
-import { useRouter } from "next/router";
+import { usePathname } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { userProfile } from "../../../recoil/user/atom";
+import { FaUser } from "react-icons/fa";
 
 const UserMyPage = () => {
   const [currentTab, _] = useState<myPageTabType>("PROFILE");
   const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
+  const pathName = usePathname();
+
+  //   useEffect(() => {
+  //       if(pathName){
+
+  //       }
+
+  // },[])
+  // console.log(pathName);
 
   return (
     <PageWrapper>
-      <Navigator></Navigator>
+      <MemorizedNavigator></MemorizedNavigator>
       <ContentWrapper>
         <MyPageNavigator currentTab={currentTab}></MyPageNavigator>
         <ContentArea>
@@ -42,18 +50,21 @@ const UserMyPage = () => {
               alignItems="center"
             >
               <Box width={160} height={160} borderRadius={80} overflow="hidden">
-                <img
-                  width={160}
-                  height={160}
-                  src={userProfileState?.profileUrl}
-                ></img>
+                {userProfileState?.profileUrl ? (
+                  <img
+                    width={160}
+                    height={160}
+                    src={userProfileState?.profileUrl}
+                  ></img>
+                ) : (
+                  <FaUser></FaUser>
+                )}
               </Box>
               <Typography variants="heading3">
                 {userProfileState?.nickName + "님"}
               </Typography>
             </Box>
             <Box
-              // padding={"0px 8px"}
               border={`1px solid ${colors.g000}`}
               borderRadius={4}
               display="flex"

@@ -10,11 +10,5 @@
     "files": [
       "static/chunks/node_modules_next_dist_pages__error_js.js"
     ]
-  },
-  "stretchings/index.tsx -> ../../components/utils/Navigator": {
-    "id": "stretchings/index.tsx -> ../../components/utils/Navigator",
-    "files": [
-      "static/chunks/components_utils_Navigator_tsx.js"
-    ]
   }
 }
