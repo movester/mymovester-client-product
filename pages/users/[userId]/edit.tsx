@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { colors } from "../../../constants/style";
-import Navigator from "../../../components/utils/Navigator";
+import { MemorizedNavigator } from "../../../components/utils/Navigator";
 import { Box, Button, Input, Typography } from "movester-design-system";
 import { useEffect, useState } from "react";
 import MyPageNavigator from "../../../components/utils/MyPageNavigator";
@@ -30,7 +30,7 @@ const UserMyPage = () => {
 
   return (
     <PageWrapper>
-      <Navigator></Navigator>
+      <MemorizedNavigator></MemorizedNavigator>
       <ContentWrapper>
         <MyPageNavigator currentTab={currentTab}></MyPageNavigator>
         <ContentArea>

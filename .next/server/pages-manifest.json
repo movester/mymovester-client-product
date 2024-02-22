@@ -3,5 +3,8 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/stretchings": "pages/stretchings.js",
-  "/users/[userId]": "pages/users/[userId].js"
+  "/users/[userId]": "pages/users/[userId].js",
+  "/users/[userId]/edit": "pages/users/[userId]/edit.js",
+  "/login": "pages/login.js",
+  "/withdrawal": "pages/withdrawal.js"
 }
