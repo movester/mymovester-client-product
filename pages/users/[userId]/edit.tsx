@@ -6,31 +6,32 @@ import { useEffect, useState } from "react";
 import MyPageNavigator from "../../../components/utils/MyPageNavigator";
 import { myPageTabType } from "../../../constants/types";
 import { useRouter } from "next/router";
+import { NextPageContext } from "next";
+import { useRecoilState } from "recoil";
+import { userProfile } from "../../../recoil/user/atom";
 
-const UserMyPage = () => {
+const UserMyPage = ({ isLoggined }) => {
+  const [recoilUserProfileState, setRecoilUserProfileState] =
+    useRecoilState(userProfile);
+
   const [currentTab, _] = useState<myPageTabType>("EDIT");
-  const [userName, setUserName] = useState<string>("movcoco");
+  const [userName, setUserName] = useState<string>(
+    recoilUserProfileState?.nickName
+  );
 
   const router = useRouter();
 
-  const handleUserInfo = async () => {
-    await window.Kakao.API.request({
-      url: "/v2/user/me",
-      data: {
-        property_keys: ["kakao_account.email"],
-      },
-    }).then((res) => console.log(res));
-  };
+  // console.log(recoilUserProfileState);
 
   useEffect(() => {
-    if (window.Kakao) {
-      handleUserInfo();
-    }
-  }, []);
+    setUserName(recoilUserProfileState?.nickName);
+  }, [recoilUserProfileState?.nickName]);
 
   return (
     <PageWrapper>
-      <MemorizedNavigator></MemorizedNavigator>
+      <MemorizedNavigator
+        isLoggined={isLoggined === "true" ? true : false}
+      ></MemorizedNavigator>
       <ContentWrapper>
         <MyPageNavigator currentTab={currentTab}></MyPageNavigator>
         <ContentArea>
@@ -144,3 +145,8 @@ const WithdrawalButton = styled.div`
     cursor: pointer;
   }
 `;
+export const getServerSideProps = ({ req }: NextPageContext) => {
+  const isLoggined = req.headers["x-loggined"];
+
+  return { props: { isLoggined } };
+};

@@ -11,8 +11,9 @@ import { usePathname } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { userProfile } from "../../../recoil/user/atom";
 import { FaUser } from "react-icons/fa";
+import { NextPageContext } from "next";
 
-const UserMyPage = () => {
+const UserMyPage = ({ isLoggined }) => {
   const [currentTab, _] = useState<myPageTabType>("PROFILE");
   const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
   const pathName = usePathname();
@@ -27,7 +28,9 @@ const UserMyPage = () => {
 
   return (
     <PageWrapper>
-      <MemorizedNavigator></MemorizedNavigator>
+      <MemorizedNavigator
+        isLoggined={isLoggined === "true" ? true : false}
+      ></MemorizedNavigator>
       <ContentWrapper>
         <MyPageNavigator currentTab={currentTab}></MyPageNavigator>
         <ContentArea>
@@ -108,3 +111,9 @@ const ContentArea = styled.div`
   display: block;
   width: 300px;
 `;
+
+export const getServerSideProps = ({ req }: NextPageContext) => {
+  const isLoggined = req.headers["x-loggined"];
+
+  return { props: { isLoggined } };
+};

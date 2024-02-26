@@ -2,7 +2,7 @@ import { styled } from "styled-components";
 import { MemorizedNavigator } from "../../components/utils/Navigator";
 import { colors } from "../../constants/style";
 import { useEffect, useMemo, useState } from "react";
-
+import { headers } from "next/headers";
 import {
   EFFECT_CATEGORY,
   ICategoryIconBoxType,
@@ -27,22 +27,24 @@ import { useRouter } from "next/router";
 import Skeleton from "react-loading-skeleton";
 import { Box, ComboBox } from "movester-design-system";
 import dynamic from "next/dynamic";
+import { middleware } from "../../middleware";
+import { NextPageContext } from "next";
 
 const PAGE_SIZE = 10;
 
 export type labeItemType = { label: string; labelId: string };
 
 interface styleType {
-  isMobile: boolean;
+  $ismobile: boolean;
 }
 
-const StrechingPage = () => {
+const StrechingPage = ({ isLoggined }) => {
   const labelItems = [
     { label: "타겟 부위", labelId: "sections" },
     { label: "효과", labelId: "effects" },
   ];
 
-  const isMobile = useIsMobile();
+  const ismobile = useIsMobile();
 
   const router = useRouter();
 
@@ -89,8 +91,10 @@ const StrechingPage = () => {
   return (
     <PageWrapper>
       {/* <Navigator></Navigator> */}
-      <MemorizedNavigator></MemorizedNavigator>
-      <ContentWrapper isMobile={isMobile}>
+      <MemorizedNavigator
+        isLoggined={isLoggined === "true" ? true : false}
+      ></MemorizedNavigator>
+      <ContentWrapper $ismobile={ismobile}>
         <Box
           display="flex"
           flexDirection="column"
@@ -108,7 +112,7 @@ const StrechingPage = () => {
           <Box
             display="flex"
             flexDirection="row"
-            justifyContent={!isMobile ? "center" : "start"}
+            justifyContent={!ismobile ? "center" : "start"}
             alignItems="start"
             width={"100vw"}
             overflow="scroll"
@@ -193,7 +197,7 @@ const PageWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div<styleType>`
-  padding-top: ${(props) => (props.isMobile ? "40px" : "80px")};
+  padding-top: ${(props) => (props.$ismobile ? "40px" : "80px")};
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -203,8 +207,8 @@ const ContentWrapper = styled.div<styleType>`
   height: 100%;
   overflow-x: scroll;
   max-width: 2560px;
-  padding-left: ${(props) => (props.isMobile ? "16px" : "64px")};
-  padding-right: ${(props) => (props.isMobile ? "16px" : "64px")};
+  padding-left: ${(props) => (props.$ismobile ? "16px" : "64px")};
+  padding-right: ${(props) => (props.$ismobile ? "16px" : "64px")};
   padding-bottom: 64px;
 `;
 
@@ -220,3 +224,9 @@ const ItemGrid = styled.div`
     grid-template-columns: repeat(1, 1fr);
   }
 `;
+
+export const getServerSideProps = ({ req }: NextPageContext) => {
+  const isLoggined = req.headers["x-loggined"];
+
+  return { props: { isLoggined } };
+};

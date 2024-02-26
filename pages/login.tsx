@@ -61,22 +61,11 @@ const LoginPage = () => {
     [router]
   );
 
-  // useEffect(() => {
-  //   setUserProfileState({
-  //     kakao_access_token: kakaoAccessToken,
-  //     user_id: userId,
-  //     profile_image: profileImage,
-  //     name: userName,
-  //   });
-  // }, [kakaoAccessToken, profileImage, setUserProfileState, userId, userName]);
-
   useEffect(() => {
     if (authCode) {
       loginHandler(authCode);
-
       // 인가코드를 제대로 못 받았을 경우에 에러 페이지를 띄운다.
     } else if (kakaoServerError) {
-      // router.push("/notifications/authentication-failed");
       console.log(kakaoServerError);
     }
   }, [loginHandler, authCode, kakaoServerError, router]);

@@ -12,12 +12,17 @@ import { userProfile } from "../../recoil/user/atom";
 
 import {
   getAccessToken,
-  isLoggined,
+  isAccessTokenExpired,
   removeToken,
 } from "../../hooks/utils/manage-token";
 import { FaUser } from "react-icons/fa";
 import useUserInfoInquiry from "../../hooks/api/useUserInfoInquiry";
 import React from "react";
+import { NextPageContext } from "next";
+
+interface IProps {
+  isLoggined: boolean;
+}
 
 interface IStyledProps {
   ismobile: boolean;
@@ -29,17 +34,18 @@ export type KakaoProfileInfoType = {
   thumbnailURL: string;
 };
 
-const Navigator = () => {
-  const router = useRouter();
-  const isMobile = useIsMobile();
-  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+const Navigator = (props: IProps) => {
+  const { isLoggined } = props;
+
   const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
-  const [USERID, setUserID] = useState<number | string | null>(null);
+
+  const router = useRouter();
+  const ismobile = useIsMobile();
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const [USERID, setUSERID] = useState<number | string | null>(null);
   const [accessToken, setAccessToken] = useState<string | null>(null);
 
   const modalRef = useRef<HTMLDivElement>(null);
-
-  const checkIsLoggined = isLoggined();
 
   const modalOutSideClick = (e: any) => {
     if (modalRef.current === e.target) {
@@ -47,7 +53,7 @@ const Navigator = () => {
     }
   };
 
-  const handleKakaoLogout = async () => {
+  const handleKakaoLogout = () => {
     removeToken();
     router.replace("/stretchings");
   };
@@ -68,9 +74,9 @@ const Navigator = () => {
 
   useEffect(() => {
     if (isLoggined && userProfileState) {
-      setUserID(userProfileState.id);
+      setUSERID(userProfileState.id);
     }
-  }, [userProfileState]);
+  }, [isLoggined, userProfileState]);
 
   return (
     <>
@@ -99,7 +105,7 @@ const Navigator = () => {
           </MyPageModal>
         </Modal>
       )}
-      <Wrapper ismobile={isMobile}>
+      <Wrapper ismobile={ismobile}>
         <Box
           display="flex"
           flexDirection="row"
@@ -109,17 +115,17 @@ const Navigator = () => {
           onClick={() => router.push("/stretchings")}
         >
           <img
-            src={isMobile ? "/favicon.ico" : "/logo.png"}
-            width={isMobile ? 16 : 120}
-            height={isMobile ? 16 : 32}
+            src={ismobile ? "/favicon.ico" : "/logo.png"}
+            width={ismobile ? 16 : 120}
+            height={ismobile ? 16 : 32}
             alt={""}
           ></img>
         </Box>
         <AccountWrapper>
-          {checkIsLoggined ? (
+          {isLoggined ? (
             <>
               <ProfileWrapper
-                ismobile={isMobile}
+                ismobile={ismobile}
                 onClick={() => setIsModalOpened((prev) => !prev)}
               >
                 {userProfileState?.profileUrl ? (
