@@ -17,6 +17,7 @@ const useStretchingDetailInquiry = (props: IProps) => {
       console.log(error);
     },
     enabled: Boolean(id),
+    refetchOnWindowFocus: false,
   });
 
   return res;

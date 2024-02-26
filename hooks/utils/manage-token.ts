@@ -1,32 +1,48 @@
+import Cookies from "js-cookie";
+import { JwtPayload, jwtDecode } from "jwt-decode";
+
 export const setAccessToken = (token): void => {
-  window.localStorage.setItem("access_token", token);
+  Cookies.set("access_token", token, {
+    secure: true,
+  });
 };
 
 export const setRefreshToken = (token): void => {
-  window.localStorage.setItem("refresh_token", token);
+  Cookies.set("refresh_token", token, {
+    secure: true,
+  });
 };
 
 export const getAccessToken = (): string | undefined => {
-  return window.localStorage.getItem("access_token");
+  return Cookies.get("access_token");
 };
 
 export const getRefreshToken = (): string | undefined => {
-  return window.localStorage.getItem("refresh_token");
+  return Cookies.get("refresh_token");
 };
 
 export const removeToken = () => {
-  window.localStorage.removeItem("refresh_token");
-  window.localStorage.removeItem("access_token");
+  Cookies.remove("refresh_token", {
+    secure: true,
+  });
+  Cookies.remove("access_token", {
+    secure: true,
+  });
 };
 
-export const isLoggined = (): boolean => {
-  if (typeof window !== "undefined") {
-    // window 객체를 사용하는 코드
-    return (
-      Boolean(window.localStorage.getItem("access_token")) &&
-      Boolean(window.localStorage.getItem("refresh_token"))
-    );
-  } else {
-    return false;
+export const isTokenExpired = (token: string): boolean => {
+  const decoded = jwtDecode<JwtPayload>(token);
+  let isExpired = false;
+  if (decoded.exp) {
+    const buffer = 60_000;
+    // eslint-disable-next-line no-magic-numbers
+    isExpired = decoded.exp < (Date.now() + buffer) / 1000;
   }
+  return isExpired;
+};
+
+export const isAccessTokenExpired = (): boolean => {
+  const accessToken = getAccessToken();
+
+  return !accessToken || isTokenExpired(accessToken);
 };

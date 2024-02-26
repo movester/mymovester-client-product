@@ -9,8 +9,10 @@ import {
 } from "movester-design-system";
 import { styled } from "styled-components";
 import { colors } from "../constants/style";
-import { SetStateAction, useReducer, useState } from "react";
+import { SetStateAction, useMemo, useReducer, useState } from "react";
 import { useRouter } from "next/router";
+import useUserWithdrawal from "../hooks/api/useUserWithdrawal";
+import { getAccessToken } from "../hooks/utils/manage-token";
 
 const WithdrawalPage = () => {
   const [checkBox, setCheckBox] = useState(false);
@@ -21,6 +23,23 @@ const WithdrawalPage = () => {
   const [radio5, setRadio5] = useState<boolean>(false);
   const [textareaValue, setTextareaValue] = useState("");
   const router = useRouter();
+
+  const isWithdrawReasonChecked = useMemo(
+    () => radio1 || radio2 || radio3 || radio4 || radio5,
+    [radio1, radio2, radio3, radio4, radio5]
+  );
+
+  const { mutate: deleteUser } = useUserWithdrawal();
+
+  const handleOnClickWithdrawalButton = () => {
+    if (typeof window !== undefined) {
+      const accessToken = getAccessToken();
+      if (accessToken) {
+        deleteUser(accessToken);
+      }
+    }
+  };
+
   return (
     <PageWrapper>
       <ContentWrapper>
@@ -28,8 +47,8 @@ const WithdrawalPage = () => {
         <Typography variants="body1" color={colors.g100}>
           {"movcoco님,\n뭅스터와 이별하려 하신다니 많이 아쉽습니다."}
         </Typography>
-        <Box display="flex" flexDirection="column" gap={32}>
-          <Box display="flex" flexDirection="column" gap={4}>
+        <Box display="flex" flexDirection="column" gap={64}>
+          <Box display="flex" flexDirection="column" gap={8}>
             <Typography variants="body1" color={colors.g100}>
               탈퇴하기 전 아래 내용을 확인해 주세요
             </Typography>
@@ -60,7 +79,7 @@ const WithdrawalPage = () => {
           </Box>
 
           <Box display="flex" flexDirection="column">
-            <Typography variants="heading3">
+            <Typography variants="heading2">
               뭅스터를 탈퇴하는 이유가 무엇인가요?(중복 가능)(필수)
             </Typography>
             <Box padding={16} display="flex" flexDirection="column" gap={8}>
@@ -83,7 +102,7 @@ const WithdrawalPage = () => {
           </Box>
 
           <Box display="flex" flexDirection="column" gap={4}>
-            <Typography variants="heading3">
+            <Typography variants="heading2">
               뭅스터 서비스 이용 중 어떤 부분이 불편하셨나요? (선택)
             </Typography>
             <Typography variants="body2">
@@ -106,7 +125,13 @@ const WithdrawalPage = () => {
           alignItems="center"
           justifyContent="center"
         >
-          <Button variants="secondary" size="xs" width={240}>
+          <Button
+            variants="secondary"
+            size="xs"
+            width={240}
+            disabled={checkBox && isWithdrawReasonChecked}
+            onClick={handleOnClickWithdrawalButton}
+          >
             탈퇴하기
           </Button>
           <Button

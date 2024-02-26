@@ -82,6 +82,7 @@ const useStretchingInquiry = (props: IProps) => {
     onError: (error) => {
       console.log(error);
     },
+    refetchOnWindowFocus: false,
   });
 
   return res;

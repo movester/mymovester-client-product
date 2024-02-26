@@ -13,7 +13,7 @@ interface IProps {
 const CategoryButton = (props: IProps) => {
   const { labelItems, selectedItem, setSelectedItem } = props;
 
-  const isMobile = useIsMobile();
+  const ismobile = useIsMobile();
 
   return (
     <Box
@@ -29,8 +29,8 @@ const CategoryButton = (props: IProps) => {
       {labelItems.length > 0 &&
         labelItems.map((item) => (
           <Box
-            width={!isMobile ? 200 : 120}
-            height={!isMobile ? 40 : 30}
+            width={!ismobile ? 200 : 120}
+            height={!ismobile ? 40 : 30}
             display="flex"
             flexDirection="column"
             alignItems="center"
@@ -45,7 +45,7 @@ const CategoryButton = (props: IProps) => {
             onClick={() => setSelectedItem(item)}
           >
             <Typography
-              variants={!isMobile ? "body1" : "body2"}
+              variants={!ismobile ? "body1" : "body2"}
               color={
                 selectedItem.labelId === item.labelId
                   ? colors.f000

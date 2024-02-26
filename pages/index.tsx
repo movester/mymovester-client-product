@@ -1,14 +1,10 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import { styled } from "styled-components";
-
-import Navigator from "../components/utils/Navigator";
+import { useEffect } from "react";
+import { MemorizedNavigator } from "../components/utils/Navigator";
+import { middleware } from "../middleware";
 
 const mainPage = () => {
-  return (
-    <>
-      <Navigator></Navigator>
-    </>
-  );
+  return <>{/* <MemorizedNavigator></MemorizedNavigator> */}</>;
 };
 
 export default mainPage;

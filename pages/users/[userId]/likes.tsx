@@ -3,14 +3,14 @@ import { colors } from "../../../constants/style";
 import MyPageNavigator from "../../../components/utils/MyPageNavigator";
 import { Typography } from "movester-design-system";
 import { useState } from "react";
-import Navigator from "../../../components/utils/Navigator";
+import { MemorizedNavigator } from "../../../components/utils/Navigator";
 import { myPageTabType } from "../../../constants/types";
 
 const UserActivitiesLikePage = () => {
   const [currentTab, _] = useState<myPageTabType>("LIKES");
   return (
     <PageWrapper>
-      <Navigator></Navigator>
+      <MemorizedNavigator></MemorizedNavigator>
       <ContentWrapper>
         <MyPageNavigator currentTab={currentTab}></MyPageNavigator>
         <ContentArea>

@@ -13,6 +13,16 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.fallback = {
+        fs: false,
+      };
+    }
+
+    return config;
+  },
+
   async rewrites() {
     return [
       {

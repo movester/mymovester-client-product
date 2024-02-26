@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { styled } from "styled-components";
-import Navigator from "../components/utils/Navigator";
+import { MemorizedNavigator } from "../components/utils/Navigator";
 import { StretchingDetailQueryItemType } from "../constants/types";
 import { colors } from "../constants/style";
 import ListTableItem from "../components/utils/ListTableItem";
@@ -32,7 +32,7 @@ const StretchingDetailPcView = (props: IProps) => {
 
   return (
     <PageWrapper>
-      <Navigator></Navigator>
+      <MemorizedNavigator></MemorizedNavigator>
       <ContentWrapper>
         <SocialBoxWrapper>
           <Box

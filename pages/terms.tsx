@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Navigator from "../components/utils/Navigator";
+import { MemorizedNavigator } from "../components/utils/Navigator";
 import {
   Box,
   Button,
@@ -106,7 +106,7 @@ const TermsPage = () => {
   return (
     <PageWrapper>
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
-      <Navigator></Navigator>
+      <MemorizedNavigator></MemorizedNavigator>
       <ContentWrapper>
         <Box
           display="flex"

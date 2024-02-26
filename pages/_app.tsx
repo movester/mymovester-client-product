@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Head from "next/head";
 import Script from "next/script";
 import { RecoilRoot } from "recoil";
+import { middleware } from "../middleware";
 
 declare global {
   // Kakao 함수를 전역에서 사용할 수 있도록 선언
