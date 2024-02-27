@@ -6,8 +6,12 @@ import useIsMobile from "../../../hooks/utils/useIsMobile";
 import StretchingDetailMobilView from "../../../views/stretchingDetailMobileView";
 import StretchingDetailPcView from "../../../views/stretchingDetailPcView";
 import useStretchingDetailInquiry from "../../../hooks/api/useStretchingDetailInquiry";
+import { NextPageContext } from "next";
+import { getAccessToken } from "../../../hooks/utils/manage-token";
+import useLikeStretching from "../../../hooks/api/useLikeStretching";
+import useDislikeStretching from "../../../hooks/api/useDislikeStretching";
 
-const StretchingDetailPage = () => {
+const StretchingDetailPage = ({ isLoggined }) => {
   const router = useRouter();
 
   const isMobile = useIsMobile();
@@ -18,7 +22,25 @@ const StretchingDetailPage = () => {
       : router.query.id[0]
     : undefined;
 
-  const { data } = useStretchingDetailInquiry({ id: STRETCHING_ID });
+  const accessToken = getAccessToken();
+
+  const { data } = useStretchingDetailInquiry({
+    id: STRETCHING_ID,
+    token: accessToken,
+  });
+
+  const { mutate: handleLikeStretching } = useLikeStretching({ id: data.id });
+  const { mutate: handleDisLikeStretching } = useDislikeStretching({
+    id: data.id,
+  });
+
+  const handleOnClickLikeButton = () => {
+    if (data.isLike) {
+      handleDisLikeStretching(accessToken);
+    } else {
+      handleLikeStretching(accessToken);
+    }
+  };
 
   return (
     <PageWrapper>
@@ -27,7 +49,11 @@ const StretchingDetailPage = () => {
           {isMobile ? (
             <StretchingDetailMobilView data={data}></StretchingDetailMobilView>
           ) : (
-            <StretchingDetailPcView data={data}></StretchingDetailPcView>
+            <StretchingDetailPcView
+              data={data}
+              isLoggined={isLoggined === "true" ? true : false}
+              handleLikeButton={handleOnClickLikeButton}
+            ></StretchingDetailPcView>
           )}
         </>
       )}
@@ -44,3 +70,9 @@ const PageWrapper = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const getServerSideProps = ({ req }: NextPageContext) => {
+  const isLoggined = req.headers["x-loggined"];
+
+  return { props: { isLoggined } };
+};
