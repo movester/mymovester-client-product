@@ -29,9 +29,9 @@ const StretchingDetailPage = ({ isLoggined }) => {
     token: accessToken,
   });
 
-  const { mutate: handleLikeStretching } = useLikeStretching({ id: data.id });
+  const { mutate: handleLikeStretching } = useLikeStretching({ id: data?.id });
   const { mutate: handleDisLikeStretching } = useDislikeStretching({
-    id: data.id,
+    id: data?.id,
   });
 
   const handleOnClickLikeButton = () => {

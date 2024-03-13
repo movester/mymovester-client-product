@@ -52,7 +52,7 @@ const StretchingDetailPcView = (props: IProps) => {
                 <AiOutlineHeart size={28} />
               )}
             </IconBox>
-            <Typography variants="body2">123</Typography>
+            <Typography variants="body2"></Typography>
           </Box>
           <Box
             display="flex"
@@ -64,7 +64,7 @@ const StretchingDetailPcView = (props: IProps) => {
             <IconBox onClick={handleOnClickShareURL}>
               <AiOutlineShareAlt size={28}></AiOutlineShareAlt>
             </IconBox>
-            <Typography variants="body2">123</Typography>
+            <Typography variants="body2"></Typography>
           </Box>
         </SocialBoxWrapper>
         <Box display="flex" flexDirection="column" gap={16}>
