@@ -67,6 +67,7 @@ export type StretchingDetailQueryItemType = {
   set: number;
   precautionList: string[];
   videoUrl: string;
+  isLike: false;
 };
 
 export type myPageTabType = "PROFILE" | "LIKES" | "EDIT";

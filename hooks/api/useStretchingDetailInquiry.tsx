@@ -1,13 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
+import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import { StretchingDetailQueryItemType } from "../../constants/types";
 
 interface IProps {
   id: string;
+  token: string;
 }
 
 const useStretchingDetailInquiry = (props: IProps) => {
   const { id } = props;
 
-  const res = useQuery({
+  const res: UseQueryResult<StretchingDetailQueryItemType> = useQuery({
     queryFn: () =>
       fetch(`/api/stretchings/${id}`)
         .then((res) => res.json())

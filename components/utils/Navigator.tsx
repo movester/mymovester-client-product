@@ -136,7 +136,7 @@ const Navigator = (props: IProps) => {
                     alt={""}
                   ></img>
                 ) : (
-                  <FaUser></FaUser>
+                  <FaUser color="white"></FaUser>
                 )}
               </ProfileWrapper>
             </>

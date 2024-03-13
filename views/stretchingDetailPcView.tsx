@@ -13,16 +13,19 @@ import {
 } from "../constants/text";
 import { Box, Chip, Divider, Typography } from "movester-design-system";
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import { getAccessToken } from "../hooks/utils/manage-token";
 
 interface IProps {
   data?: StretchingDetailQueryItemType;
+  isLoggined: boolean;
+  handleLikeButton: () => void;
 }
 
 const StretchingDetailPcView = (props: IProps) => {
-  const { data } = props;
-  const [heartClicked, setHeartClicked] = useState<boolean>(false);
+  const { data, isLoggined, handleLikeButton } = props;
+  // const [heartClicked, setHeartClicked] = useState<boolean>(false);
   const router = useRouter();
 
   const handleOnClickShareURL = () => {
@@ -32,7 +35,7 @@ const StretchingDetailPcView = (props: IProps) => {
 
   return (
     <PageWrapper>
-      <MemorizedNavigator></MemorizedNavigator>
+      <MemorizedNavigator isLoggined={isLoggined}></MemorizedNavigator>
       <ContentWrapper>
         <SocialBoxWrapper>
           <Box
@@ -42,14 +45,14 @@ const StretchingDetailPcView = (props: IProps) => {
             justifyContent="center"
             gap={4}
           >
-            <IconBox onClick={() => setHeartClicked((prev) => !prev)}>
-              {heartClicked ? (
+            <IconBox onClick={handleLikeButton}>
+              {data.isLike ? (
                 <AiFillHeart size={28} color={colors.r000} />
               ) : (
                 <AiOutlineHeart size={28} />
               )}
             </IconBox>
-            <Typography variants="body2">123</Typography>
+            <Typography variants="body2"></Typography>
           </Box>
           <Box
             display="flex"
@@ -61,7 +64,7 @@ const StretchingDetailPcView = (props: IProps) => {
             <IconBox onClick={handleOnClickShareURL}>
               <AiOutlineShareAlt size={28}></AiOutlineShareAlt>
             </IconBox>
-            <Typography variants="body2">123</Typography>
+            <Typography variants="body2"></Typography>
           </Box>
         </SocialBoxWrapper>
         <Box display="flex" flexDirection="column" gap={16}>

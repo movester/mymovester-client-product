@@ -15,16 +15,8 @@ import { NextPageContext } from "next";
 
 const UserMyPage = ({ isLoggined }) => {
   const [currentTab, _] = useState<myPageTabType>("PROFILE");
-  const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
+  const [userProfileState] = useRecoilState(userProfile);
   const pathName = usePathname();
-
-  //   useEffect(() => {
-  //       if(pathName){
-
-  //       }
-
-  // },[])
-  // console.log(pathName);
 
   return (
     <PageWrapper>
@@ -52,15 +44,23 @@ const UserMyPage = ({ isLoggined }) => {
               justifyContent="center"
               alignItems="center"
             >
-              <Box width={160} height={160} borderRadius={80} overflow="hidden">
-                {userProfileState?.profileUrl ? (
+              <Box
+                width={160}
+                height={160}
+                borderRadius={80}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                backgroundColor={colors.g200}
+              >
+                {userProfileState && userProfileState.profileUrl ? (
                   <img
                     width={160}
                     height={160}
-                    src={userProfileState?.profileUrl}
+                    src={userProfileState.profileUrl}
                   ></img>
                 ) : (
-                  <FaUser></FaUser>
+                  <FaUser size={90} color="white"></FaUser>
                 )}
               </Box>
               <Typography variants="heading3">

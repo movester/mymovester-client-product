@@ -67,7 +67,10 @@ export default MyPageNavigator;
 const SubNavigator = styled.div`
   display: flex;
   flex-direction: column;
-  width: 180px;
+  width: 100%;
+  min-width: 100px;
+  max-width: 200px;
+  word-break: keep-all;
 `;
 
 const SubNavigatorSectionBox = styled(Box)`
