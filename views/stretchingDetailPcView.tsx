@@ -29,6 +29,7 @@ const StretchingDetailPcView = (props: IProps) => {
   const router = useRouter();
 
   const handleOnClickShareURL = () => {
+    console.log(router);
     navigator.clipboard.writeText(`${router.basePath}${router.asPath}`);
     window.alert("링크가 복사되었습니다!");
   };
