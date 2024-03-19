@@ -1,7 +1,15 @@
 {
   "/_app": "pages/_app.js",
-  "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/": "pages/index.html",
+  "/login": "pages/login.html",
+  "/_error": "pages/_error.js",
+  "/withdrawal": "pages/withdrawal.html",
+  "/users/[userId]/edit": "pages/users/[userId]/edit.js",
+  "/terms": "pages/terms.js",
+  "/stretchings/detail": "pages/stretchings/detail.js",
   "/stretchings": "pages/stretchings.js",
-  "/users/[userId]": "pages/users/[userId].js"
+  "/users/[userId]/likes": "pages/users/[userId]/likes.js",
+  "/users/[userId]": "pages/users/[userId].js",
+  "/404": "pages/404.html"
 }

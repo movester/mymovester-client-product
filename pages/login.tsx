@@ -10,7 +10,7 @@ import { useCallback, useEffect, useState } from "react";
 import { setAccessToken, setRefreshToken } from "../hooks/utils/manage-token";
 
 const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
-const REDIRECT_URI = "http://localhost:3000/login";
+const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
 const CLIENT_SECRET = process.env.NEXT_PUBLIC_KAKAO_CLIENT_KEY;
 
 const LoginPage = () => {

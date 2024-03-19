@@ -18,6 +18,7 @@ import {
 } from "../constants/links";
 import { colors } from "../constants/style";
 import { useRouter } from "next/router";
+import { NextPageContext } from "next";
 
 const canvasStyles: CSSProperties = {
   position: "fixed",
@@ -28,7 +29,7 @@ const canvasStyles: CSSProperties = {
   left: 0,
 };
 
-const TermsPage = () => {
+const TermsPage = ({ isLoggined }) => {
   const refAnimationInstance = useRef(null);
 
   const getInstance = useCallback((instance) => {
@@ -106,7 +107,9 @@ const TermsPage = () => {
   return (
     <PageWrapper>
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
-      <MemorizedNavigator></MemorizedNavigator>
+      <MemorizedNavigator
+        isLoggined={isLoggined === "true" ? true : false}
+      ></MemorizedNavigator>
       <ContentWrapper>
         <Box
           display="flex"
@@ -218,3 +221,9 @@ const ContentWrapper = styled.div`
   width: 100%;
   position: relative;
 `;
+
+export const getServerSideProps = ({ req }: NextPageContext) => {
+  const isLoggined = req.headers["x-loggined"];
+
+  return { props: { isLoggined } };
+};
