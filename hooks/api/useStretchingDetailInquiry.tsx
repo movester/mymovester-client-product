@@ -7,11 +7,16 @@ interface IProps {
 }
 
 const useStretchingDetailInquiry = (props: IProps) => {
-  const { id } = props;
+  const { id, token } = props;
 
   const res: UseQueryResult<StretchingDetailQueryItemType> = useQuery({
     queryFn: () =>
-      fetch(`/api/stretchings/${id}`)
+      fetch(`/api/stretchings/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
         .then((res) => res.json())
         .catch((error) => error),
     queryKey: ["stretching", "detail", id],

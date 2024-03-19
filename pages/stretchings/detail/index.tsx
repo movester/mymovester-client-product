@@ -24,7 +24,7 @@ const StretchingDetailPage = ({ isLoggined }) => {
 
   const accessToken = getAccessToken();
 
-  const { data } = useStretchingDetailInquiry({
+  const { data, refetch } = useStretchingDetailInquiry({
     id: STRETCHING_ID,
     token: accessToken,
   });
@@ -37,8 +37,10 @@ const StretchingDetailPage = ({ isLoggined }) => {
   const handleOnClickLikeButton = () => {
     if (data.isLike) {
       handleDisLikeStretching(accessToken);
+      refetch();
     } else {
       handleLikeStretching(accessToken);
+      refetch();
     }
   };
 
