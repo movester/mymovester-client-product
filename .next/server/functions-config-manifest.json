@@ -5,7 +5,7 @@
     "/users/[userId]/edit": {},
     "/users/[userId]": {},
     "/users/[userId]/likes": {},
-    "/terms": {},
-    "/stretchings/detail": {}
+    "/stretchings/detail": {},
+    "/terms": {}
   }
 }

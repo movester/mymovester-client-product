@@ -4,11 +4,11 @@
   "/": "pages/index.html",
   "/login": "pages/login.html",
   "/withdrawal": "pages/withdrawal.html",
-  "/_error": "pages/_error.js",
-  "/users/[userId]/edit": "pages/users/[userId]/edit.js",
   "/stretchings/detail": "pages/stretchings/detail.js",
   "/stretchings": "pages/stretchings.js",
+  "/users/[userId]/edit": "pages/users/[userId]/edit.js",
   "/terms": "pages/terms.js",
+  "/_error": "pages/_error.js",
   "/users/[userId]/likes": "pages/users/[userId]/likes.js",
   "/users/[userId]": "pages/users/[userId].js",
   "/404": "pages/404.html"
