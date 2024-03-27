@@ -2207,12 +2207,14 @@ function jwtDecode(token, options) {
 
 const setAccessToken = (token)=>{
     Cookies.set("access_token", token, {
-        secure: true
+        secure: true,
+        httpOnly: false
     });
 };
 const setRefreshToken = (token)=>{
     Cookies.set("refresh_token", token, {
-        secure: true
+        secure: true,
+        httpOnly: false
     });
 };
 const getAccessToken = ()=>{

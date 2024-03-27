@@ -22,12 +22,14 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([js_c
 
 const setAccessToken = token => {
   js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].set("access_token", token, {
-    secure: true
+    secure: true,
+    httpOnly: false
   });
 };
 const setRefreshToken = token => {
   js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].set("refresh_token", token, {
-    secure: true
+    secure: true,
+    httpOnly: false
   });
 };
 const getAccessToken = () => {

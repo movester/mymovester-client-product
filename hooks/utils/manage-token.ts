@@ -4,12 +4,14 @@ import { JwtPayload, jwtDecode } from "jwt-decode";
 export const setAccessToken = (token): void => {
   Cookies.set("access_token", token, {
     secure: true,
+    httpOnly: false,
   });
 };
 
 export const setRefreshToken = (token): void => {
   Cookies.set("refresh_token", token, {
     secure: true,
+    httpOnly: false,
   });
 };
 
