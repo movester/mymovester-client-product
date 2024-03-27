@@ -22,13 +22,13 @@ var __webpack_async_dependencies__ = __webpack_handle_async_dependencies__([js_c
 
 const setAccessToken = token => {
   js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].set("access_token", token, {
-    secure: true,
+    secure: false,
     httpOnly: false
   });
 };
 const setRefreshToken = token => {
   js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].set("refresh_token", token, {
-    secure: true,
+    secure: false,
     httpOnly: false
   });
 };
@@ -40,10 +40,10 @@ const getRefreshToken = () => {
 };
 const removeToken = () => {
   js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].remove("refresh_token", {
-    secure: true
+    secure: false
   });
   js_cookie__WEBPACK_IMPORTED_MODULE_0__["default"].remove("access_token", {
-    secure: true
+    secure: false
   });
 };
 const isTokenExpired = token => {

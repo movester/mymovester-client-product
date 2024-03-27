@@ -1,15 +1,15 @@
 {
+  "/_app": "pages/_app.js",
   "/_document": "pages/_document.js",
   "/": "pages/index.html",
   "/login": "pages/login.html",
   "/withdrawal": "pages/withdrawal.html",
   "/_error": "pages/_error.js",
-  "/stretchings": "pages/stretchings.js",
-  "/terms": "pages/terms.js",
   "/users/[userId]/edit": "pages/users/[userId]/edit.js",
+  "/stretchings": "pages/stretchings.js",
   "/users/[userId]/likes": "pages/users/[userId]/likes.js",
   "/users/[userId]": "pages/users/[userId].js",
   "/stretchings/detail": "pages/stretchings/detail.js",
-  "/_app": "pages/_app.js",
+  "/terms": "pages/terms.js",
   "/404": "pages/404.html"
 }

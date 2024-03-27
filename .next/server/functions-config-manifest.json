@@ -4,8 +4,8 @@
     "/stretchings/detail": {},
     "/stretchings": {},
     "/terms": {},
+    "/users/[userId]/edit": {},
     "/users/[userId]": {},
-    "/users/[userId]/likes": {},
-    "/users/[userId]/edit": {}
+    "/users/[userId]/likes": {}
   }
 }

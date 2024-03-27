@@ -3,14 +3,14 @@ import { JwtPayload, jwtDecode } from "jwt-decode";
 
 export const setAccessToken = (token): void => {
   Cookies.set("access_token", token, {
-    secure: true,
+    secure: false,
     httpOnly: false,
   });
 };
 
 export const setRefreshToken = (token): void => {
   Cookies.set("refresh_token", token, {
-    secure: true,
+    secure: false,
     httpOnly: false,
   });
 };
@@ -25,10 +25,10 @@ export const getRefreshToken = (): string | undefined => {
 
 export const removeToken = () => {
   Cookies.remove("refresh_token", {
-    secure: true,
+    secure: false,
   });
   Cookies.remove("access_token", {
-    secure: true,
+    secure: false,
   });
 };
 
