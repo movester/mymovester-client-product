@@ -72,7 +72,7 @@ const LoginPage = () => {
 
   const kakaoLogin = async () => {
     const response = await window.Kakao.Auth.authorize({
-      redirectUri: "http://localhost:3000/login",
+      redirectUri: `${REDIRECT_URI}`,
       scope: "account_email,profile_nickname,profile_image",
     }).then((res) => console.log(res));
   };
