@@ -2,10 +2,10 @@
   "version": 1,
   "functions": {
     "/stretchings": {},
-    "/users/[userId]/edit": {},
-    "/users/[userId]": {},
-    "/users/[userId]/likes": {},
     "/stretchings/detail": {},
-    "/terms": {}
+    "/terms": {},
+    "/users/[userId]": {},
+    "/users/[userId]/edit": {},
+    "/users/[userId]/likes": {}
   }
 }

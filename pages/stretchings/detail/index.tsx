@@ -43,6 +43,7 @@ const StretchingDetailPage = ({ isLoggined }) => {
       refetch();
     }
   };
+  console.log(data);
 
   return (
     <PageWrapper>

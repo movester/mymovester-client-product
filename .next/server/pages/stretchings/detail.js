@@ -244,7 +244,7 @@ const useStretchingDetailInquiry = props => {
     queryFn: () => fetch(`/api/stretchings/${id}`, {
       method: "GET",
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${token ? token : ""}`
       }
     }).then(res => res.json()).catch(error => error),
     queryKey: ["stretching", "detail", id],
@@ -338,6 +338,7 @@ const StretchingDetailPage = ({
     }
   };
 
+  console.log(data);
   return /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx(PageWrapper, {
     children: data && /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.Fragment, {
       children: isMobile ? /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_11__.jsx(_views_stretchingDetailMobileView__WEBPACK_IMPORTED_MODULE_5__/* ["default"] */ .Z, {
@@ -760,19 +761,19 @@ const StretchingDetailPcView = props => {
           gap: 8,
           children: [/*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Chip, {
             children: _constants_text__WEBPACK_IMPORTED_MODULE_5__/* .STRETCHING_SUB_CATEGORY_TEXT */ .D_[data.subCategory]
-          }), data.effectList.map((item, idx) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Chip, {
+          }), data.effectList && data.effectList.map((item, idx) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Chip, {
             variants: "secondary",
             children: _constants_text__WEBPACK_IMPORTED_MODULE_5__/* .STRETCHING_EFFECT_TEXT */ .iW[item]
           }, `detail-effect-${item}-${idx}`))]
         }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Divider, {})]
       }), /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Box, {
         display: "grid",
-        gridTemplateColumns: `repeat(${data.imageList.length > 1 ? 2 : 1},350px)`,
+        gridTemplateColumns: `repeat(${data.imageList?.length > 1 ? 2 : 1},350px)`,
         gap: 8,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: data.imageList.length > 1 ? "none" : _constants_style__WEBPACK_IMPORTED_MODULE_2__/* .colors */ .O.f300,
-        children: data.imageList.map((imgLink, index) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Box, {
+        backgroundColor: data.imageList?.length > 1 ? "none" : _constants_style__WEBPACK_IMPORTED_MODULE_2__/* .colors */ .O.f300,
+        children: data.imageList?.map((imgLink, index) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Box, {
           backgroundColor: _constants_style__WEBPACK_IMPORTED_MODULE_2__/* .colors */ .O.f300,
           children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx("img", {
             src: imgLink
@@ -813,7 +814,7 @@ const StretchingDetailPcView = props => {
           flexDirection: "column",
           backgroundColor: _constants_style__WEBPACK_IMPORTED_MODULE_2__/* .colors */ .O.g000,
           gap: 1,
-          children: data.techniqueList.map((list, index) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(_components_utils_ListTableItem__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
+          children: data.techniqueList?.map((list, index) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(_components_utils_ListTableItem__WEBPACK_IMPORTED_MODULE_3__/* ["default"] */ .Z, {
             order: index + 1,
             children: /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Typography, {
               variants: "body1",
@@ -821,7 +822,7 @@ const StretchingDetailPcView = props => {
             })
           }, `technique-list-${list}-${index}`))
         })]
-      }), data.precautionList.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Box, {
+      }), data.precautionList?.length > 0 && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsxs)(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Box, {
         display: "flex",
         flexDirection: "column",
         alignItems: "start",
@@ -839,7 +840,7 @@ const StretchingDetailPcView = props => {
           alignItems: "start",
           flexDirection: "column",
           gap: 4,
-          children: data.precautionList.map((list, index) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Typography, {
+          children: data.precautionList?.map((list, index) => /*#__PURE__*/react_jsx_runtime__WEBPACK_IMPORTED_MODULE_9__.jsx(movester_design_system__WEBPACK_IMPORTED_MODULE_6__.Typography, {
             variants: "body1",
             children: "✔️ " + list
           }, `technique-list-${list}`))

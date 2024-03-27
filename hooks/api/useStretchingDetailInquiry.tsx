@@ -14,7 +14,7 @@ const useStretchingDetailInquiry = (props: IProps) => {
       fetch(`/api/stretchings/${id}`, {
         method: "GET",
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token ? token : ""}`,
         },
       })
         .then((res) => res.json())

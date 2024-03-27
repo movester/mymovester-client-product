@@ -78,11 +78,12 @@ const StretchingDetailPcView = (props: IProps) => {
             gap={8}
           >
             <Chip>{STRETCHING_SUB_CATEGORY_TEXT[data.subCategory]}</Chip>
-            {data.effectList.map((item, idx) => (
-              <Chip variants="secondary" key={`detail-effect-${item}-${idx}`}>
-                {STRETCHING_EFFECT_TEXT[item]}
-              </Chip>
-            ))}
+            {data.effectList &&
+              data.effectList.map((item, idx) => (
+                <Chip variants="secondary" key={`detail-effect-${item}-${idx}`}>
+                  {STRETCHING_EFFECT_TEXT[item]}
+                </Chip>
+              ))}
           </Box>
           <Divider></Divider>
         </Box>
@@ -91,14 +92,14 @@ const StretchingDetailPcView = (props: IProps) => {
         <Box
           display="grid"
           gridTemplateColumns={`repeat(${
-            data.imageList.length > 1 ? 2 : 1
+            data.imageList?.length > 1 ? 2 : 1
           },350px)`}
           gap={8}
           justifyContent="center"
           alignItems="center"
-          backgroundColor={data.imageList.length > 1 ? "none" : colors.f300}
+          backgroundColor={data.imageList?.length > 1 ? "none" : colors.f300}
         >
-          {data.imageList.map((imgLink, index) => (
+          {data.imageList?.map((imgLink, index) => (
             <Box
               backgroundColor={colors.f300}
               key={`img-detail-${data.id}-${index}`}
@@ -144,7 +145,7 @@ const StretchingDetailPcView = (props: IProps) => {
             backgroundColor={colors.g000}
             gap={1}
           >
-            {data.techniqueList.map((list, index) => (
+            {data.techniqueList?.map((list, index) => (
               <ListTableItem
                 key={`technique-list-${list}-${index}`}
                 order={index + 1}
@@ -156,7 +157,7 @@ const StretchingDetailPcView = (props: IProps) => {
         </Box>
 
         {/* 주의 사항 */}
-        {data.precautionList.length > 0 && (
+        {data.precautionList?.length > 0 && (
           <Box
             display="flex"
             flexDirection="column"
@@ -176,7 +177,7 @@ const StretchingDetailPcView = (props: IProps) => {
               flexDirection="column"
               gap={4}
             >
-              {data.precautionList.map((list, index) => (
+              {data.precautionList?.map((list, index) => (
                 <Typography variants="body1" key={`technique-list-${list}`}>
                   {"✔️ " + list}
                 </Typography>
