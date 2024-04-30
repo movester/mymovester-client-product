@@ -90,7 +90,6 @@ const StrechingPage = ({ isLoggined }) => {
 
   return (
     <PageWrapper>
-      {/* <Navigator></Navigator> */}
       <MemorizedNavigator
         isLoggined={isLoggined === "true" ? true : false}
       ></MemorizedNavigator>
@@ -198,6 +197,7 @@ const PageWrapper = styled.div`
 
 const ContentWrapper = styled.div<styleType>`
   padding-top: ${(props) => (props.$ismobile ? "40px" : "80px")};
+
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -213,14 +213,15 @@ const ContentWrapper = styled.div<styleType>`
 `;
 
 const ItemGrid = styled.div`
+  max-width: 900px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   @media screen and (max-width: 900px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 560px) {
     grid-template-columns: repeat(1, 1fr);
   }
 `;

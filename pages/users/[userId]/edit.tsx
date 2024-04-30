@@ -148,5 +148,14 @@ const WithdrawalButton = styled.div`
 export const getServerSideProps = ({ req }: NextPageContext) => {
   const isLoggined = req.headers["x-loggined"];
 
+  if (isLoggined === "false") {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`,
+      },
+    };
+  }
+
   return { props: { isLoggined } };
 };
