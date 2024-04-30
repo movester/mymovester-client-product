@@ -7,7 +7,7 @@ import { Box, Typography } from "movester-design-system";
 import { useEffect, useState } from "react";
 import MyPageNavigator from "../../../components/utils/MyPageNavigator";
 import { myPageTabType } from "../../../constants/types";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { userProfile } from "../../../recoil/user/atom";
 import { FaUser } from "react-icons/fa";
@@ -114,6 +114,13 @@ const ContentArea = styled.div`
 
 export const getServerSideProps = ({ req }: NextPageContext) => {
   const isLoggined = req.headers["x-loggined"];
-
+  if (isLoggined === "false") {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}/login`,
+      },
+    };
+  }
   return { props: { isLoggined } };
 };
