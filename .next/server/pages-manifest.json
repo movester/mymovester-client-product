@@ -3,5 +3,9 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/login": "pages/login.js",
-  "/stretchings": "pages/stretchings.js"
+  "/stretchings": "pages/stretchings.js",
+  "/users/[userId]": "pages/users/[userId].js",
+  "/users/[userId]/edit": "pages/users/[userId]/edit.js",
+  "/withdrawal": "pages/withdrawal.js",
+  "/users/[userId]/likes": "pages/users/[userId]/likes.js"
 }

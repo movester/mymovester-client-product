@@ -13,6 +13,8 @@ import { SetStateAction, useMemo, useReducer, useState } from "react";
 import { useRouter } from "next/router";
 import useUserWithdrawal from "../hooks/api/useUserWithdrawal";
 import { getAccessToken } from "../hooks/utils/manage-token";
+import { useRecoilState } from "recoil";
+import { userProfile } from "../recoil/user/atom";
 
 const WithdrawalPage = () => {
   const [checkBox, setCheckBox] = useState(false);
@@ -22,6 +24,9 @@ const WithdrawalPage = () => {
   const [radio4, setRadio4] = useState<boolean>(false);
   const [radio5, setRadio5] = useState<boolean>(false);
   const [textareaValue, setTextareaValue] = useState("");
+
+  const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
+
   const router = useRouter();
 
   const isWithdrawReasonChecked = useMemo(
@@ -45,7 +50,7 @@ const WithdrawalPage = () => {
       <ContentWrapper>
         <Typography variants="heading1">회원 탈퇴 신청</Typography>
         <Typography variants="body1" color={colors.g100}>
-          {"movcoco님,\n뭅스터와 이별하려 하신다니 많이 아쉽습니다."}
+          {`${userProfileState?.nickName} 님,\n뭅스터와 이별하려 하신다니 많이 아쉽습니다.`}
         </Typography>
         <Box display="flex" flexDirection="column" gap={64}>
           <Box display="flex" flexDirection="column" gap={8}>

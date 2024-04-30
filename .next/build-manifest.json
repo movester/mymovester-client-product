@@ -31,6 +31,26 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/stretchings.js"
+    ],
+    "/users/[userId]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/users/[userId].js"
+    ],
+    "/users/[userId]/edit": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/users/[userId]/edit.js"
+    ],
+    "/users/[userId]/likes": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/users/[userId]/likes.js"
+    ],
+    "/withdrawal": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/withdrawal.js"
     ]
   },
   "ampFirstPages": []
