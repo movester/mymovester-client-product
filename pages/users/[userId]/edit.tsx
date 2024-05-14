@@ -21,8 +21,6 @@ const UserMyPage = ({ isLoggined }) => {
 
   const router = useRouter();
 
-  // console.log(recoilUserProfileState);
-
   useEffect(() => {
     setUserName(recoilUserProfileState?.nickName);
   }, [recoilUserProfileState?.nickName]);

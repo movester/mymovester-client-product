@@ -2,6 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/stretchings": "pages/stretchings.js",
-  "/stretchings/detail": "pages/stretchings/detail.js"
+  "/stretchings/detail": "pages/stretchings/detail.js",
+  "/login": "pages/login.js",
+  "/stretchings": "pages/stretchings.js"
 }

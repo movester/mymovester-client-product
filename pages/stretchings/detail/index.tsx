@@ -35,15 +35,23 @@ const StretchingDetailPage = ({ isLoggined }) => {
   });
 
   const handleOnClickLikeButton = () => {
-    if (data.isLike) {
-      handleDisLikeStretching(accessToken);
-      refetch();
+    if (isLoggined) {
+      if (data.isLike) {
+        handleDisLikeStretching(accessToken);
+        refetch();
+      } else {
+        handleLikeStretching(accessToken);
+        refetch();
+      }
     } else {
-      handleLikeStretching(accessToken);
-      refetch();
+      const isConfirm = window.confirm(
+        "로그인이 필요한 기능 입니다.로그인 페이지로 이동하시겠습니까?"
+      );
+      if (isConfirm) {
+        router.push("/login");
+      }
     }
   };
-  console.log(data);
 
   return (
     <PageWrapper>
@@ -54,7 +62,7 @@ const StretchingDetailPage = ({ isLoggined }) => {
           ) : (
             <StretchingDetailPcView
               data={data}
-              isLoggined={isLoggined === "true" ? true : false}
+              isLoggined={isLoggined}
               handleLikeButton={handleOnClickLikeButton}
             ></StretchingDetailPcView>
           )}
@@ -75,7 +83,7 @@ const PageWrapper = styled.div`
 `;
 
 export const getServerSideProps = ({ req }: NextPageContext) => {
-  const isLoggined = req.headers["x-loggined"];
+  const isLoggined = req.headers["x-loggined"] === "true" ? true : false;
 
   return { props: { isLoggined } };
 };

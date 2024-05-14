@@ -115,6 +115,7 @@ const StrechingPage = ({ isLoggined }) => {
             alignItems="start"
             width={"100vw"}
             overflow="scroll"
+            gap={4}
           >
             {selectedCategoryButtonItem.labelId === "sections"
               ? STRETCHING_TOTAL_CATEGORY.map((categoryItem) => (
