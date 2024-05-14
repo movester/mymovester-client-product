@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { colors } from "../../../constants/style";
 import { useRouter } from "next/router";
@@ -10,6 +10,7 @@ import { NextPageContext } from "next";
 import { getAccessToken } from "../../../hooks/utils/manage-token";
 import useLikeStretching from "../../../hooks/api/useLikeStretching";
 import useDislikeStretching from "../../../hooks/api/useDislikeStretching";
+import { debounce } from "lodash";
 
 const StretchingDetailPage = ({ isLoggined }) => {
   const router = useRouter();
@@ -29,20 +30,27 @@ const StretchingDetailPage = ({ isLoggined }) => {
     token: accessToken,
   });
 
+  const [likeButtonClicked, setLikeButtonClicked] = useState<boolean>(
+    data?.isLike
+  );
+
   const { mutate: handleLikeStretching } = useLikeStretching({ id: data?.id });
   const { mutate: handleDisLikeStretching } = useDislikeStretching({
     id: data?.id,
   });
 
+  const likeDebounce = debounce(() => {
+    if (likeButtonClicked) {
+      handleDisLikeStretching(accessToken);
+    } else {
+      handleLikeStretching(accessToken);
+    }
+  }, 1000);
+
   const handleOnClickLikeButton = () => {
     if (isLoggined) {
-      if (data.isLike) {
-        handleDisLikeStretching(accessToken);
-        refetch();
-      } else {
-        handleLikeStretching(accessToken);
-        refetch();
-      }
+      setLikeButtonClicked((prev) => !prev);
+      likeDebounce();
     } else {
       const isConfirm = window.confirm(
         "로그인이 필요한 기능 입니다.로그인 페이지로 이동하시겠습니까?"
@@ -62,6 +70,7 @@ const StretchingDetailPage = ({ isLoggined }) => {
           ) : (
             <StretchingDetailPcView
               data={data}
+              isLiked={likeButtonClicked}
               isLoggined={isLoggined}
               handleLikeButton={handleOnClickLikeButton}
             ></StretchingDetailPcView>
