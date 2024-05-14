@@ -31,6 +31,16 @@
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/stretchings/detail.js"
+    ],
+    "/users/[userId]": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/users/[userId].js"
+    ],
+    "/users/[userId]/likes": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/users/[userId]/likes.js"
     ]
   },
   "ampFirstPages": []

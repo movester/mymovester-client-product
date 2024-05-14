@@ -45,7 +45,7 @@ const StretchingDetailPage = ({ isLoggined }) => {
     } else {
       handleLikeStretching(accessToken);
     }
-  }, 1000);
+  }, 500);
 
   const handleOnClickLikeButton = () => {
     if (isLoggined) {
@@ -60,6 +60,11 @@ const StretchingDetailPage = ({ isLoggined }) => {
       }
     }
   };
+
+  useEffect(() => {
+    if (data?.isLike !== likeButtonClicked) setLikeButtonClicked(data.isLike);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
 
   return (
     <PageWrapper>
