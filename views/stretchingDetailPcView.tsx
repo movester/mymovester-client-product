@@ -36,7 +36,10 @@ const StretchingDetailPcView = (props: IProps) => {
 
   return (
     <PageWrapper>
-      <MemorizedNavigator isLoggined={isLoggined}></MemorizedNavigator>
+      <MemorizedNavigator
+        isLoggined={isLoggined}
+        pageID="STRETCHINGS"
+      ></MemorizedNavigator>
       <ContentWrapper>
         <SocialBoxWrapper>
           <Box

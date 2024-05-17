@@ -97,7 +97,10 @@ const StrechingPage = ({ isLoggined }) => {
   }, [inView, isFetching, hasNextPage, fetchNextPage]);
   return (
     <PageWrapper>
-      <MemorizedNavigator isLoggined={isLoggined}></MemorizedNavigator>
+      <MemorizedNavigator
+        isLoggined={isLoggined}
+        pageID="STRETCHINGS"
+      ></MemorizedNavigator>
       <ContentWrapper $ismobile={ismobile}>
         <Box
           display="flex"
