@@ -21,10 +21,11 @@ interface IProps {
   data?: StretchingDetailQueryItemType;
   isLoggined: boolean;
   handleLikeButton: () => void;
+  isLiked: boolean;
 }
 
 const StretchingDetailPcView = (props: IProps) => {
-  const { data, isLoggined, handleLikeButton } = props;
+  const { data, isLoggined, handleLikeButton, isLiked } = props;
   // const [heartClicked, setHeartClicked] = useState<boolean>(false);
   const router = useRouter();
 
@@ -46,7 +47,7 @@ const StretchingDetailPcView = (props: IProps) => {
             gap={4}
           >
             <IconBox onClick={handleLikeButton}>
-              {data.isLike ? (
+              {isLiked ? (
                 <AiFillHeart size={28} color={colors.r000} />
               ) : (
                 <AiOutlineHeart size={28} />

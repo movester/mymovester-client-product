@@ -1,8 +1,7 @@
 import { styled } from "styled-components";
 import { MemorizedNavigator } from "../../components/utils/Navigator";
 import { colors } from "../../constants/style";
-import { useEffect, useMemo, useState } from "react";
-import { headers } from "next/headers";
+import { useEffect, useState } from "react";
 import {
   EFFECT_CATEGORY,
   ICategoryIconBoxType,
@@ -21,14 +20,10 @@ import {
   StretchingMainCategoryType,
   StretchingSubCategoryType,
 } from "../../constants/types";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { useRouter } from "next/router";
-import Skeleton from "react-loading-skeleton";
 import { Box, ComboBox } from "movester-design-system";
-import dynamic from "next/dynamic";
-import { middleware } from "../../middleware";
 import { NextPageContext } from "next";
+import { useInView } from "react-intersection-observer";
 
 const PAGE_SIZE = 10;
 
@@ -60,21 +55,23 @@ const StrechingPage = ({ isLoggined }) => {
   const [seletedEffectItem, setSeletedEffectItem] =
     useState<ICategoryIconBoxType<StretchingEffectType> | null>(null);
 
-  const { data, fetchNextPage, hasNextPage } = useStretchingInquiry({
-    size: PAGE_SIZE,
-    orderFilter: listOrder.id,
-    effect: seletedEffectItem?.id,
-    mainCategory:
-      selectedCategoryItem?.id === "UPPER_BODY" ||
-      selectedCategoryItem?.id === "LOWER_BODY"
-        ? selectedCategoryItem?.id
-        : null,
-    subCategory:
-      selectedCategoryItem?.id !== "UPPER_BODY" &&
-      selectedCategoryItem?.id !== "LOWER_BODY"
-        ? selectedCategoryItem?.id
-        : null,
-  });
+  const { data, fetchNextPage, hasNextPage, isFetching } = useStretchingInquiry(
+    {
+      size: PAGE_SIZE,
+      orderFilter: listOrder.id,
+      effect: seletedEffectItem?.id,
+      mainCategory:
+        selectedCategoryItem?.id === "UPPER_BODY" ||
+        selectedCategoryItem?.id === "LOWER_BODY"
+          ? selectedCategoryItem?.id
+          : null,
+      subCategory:
+        selectedCategoryItem?.id !== "UPPER_BODY" &&
+        selectedCategoryItem?.id !== "LOWER_BODY"
+          ? selectedCategoryItem?.id
+          : null,
+    }
+  );
 
   const handleOnClickStretchingItem = (stretchingId) => {
     router.push({
@@ -88,12 +85,19 @@ const StrechingPage = ({ isLoggined }) => {
     setSeletedEffectItem(null);
   }, [selectedCategoryButtonItem]);
 
+  const { ref, inView } = useInView({
+    threshold: 0.9,
+    delay: 0,
+  });
+
+  useEffect(() => {
+    if (inView) {
+      !isFetching && hasNextPage && fetchNextPage();
+    }
+  }, [inView, isFetching, hasNextPage, fetchNextPage]);
   return (
     <PageWrapper>
-      {/* <Navigator></Navigator> */}
-      <MemorizedNavigator
-        isLoggined={isLoggined === "true" ? true : false}
-      ></MemorizedNavigator>
+      <MemorizedNavigator isLoggined={isLoggined}></MemorizedNavigator>
       <ContentWrapper $ismobile={ismobile}>
         <Box
           display="flex"
@@ -116,6 +120,7 @@ const StrechingPage = ({ isLoggined }) => {
             alignItems="start"
             width={"100vw"}
             overflow="scroll"
+            gap={4}
           >
             {selectedCategoryButtonItem.labelId === "sections"
               ? STRETCHING_TOTAL_CATEGORY.map((categoryItem) => (
@@ -157,29 +162,20 @@ const StrechingPage = ({ isLoggined }) => {
               setValue={setListOreder}
             ></ComboBox>
           </Box>
-          {/* <Box>
-            <Skeleton count={3} baseColor={colors.g000} width={300}></Skeleton>
-          </Box> */}
           {data && (
-            <InfiniteScroll
-              dataLength={data.pages[0].data.length}
-              next={() => fetchNextPage()}
-              hasMore={hasNextPage}
-              loader={<div>로딩중</div>}
-            >
-              <ItemGrid>
-                {data.pages.map((queryItem) =>
-                  queryItem?.data.map((item) => (
-                    <DetailThumnailItem
-                      stretchingItem={item}
-                      key={`${item.id}-thumnail-list`}
-                      onClick={handleOnClickStretchingItem}
-                    ></DetailThumnailItem>
-                  ))
-                )}
-              </ItemGrid>
-            </InfiniteScroll>
+            <ItemGrid>
+              {data.pages.map((queryItem) =>
+                queryItem?.data.map((item) => (
+                  <DetailThumnailItem
+                    key={`${item.id}-thumnail-list`}
+                    stretchingItem={item}
+                    onClick={handleOnClickStretchingItem}
+                  ></DetailThumnailItem>
+                ))
+              )}
+            </ItemGrid>
           )}
+          <Box ref={ref} height={64}></Box>
         </Box>
       </ContentWrapper>
     </PageWrapper>
@@ -213,20 +209,21 @@ const ContentWrapper = styled.div<styleType>`
 `;
 
 const ItemGrid = styled.div`
+  max-width: 900px;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   @media screen and (max-width: 900px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 560px) {
     grid-template-columns: repeat(1, 1fr);
   }
 `;
 
 export const getServerSideProps = ({ req }: NextPageContext) => {
-  const isLoggined = req.headers["x-loggined"];
+  const isLoggined = req.headers["x-loggined"] === "true" ? true : false;
 
   return { props: { isLoggined } };
 };

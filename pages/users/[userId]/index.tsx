@@ -7,15 +7,19 @@ import { Box, Typography } from "movester-design-system";
 import { useEffect, useState } from "react";
 import MyPageNavigator from "../../../components/utils/MyPageNavigator";
 import { myPageTabType } from "../../../constants/types";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { useRecoilState } from "recoil";
 import { userProfile } from "../../../recoil/user/atom";
 import { FaUser } from "react-icons/fa";
 import { NextPageContext } from "next";
+import { useRouter } from "next/router";
 
 const UserMyPage = ({ isLoggined }) => {
   const [currentTab, _] = useState<myPageTabType>("PROFILE");
   const [userProfileState] = useRecoilState(userProfile);
+
+  const router = useRouter();
+
   const pathName = usePathname();
 
   return (
@@ -75,6 +79,7 @@ const UserMyPage = ({ isLoggined }) => {
               alignItems="center"
               height={24}
               width={40}
+              onClick={() => router.push(`/users/${userProfileState.id}/edit`)}
             >
               <Typography variants="body3">설정</Typography>
             </Box>
@@ -114,6 +119,13 @@ const ContentArea = styled.div`
 
 export const getServerSideProps = ({ req }: NextPageContext) => {
   const isLoggined = req.headers["x-loggined"];
-
+  if (isLoggined === "false") {
+    return {
+      redirect: {
+        permanent: false,
+        destination: `${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}`,
+      },
+    };
+  }
   return { props: { isLoggined } };
 };
