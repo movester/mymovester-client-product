@@ -2,8 +2,5 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/users/[userId]/likes": "pages/users/[userId]/likes.js",
-  "/stretchings/detail": "pages/stretchings/detail.js",
-  "/stretchings": "pages/stretchings.js",
-  "/users/[userId]": "pages/users/[userId].js"
+  "/stretchings": "pages/stretchings.js"
 }
