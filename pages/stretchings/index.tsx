@@ -86,7 +86,7 @@ const StrechingPage = ({ isLoggined }) => {
   }, [selectedCategoryButtonItem]);
 
   const { ref, inView } = useInView({
-    threshold: 0.9,
+    threshold: 0.5,
     delay: 0,
   });
 
@@ -175,7 +175,9 @@ const StrechingPage = ({ isLoggined }) => {
               )}
             </ItemGrid>
           )}
-          <Box ref={ref} height={64}></Box>
+          <div ref={ref}>
+            <Box height={32}></Box>
+          </div>
         </Box>
       </ContentWrapper>
     </PageWrapper>

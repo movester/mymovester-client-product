@@ -30,7 +30,7 @@ const DetailThumnailItem = (props: IProps) => {
         gap={8}
       >
         <Box width={"100%"} backgroundColor={colors.f300} borderRadius={8}>
-          <img src={stretchingItem.imageUrl}></img>
+          <ThumbnailImg src={stretchingItem.imageUrl}></ThumbnailImg>
         </Box>
         <Box
           display="flex"
@@ -82,5 +82,12 @@ const Wrapper = styled.div`
   width: 100%;
   :hover {
     cursor: pointer;
+  }
+`;
+const ThumbnailImg = styled.img`
+  &:hover {
+    transition: transform 0.2s ease-in-out;
+    transform: scale(1.2);
+    opacity: 0.7;
   }
 `;
