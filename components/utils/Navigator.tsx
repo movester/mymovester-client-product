@@ -3,25 +3,20 @@ import { styled } from "styled-components";
 import { colors } from "../../constants/style";
 import { useRouter } from "next/router";
 import useIsMobile from "../../hooks/utils/useIsMobile";
-
 import { Box, Typography } from "movester-design-system";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Modal from "./Modal";
 import { useRecoilState } from "recoil";
 import { userProfile } from "../../recoil/user/atom";
-
-import {
-  getAccessToken,
-  isAccessTokenExpired,
-  removeToken,
-} from "../../hooks/utils/manage-token";
+import { getAccessToken, removeToken } from "../../hooks/utils/manage-token";
 import { FaUser } from "react-icons/fa";
 import useUserInfoInquiry from "../../hooks/api/useUserInfoInquiry";
 import React from "react";
-import { NextPageContext } from "next";
 
+type MAIN_NAVIGATOR = "HOME" | "STRETCHINGS" | "USERS";
 interface IProps {
   isLoggined: boolean;
+  pageID: MAIN_NAVIGATOR;
 }
 
 interface IStyledProps {
@@ -35,7 +30,7 @@ export type KakaoProfileInfoType = {
 };
 
 const Navigator = (props: IProps) => {
-  const { isLoggined } = props;
+  const { isLoggined, pageID } = props;
 
   const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
 
@@ -106,21 +101,56 @@ const Navigator = (props: IProps) => {
         </Modal>
       )}
       <Wrapper ismobile={ismobile}>
-        <Box
-          display="flex"
-          flexDirection="row"
-          justifyContent="center"
-          alignItems="center"
-          height={"100%"}
-          onClick={() => router.push("/stretchings")}
-        >
-          <img
-            src={ismobile ? "/favicon.ico" : "/logo.png"}
-            width={ismobile ? 16 : 120}
-            height={ismobile ? 16 : 32}
-            alt={""}
-          ></img>
+        <Box display="flex" gap={32} justifyContent="start" alignItems="end">
+          <Box
+            display="flex"
+            flexDirection="row"
+            justifyContent="center"
+            alignItems="center"
+            height={"100%"}
+            onClick={() => router.push("/stretchings")}
+          >
+            <img
+              src={ismobile ? "/favicon.ico" : "/logo.png"}
+              width={ismobile ? 16 : 120}
+              height={ismobile ? 16 : 36}
+              alt={""}
+            ></img>
+          </Box>
+          <Box display="flex" gap={16} justifyContent="start" alignItems="end">
+            <Box
+              onClick={() => router.push("/")}
+              display="flex"
+              alignItems="center"
+            >
+              <Typography
+                variants="heading2"
+                color={
+                  pageID === "HOME" ? colors.vividPrimaryColor : colors.g000
+                }
+              >
+                홈
+              </Typography>
+            </Box>
+            <Box
+              onClick={() => router.push("/stretchings")}
+              display="flex"
+              alignItems="center"
+            >
+              <Typography
+                variants="heading2"
+                color={
+                  pageID === "STRETCHINGS"
+                    ? colors.vividPrimaryColor
+                    : colors.g000
+                }
+              >
+                스트레칭
+              </Typography>
+            </Box>
+          </Box>
         </Box>
+
         <AccountWrapper>
           {isLoggined ? (
             <>

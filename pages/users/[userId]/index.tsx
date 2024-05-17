@@ -26,6 +26,7 @@ const UserMyPage = ({ isLoggined }) => {
     <PageWrapper>
       <MemorizedNavigator
         isLoggined={isLoggined === "true" ? true : false}
+        pageID="USERS"
       ></MemorizedNavigator>
       <ContentWrapper>
         <MyPageNavigator currentTab={currentTab}></MyPageNavigator>
