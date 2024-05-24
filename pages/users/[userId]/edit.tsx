@@ -28,6 +28,7 @@ const UserMyPage = ({ isLoggined }) => {
   return (
     <PageWrapper>
       <MemorizedNavigator
+        pageID="USERS"
         isLoggined={isLoggined === "true" ? true : false}
       ></MemorizedNavigator>
       <ContentWrapper>
