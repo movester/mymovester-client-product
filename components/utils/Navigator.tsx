@@ -101,7 +101,7 @@ const Navigator = (props: IProps) => {
         </Modal>
       )}
       <Wrapper $ismobile={ismobile}>
-        <Box display="flex" gap={32}>
+        <NavigatorItemWrapper>
           <Box
             display="flex"
             flexDirection="row"
@@ -154,7 +154,7 @@ const Navigator = (props: IProps) => {
               </Typography>
             </Box>
           </Box>
-        </Box>
+        </NavigatorItemWrapper>
 
         <AccountWrapper>
           {isLoggined ? (
@@ -251,4 +251,11 @@ const ProfileWrapper = styled.div<IStyledProps>`
   justify-content: center;
   align-items: center;
   background-color: ${colors.g200};
+`;
+
+const NavigatorItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 32px;
 `;

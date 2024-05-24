@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Head from "next/head";
 import Script from "next/script";
 import { RecoilRoot } from "recoil";
-import { middleware } from "../middleware";
+import { RecoilEnv } from "recoil";
 
 declare global {
   // Kakao 함수를 전역에서 사용할 수 있도록 선언
@@ -18,6 +18,8 @@ function MyApp({ Component, pageProps }) {
 
   function kakaoInit() {
     window.Kakao.init(process.env.NEXT_PUBLIC_KAKAO_KEY);
+
+    RecoilEnv.RECOIL_DUPLICATE_ATOM_KEY_CHECKING_ENABLED = false;
   }
 
   return (

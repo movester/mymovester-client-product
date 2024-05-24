@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Box, Typography } from "movester-design-system";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { KAKAO_INQUIRY_LINK } from "../constants/links";
+import { LINK_KAKAO_INQUIRY } from "../constants/links";
 import useIsMobile from "../hooks/utils/useIsMobile";
 import { useCallback, useEffect, useState } from "react";
 
@@ -114,7 +114,7 @@ const LoginPage = () => {
             onClick={kakaoLogin}
           ></Image>
         )}
-        <Link href={KAKAO_INQUIRY_LINK}>
+        <Link href={LINK_KAKAO_INQUIRY}>
           <Typography variants="body2">문의하기</Typography>
         </Link>
       </Box>
