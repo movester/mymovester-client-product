@@ -1,23 +1,17 @@
 import { styled } from "styled-components";
 import { MemorizedNavigator } from "../components/utils/Navigator";
-import {
-  Box,
-  Button,
-  CheckBox,
-  Divider,
-  Typography,
-} from "movester-design-system";
+import { Box, Button, CheckBox, Typography } from "movester-design-system";
 import ReactCanvasConfetti from "react-canvas-confetti";
 import { CSSProperties, useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
-  MARKETING_POLICY,
-  PRIVACY_POLICY,
-  USAGE_POLICY,
+  LINK_MARKETING_POLICY,
+  LINK_PRIVACY_POLICY,
+  LINK_USAGE_POLICY,
 } from "../constants/links";
 import { colors } from "../constants/style";
-import { useRouter } from "next/router";
+
 import { NextPageContext } from "next";
 
 const canvasStyles: CSSProperties = {
@@ -108,6 +102,7 @@ const TermsPage = ({ isLoggined }) => {
     <PageWrapper>
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
       <MemorizedNavigator
+        pageID="USERS"
         isLoggined={isLoggined === "true" ? true : false}
       ></MemorizedNavigator>
       <ContentWrapper>
@@ -174,19 +169,20 @@ const TermsPage = ({ isLoggined }) => {
               isChecked={usage_policy}
               setIsChecked={() => setUsage_policy((prev) => !prev)}
             >
-              (필수) <Link href={USAGE_POLICY}>이용약관 동의</Link>
+              (필수) <Link href={LINK_USAGE_POLICY}>이용약관 동의</Link>
             </CheckBox>
             <CheckBox
               isChecked={privacy_policy}
               setIsChecked={() => setPrivacy_policy((prev) => !prev)}
             >
-              (필수) <Link href={PRIVACY_POLICY}>개인정보 처리방침 동의</Link>
+              (필수){" "}
+              <Link href={LINK_PRIVACY_POLICY}>개인정보 처리방침 동의</Link>
             </CheckBox>
             <CheckBox
               isChecked={marketing_policy}
               setIsChecked={() => setMarketing_policy((prev) => !prev)}
             >
-              (선택) <Link href={MARKETING_POLICY}>마케팅 수신 동의</Link>
+              (선택) <Link href={LINK_MARKETING_POLICY}>마케팅 수신 동의</Link>
             </CheckBox>
           </Box>
         </Box>

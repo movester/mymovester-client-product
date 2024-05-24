@@ -20,7 +20,7 @@ interface IProps {
 }
 
 interface IStyledProps {
-  ismobile: boolean;
+  $ismobile: boolean;
 }
 
 export type KakaoProfileInfoType = {
@@ -100,15 +100,15 @@ const Navigator = (props: IProps) => {
           </MyPageModal>
         </Modal>
       )}
-      <Wrapper ismobile={ismobile}>
-        <Box display="flex" gap={32} justifyContent="start" alignItems="end">
+      <Wrapper $ismobile={ismobile}>
+        <NavigatorItemWrapper>
           <Box
             display="flex"
             flexDirection="row"
             justifyContent="center"
             alignItems="center"
             height={"100%"}
-            onClick={() => router.push("/stretchings")}
+            onClick={() => router.push("/")}
           >
             <img
               src={ismobile ? "/favicon.ico" : "/logo.png"}
@@ -117,11 +117,16 @@ const Navigator = (props: IProps) => {
               alt={""}
             ></img>
           </Box>
-          <Box display="flex" gap={16} justifyContent="start" alignItems="end">
+          <Box
+            display="flex"
+            gap={16}
+            justifyContent="start"
+            alignItems="center"
+          >
             <Box
               onClick={() => router.push("/")}
               display="flex"
-              alignItems="center"
+              alignItems="end"
             >
               <Typography
                 variants="heading2"
@@ -135,7 +140,7 @@ const Navigator = (props: IProps) => {
             <Box
               onClick={() => router.push("/stretchings")}
               display="flex"
-              alignItems="center"
+              alignItems="end"
             >
               <Typography
                 variants="heading2"
@@ -149,13 +154,13 @@ const Navigator = (props: IProps) => {
               </Typography>
             </Box>
           </Box>
-        </Box>
+        </NavigatorItemWrapper>
 
         <AccountWrapper>
           {isLoggined ? (
             <>
               <ProfileWrapper
-                ismobile={ismobile}
+                $ismobile={ismobile}
                 onClick={() => setIsModalOpened((prev) => !prev)}
               >
                 {userProfileState?.profileUrl ? (
@@ -186,9 +191,9 @@ export const MemorizedNavigator = React.memo(Navigator);
 const Wrapper = styled.div<IStyledProps>`
   background-color: ${colors.f000};
   height: auto;
-  padding: ${(props) => (props.ismobile ? "8px 16px" : "16px")};
+  padding: ${(props) => (props.$ismobile ? "8px 16px" : "16px")};
   width: 100%;
-  height: ${(props) => (props.ismobile ? "50px" : "70px")};
+  height: ${(props) => (props.$ismobile ? "50px" : "70px")};
   position: sticky;
   top: 0;
   box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
@@ -238,12 +243,19 @@ const MyPageModalListItem = styled.button`
 `;
 
 const ProfileWrapper = styled.div<IStyledProps>`
-  width: ${(props) => (props.ismobile ? "30px" : "40px")};
-  height: ${(props) => (props.ismobile ? "30px" : "40px")};
+  width: ${(props) => (props.$ismobile ? "30px" : "40px")};
+  height: ${(props) => (props.$ismobile ? "30px" : "40px")};
   border-radius: 50%;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: ${colors.g200};
+`;
+
+const NavigatorItemWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 32px;
 `;
