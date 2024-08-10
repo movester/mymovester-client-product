@@ -51,6 +51,7 @@ const mainPage = ({ isLoggined }) => {
             alignItems="start"
             justifyContent="start"
             flexDirection="column"
+            gap={16}
           >
             <HeadingTypo $isMobile={isMobile}>
               {"바쁜 일상 속\n나를 위한 작은 움직임"}
@@ -76,9 +77,16 @@ const mainPage = ({ isLoggined }) => {
             alignItems="start"
             justifyContent="start"
             flexDirection="column"
-            gap={isMobile ? 64 : 0}
+            gap={isMobile ? 64 : 16}
           >
-            <div style={{ paddingBottom: "8px" }}>
+            <div
+              style={{
+                paddingBottom: "8px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "16px",
+              }}
+            >
               <HeadingTypo $isMobile={isMobile}>
                 {"모든 스트레칭을 한 곳에"}
               </HeadingTypo>
@@ -117,6 +125,7 @@ const mainPage = ({ isLoggined }) => {
               alignItems="start"
               justifyContent="start"
               flexDirection="column"
+              gap={16}
             >
               <HeadingTypo $isMobile={isMobile}>
                 {"즐겁고 간단하게\n스트레칭 습관 형성하기"}
@@ -148,10 +157,17 @@ const mainPage = ({ isLoggined }) => {
             alignItems="start"
             justifyContent="space-between"
             flexDirection="column"
-            gap={isMobile ? 64 : 0}
+            gap={isMobile ? 64 : 16}
             width={"100%"}
           >
-            <div style={{ paddingBottom: "8px" }}>
+            <div
+              style={{
+                paddingBottom: "8px",
+                display: "flex",
+                flexDirection: "column",
+                gap: "16px",
+              }}
+            >
               <HeadingTypo $isMobile={isMobile}>
                 {"함께 하는 즐거움\n스트레칭 알림"}
               </HeadingTypo>
@@ -204,7 +220,7 @@ const MainBanner = styled.div<{ $visible: boolean; $isMobile?: boolean }>`
   width: 100%;
   max-width: 800px;
   height: ${(props) => (props.$isMobile ? "100%" : "inherit")};
-  padding: ${(props) => (props.$isMobile ? "32px" : "64px")};
+  padding: ${(props) => (props.$isMobile ? "32px 16px 0 16px" : "64px")};
   display: flex;
   flex-direction: ${(props) => (props.$isMobile ? "column" : "row")};
   scroll-snap-align: start;

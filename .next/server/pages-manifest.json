@@ -2,7 +2,7 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/stretchings/detail": "pages/stretchings/detail.js",
-  "/stretchings": "pages/stretchings.js",
-  "/login": "pages/login.js"
+  "/users/[userId]/edit": "pages/users/[userId]/edit.js",
+  "/users/[userId]": "pages/users/[userId].js",
+  "/": "pages/index.js"
 }
