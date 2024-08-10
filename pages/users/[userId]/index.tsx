@@ -62,6 +62,7 @@ const UserMyPage = ({ isLoggined }) => {
                   <img
                     width={160}
                     height={160}
+                    style={{ borderRadius: "50%" }}
                     src={userProfileState.profileUrl}
                   ></img>
                 ) : (

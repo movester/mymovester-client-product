@@ -15,20 +15,22 @@ import { BiChevronLeft } from "react-icons/bi";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import { LuShare } from "react-icons/lu";
 import { useRouter } from "next/router";
-import DevelopOngoingSign from "../components/utils/DevelopOngoingSign";
 import { Box, Chip, Typography } from "movester-design-system";
 
 interface IProps {
   data: StretchingDetailQueryItemType;
+  isLogin: boolean;
+  handleLikeButton: () => void;
+  isLiked: boolean;
 }
 
 const StretchingDetailMobilView = (props: IProps) => {
-  const { data } = props;
+  const { data, isLogin, handleLikeButton, isLiked } = props;
   const [heartClicked, setHeartClicked] = useState<boolean>(false);
   const router = useRouter();
 
   const handleOnClickShareURL = () => {
-    navigator.clipboard.writeText(`${router.basePath}${router.asPath}`);
+    navigator.clipboard.writeText(window.location.href);
     window.alert("링크가 복사되었습니다!");
   };
 
@@ -83,9 +85,9 @@ const StretchingDetailMobilView = (props: IProps) => {
             alignItems="center"
             borderRadius={16}
             boxSahdow="4px 4px 4px rgba(0,0,0,0.1)"
-            onClick={() => setHeartClicked((prev) => !prev)}
+            onClick={handleLikeButton}
           >
-            {heartClicked ? (
+            {isLiked ? (
               <AiFillHeart size={16} color={colors.r000}></AiFillHeart>
             ) : (
               <AiOutlineHeart size={16}></AiOutlineHeart>

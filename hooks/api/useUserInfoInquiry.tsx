@@ -17,7 +17,6 @@ const useUserInfoInquiry = (props: IProps) => {
         },
       })
         .then((res) => {
-          console.log("call!");
           return res.json();
         })
         .catch((error) => error),

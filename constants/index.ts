@@ -5,6 +5,14 @@ import {
   StretchingSubCategoryType,
 } from "./types";
 
+export const META = {
+  title: "movester",
+  siteName: "MOVESTER | 뭅스터",
+  description: "바쁜 일상 속 나를 위한 움직임, 뭅스터와 함께해요.",
+  keyword: ["뭅스터", "스트레칭"],
+  url: "https://movester.kr",
+  ogImage: "/logo.png",
+} as const;
 export interface ITotalComboxType<T> {
   name: string;
   id: T | "total";

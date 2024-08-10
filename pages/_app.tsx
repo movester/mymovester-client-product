@@ -26,6 +26,18 @@ function MyApp({ Component, pageProps }) {
     <>
       <RecoilRoot>
         <Head>
+          <title>{"movester"}</title>
+          <meta
+            name="description"
+            content={"바쁜 일상 속 나를 위한 움직임, 뭅스터와 함께해요"}
+          />
+          <meta property="og:title" content={"뭅스터"} />
+          <meta
+            property="og:description"
+            content={"바쁜 일상 속 나를 위한 움직임, 뭅스터와 함께해요"}
+          />
+          <meta property="og:image" content={"/"} />
+          <meta property="og:url" content={"https://movester.kr"} />
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Script
