@@ -10,7 +10,7 @@ const useUserInfoInquiry = (props: IProps) => {
 
   const res: UseQueryResult<IUserProfileType> = useQuery({
     queryFn: () =>
-      fetch("/api/user", {
+      fetch("/api/v1/user", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

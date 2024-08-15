@@ -13,6 +13,8 @@ import {
 import { colors } from "../constants/style";
 
 import { NextPageContext } from "next";
+import { useRecoilState } from "recoil";
+import { userProfile } from "../recoil/user/atom";
 
 const canvasStyles: CSSProperties = {
   position: "fixed",
@@ -23,8 +25,9 @@ const canvasStyles: CSSProperties = {
   left: 0,
 };
 
-const TermsPage = ({ isLoggined }) => {
+const TermsPage = () => {
   const refAnimationInstance = useRef(null);
+  const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
 
   const getInstance = useCallback((instance) => {
     refAnimationInstance.current = instance;
@@ -101,10 +104,10 @@ const TermsPage = ({ isLoggined }) => {
   return (
     <PageWrapper>
       <ReactCanvasConfetti refConfetti={getInstance} style={canvasStyles} />
-      <MemorizedNavigator
+      {/* <MemorizedNavigator
         pageID="USERS"
         isLoggined={isLoggined === "true" ? true : false}
-      ></MemorizedNavigator>
+      ></MemorizedNavigator> */}
       <ContentWrapper>
         <Box
           display="flex"
@@ -113,7 +116,9 @@ const TermsPage = ({ isLoggined }) => {
           alignItems="center"
           justifyContent="center"
         >
-          <Typography variants={"heading1"}>김희진님</Typography>
+          <Typography
+            variants={"heading1"}
+          >{`${userProfileState?.nickName}님 `}</Typography>
           <Typography variants={"heading1"}>
             뭅스터가 되신것을 환영합니다!
           </Typography>
@@ -153,6 +158,7 @@ const TermsPage = ({ isLoggined }) => {
           backgroundColor={colors.g200}
           padding={"16px 32px"}
           borderRadius={8}
+          width={"100%"}
         >
           <Box>
             <Typography variants="body2">[서비스 이용 약관]</Typography>
@@ -209,8 +215,8 @@ const ContentWrapper = styled.div`
   max-width: 768px;
   display: flex;
   flex-direction: column;
-  /* align-items: center;
-  justify-content: center; */
+  align-items: center;
+  justify-content: center;
   gap: 72px;
   padding: 72px 32px 32px 32px;
   height: 100%;

@@ -11,7 +11,7 @@ const useStretchingDetailInquiry = (props: IProps) => {
 
   const res: UseQueryResult<StretchingDetailQueryItemType> = useQuery({
     queryFn: () =>
-      fetch(`/api/stretchings/${id}`, {
+      fetch(`/api/v1/stretchings/${id}`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token ? token : ""}`,

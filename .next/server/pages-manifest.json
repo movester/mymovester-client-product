@@ -2,9 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/users/[userId]/edit": "pages/users/[userId]/edit.js",
-  "/users/[userId]": "pages/users/[userId].js",
-  "/users/[userId]/likes": "pages/users/[userId]/likes.js",
-  "/": "pages/index.js",
-  "/stretchings": "pages/stretchings.js"
+  "/login": "pages/login.js",
+  "/terms": "pages/terms.js",
+  "/stretchings": "pages/stretchings.js",
+  "/": "pages/index.js"
 }

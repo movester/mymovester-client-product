@@ -39,7 +39,7 @@ const getFetchItems = async (
 
   const effectSearchQuery = formatSearchQuery("effect", effect);
   const res = await fetch(
-    `/api/stretchings?page=${pageParam}&size=${size}&${mainCategorySearchQuery}&${subCategorySearchQuery}&${effectSearchQuery}&orderFilter=${orderFilter}`
+    `/api/v1/stretchings?page=${pageParam}&size=${size}&${mainCategorySearchQuery}&${subCategorySearchQuery}&${effectSearchQuery}&orderFilter=${orderFilter}`
   )
     .then((res) => res.json())
     .catch((error) => error);
