@@ -4,5 +4,7 @@
   "/_document": "pages/_document.js",
   "/users/[userId]/edit": "pages/users/[userId]/edit.js",
   "/users/[userId]": "pages/users/[userId].js",
-  "/": "pages/index.js"
+  "/users/[userId]/likes": "pages/users/[userId]/likes.js",
+  "/": "pages/index.js",
+  "/stretchings": "pages/stretchings.js"
 }

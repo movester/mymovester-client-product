@@ -10,17 +10,19 @@ import { myPageTabType } from "../../../constants/types";
 import { NextPageContext } from "next";
 import useStretchingLikeListsInquiry from "../../../hooks/api/useStretchingLikeListsInquiry";
 import { getAccessToken } from "../../../hooks/utils/manage-token";
-import Image from "next/image";
 import {
   STRETCHING_MAIN_CATEGORY_TEXT,
   STRETCHING_SUB_CATEGORY_TEXT,
 } from "../../../constants/text";
 import { useRouter } from "next/router";
+import useIsMobile from "../../../hooks/utils/useIsMobile";
 
 const UserActivitiesLikePage = ({ isLoggined }) => {
   const [currentTab, _] = useState<myPageTabType>("LIKES");
 
   const accessToken = getAccessToken();
+
+  const ismobile = useIsMobile();
 
   const router = useRouter();
 
@@ -36,9 +38,9 @@ const UserActivitiesLikePage = ({ isLoggined }) => {
         pageID="USERS"
         isLoggined={isLoggined === "true" ? true : false}
       ></MemorizedNavigator>
-      <ContentWrapper>
+      <ContentWrapper $ismobile={ismobile}>
         <MyPageNavigator currentTab={currentTab}></MyPageNavigator>
-        <ContentArea>
+        <ContentArea $ismobile={ismobile}>
           {data &&
             data.stretchingList.map((listItem) => (
               <Content
@@ -71,24 +73,26 @@ const PageWrapper = styled.div`
   background-color: ${colors.f000};
   height: 100%;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
   flex-direction: column;
   gap: 24px;
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<{ $ismobile: boolean }>`
   width: 100%;
-  padding: 0 80px;
+  padding: ${(props) => (props.$ismobile ? "0px 16px" : "0 80px")};
   display: flex;
   justify-content: center;
   align-items: start;
   gap: 24px;
+  /* background-color: red; */
 `;
 
-const ContentArea = styled.div`
+const ContentArea = styled.div<{ $ismobile: boolean }>`
   flex-grow: 1;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: ${(props) =>
+    props.$ismobile ? " repeat(1, 1fr)" : " repeat(3, 1fr)"};
   gap: 16px;
 
   :hover {
