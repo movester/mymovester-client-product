@@ -8,6 +8,8 @@ import useIsMobile from "../hooks/utils/useIsMobile";
 import { useCallback, useEffect, useState } from "react";
 
 import { setAccessToken, setRefreshToken } from "../hooks/utils/manage-token";
+import { useRecoilState } from "recoil";
+import { userProfile } from "../recoil/user/atom";
 
 const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI;
@@ -17,6 +19,8 @@ const LoginPage = () => {
   const router = useRouter();
 
   const { code: authCode, error: kakaoServerError } = router.query;
+
+  const [userProfileState, setUserProfileState] = useRecoilState(userProfile);
 
   const loginHandler = useCallback(
     async (code: string | string[]) => {
@@ -34,7 +38,7 @@ const LoginPage = () => {
         })
         .then((data) => {
           window.Kakao.Auth.setAccessToken(`${data.access_token}`);
-          fetch("/api/login/kakao", {
+          fetch("/api/v1/login/kakao", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -50,7 +54,20 @@ const LoginPage = () => {
               if (res.accessToken && res.refreshToken) {
                 setAccessToken(res.accessToken);
                 setRefreshToken(res.refreshToken);
+                setUserProfileState({
+                  email: res.email,
+                  id: res.id,
+                  isTermsAgreed: res.isTermsAgreed,
+                  nickName: res.name,
+                  profileUrl: res.profileUrl,
+                });
                 router.push("/stretchings");
+                // 약관 동의 페이지 이동 로직
+                // if (res.isTermsAgreed) {
+                //   router.push("/stretchings");
+                // } else {
+                //   router.push("/terms");
+                // }
               }
             });
         })

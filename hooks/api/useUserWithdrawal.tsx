@@ -6,7 +6,7 @@ const useUserWithdrawal = () => {
   const router = useRouter();
   return useMutation({
     mutationFn: (token: string) =>
-      fetch("/api/user", {
+      fetch("/api/v1/user", {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

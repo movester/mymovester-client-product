@@ -8,40 +8,97 @@ import ListTableItem from "../components/utils/ListTableItem";
 import ShadowBox from "../components/utils/ShadowBox";
 import {
   STRETCHING_EFFECT_TEXT,
-  STRETCHING_MAIN_CATEGORY_TEXT,
   STRETCHING_SUB_CATEGORY_TEXT,
 } from "../constants/text";
 import { Box, Chip, Divider, Typography } from "movester-design-system";
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
-import { useEffect, useState } from "react";
+import { IoBookmarkOutline, IoBookmark } from "react-icons/io5";
+import { useRef, useState } from "react";
 import { useRouter } from "next/router";
-import { getAccessToken } from "../hooks/utils/manage-token";
+import RoutineListModal from "../components/utils/Routine/RoutineListModal";
 
 interface IProps {
   data?: StretchingDetailQueryItemType;
-  isLoggined: boolean;
+  isLogin: boolean;
   handleLikeButton: () => void;
   isLiked: boolean;
 }
 
 const StretchingDetailPcView = (props: IProps) => {
-  const { data, isLoggined, handleLikeButton, isLiked } = props;
-  // const [heartClicked, setHeartClicked] = useState<boolean>(false);
+  const { data, isLogin, handleLikeButton, isLiked } = props;
   const router = useRouter();
+  const [savedRoutine, setSavedRoutine] = useState<boolean>(false);
+  const [isRoutineListModalOpened, setIsRoutineListModalOpened] =
+    useState<boolean>(false);
+
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const modalOutSideClick = (e: any) => {
+    if (modalRef.current === e.target) {
+      setIsRoutineListModalOpened(false);
+    }
+  };
 
   const handleOnClickShareURL = () => {
-    navigator.clipboard.writeText(`${router.basePath}${router.asPath}`);
+    navigator.clipboard.writeText(window.location.href);
     window.alert("링크가 복사되었습니다!");
+  };
+
+  const handleOnClickSaveButton = () => {
+    if (!savedRoutine) {
+      setIsRoutineListModalOpened(true);
+    }
   };
 
   return (
     <PageWrapper>
       <MemorizedNavigator
-        isLoggined={isLoggined}
+        isLoggined={isLogin}
         pageID="STRETCHINGS"
       ></MemorizedNavigator>
       <ContentWrapper>
+        {isRoutineListModalOpened && (
+          <RoutineListModal
+            setModalClose={setIsRoutineListModalOpened}
+            modalOutsideClick={modalOutSideClick}
+            modalRef={modalRef}
+            title="루틴생성"
+          >
+            <Box display="flex" flexDirection="column" gap={4}>
+              <Typography variants="body2" color={colors.g300}>
+                루틴 리스트
+              </Typography>
+              <Box display="flex" flexDirection="column" gap={8}>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="start"
+                  gap={16}
+                >
+                  <img src="/mainpage1.png" width={80} height={80}></img>
+                  <Typography variants="heading3">자기전 루틴</Typography>
+                </Box>
+              </Box>
+            </Box>
+          </RoutineListModal>
+        )}
         <SocialBoxWrapper>
+          <Box
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+            justifyContent="center"
+            gap={4}
+          >
+            <IconBox onClick={handleOnClickSaveButton}>
+              {savedRoutine ? (
+                <IoBookmark size={28}></IoBookmark>
+              ) : (
+                <IoBookmarkOutline size={28}></IoBookmarkOutline>
+              )}
+            </IconBox>
+            <Typography variants="body2"></Typography>
+          </Box>
           <Box
             display="flex"
             flexDirection="column"
@@ -259,7 +316,7 @@ const IconBox = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
-  :hover {
+  &:hover {
     cursor: pointer;
   }
 `;

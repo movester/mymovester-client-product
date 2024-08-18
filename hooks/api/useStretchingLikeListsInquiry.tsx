@@ -36,7 +36,7 @@ const useStretchingLikeListsInquiry = (props: IProps) => {
 
   const res: UseQueryResult<IListListType> = useQuery({
     queryFn: () =>
-      fetch("/api/like/stretchings", {
+      fetch("/api/v1/like/stretchings", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,

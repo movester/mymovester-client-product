@@ -1,20 +1,20 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import { styled } from "styled-components";
-import { ICategoryIconBoxType, IComboBoxType } from "../../constants";
+import {
+  ICategoryIconBoxType,
+  IComboBoxType,
+  LIST_ORDER_CATEGORY,
+} from "../../constants";
 import { colors } from "../../constants/style";
 import {
-  STRETCHING_SUB_CATEGORY_TEXT,
-  STRETCHING_TOTAL_CATEGORTY_TEXT,
-} from "../../constants/text";
-import {
   StretchingEffectType,
+  StretchingListOrderFilter,
   StretchingMainCategoryType,
   StretchingSubCategoryType,
 } from "../../constants/types";
-
 import useIsMobile from "../../hooks/utils/useIsMobile";
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import { Box, Typography } from "movester-design-system";
 
@@ -34,10 +34,13 @@ interface IProps {
       >
     >
   >;
+  setListOrder: Dispatch<
+    SetStateAction<IComboBoxType<StretchingListOrderFilter>>
+  >;
 }
 
 const StretchingCategoryMenu = (props: IProps) => {
-  const { menuItem, isSelected, setSelectedItem } = props;
+  const { menuItem, isSelected, setSelectedItem, setListOrder } = props;
 
   const isMobile = useIsMobile();
 
@@ -50,7 +53,10 @@ const StretchingCategoryMenu = (props: IProps) => {
         alignItems="center"
         width={!isMobile ? 80 : 70}
         gap={4}
-        onClick={() => setSelectedItem(menuItem)}
+        onClick={() => {
+          setSelectedItem(menuItem);
+          setListOrder(LIST_ORDER_CATEGORY[0]);
+        }}
       >
         <Box
           backgroundColor={isSelected ? "#A6A0D2" : colors.f300}

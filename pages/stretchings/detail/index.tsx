@@ -6,11 +6,17 @@ import useIsMobile from "../../../hooks/utils/useIsMobile";
 import StretchingDetailMobilView from "../../../views/stretchingDetailMobileView";
 import StretchingDetailPcView from "../../../views/stretchingDetailPcView";
 import useStretchingDetailInquiry from "../../../hooks/api/useStretchingDetailInquiry";
-import { NextPageContext } from "next";
+import { Metadata, NextPageContext } from "next";
 import { getAccessToken } from "../../../hooks/utils/manage-token";
 import useLikeStretching from "../../../hooks/api/useLikeStretching";
 import useDislikeStretching from "../../../hooks/api/useDislikeStretching";
 import { debounce } from "lodash";
+import { getMetaData } from "../../../hooks/utils/getMetaData";
+import Head from "next/head";
+import {
+  STRETCHING_EFFECT_TEXT,
+  STRETCHING_MAIN_CATEGORY_TEXT,
+} from "../../../constants/text";
 
 const StretchingDetailPage = ({ isLoggined }) => {
   const router = useRouter();
@@ -67,22 +73,49 @@ const StretchingDetailPage = ({ isLoggined }) => {
   }, [data]);
 
   return (
-    <PageWrapper>
-      {data && (
-        <>
-          {isMobile ? (
-            <StretchingDetailMobilView data={data}></StretchingDetailMobilView>
-          ) : (
-            <StretchingDetailPcView
-              data={data}
-              isLiked={likeButtonClicked}
-              isLoggined={isLoggined}
-              handleLikeButton={handleOnClickLikeButton}
-            ></StretchingDetailPcView>
-          )}
-        </>
-      )}
-    </PageWrapper>
+    <>
+      <Head>
+        <title>{`${data?.title} | movester`}</title>
+        <meta
+          name="description"
+          content={"바쁜 일상 속 나를 위한 움직임, 뭅스터와 함께해요"}
+        />
+        <meta property="og:title" content={`${data?.title} | movester`} />
+        <meta
+          property="og:description"
+          content={`${STRETCHING_MAIN_CATEGORY_TEXT[data?.mainCategory]} | ${
+            STRETCHING_EFFECT_TEXT[data?.effectList[0]]
+          }| 바쁜 일상 속 나를 위한 움직임, 뭅스터와 함께해요.`}
+        />
+        <meta property="og:image" content={`${data?.imageList[0]}`} />
+        <meta
+          property="og:url"
+          content={`https://movester.kr/stretchings/detail?id=${data?.id}`}
+        />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <PageWrapper>
+        {data && (
+          <>
+            {isMobile ? (
+              <StretchingDetailMobilView
+                data={data}
+                isLiked={likeButtonClicked}
+                isLogin={isLoggined}
+                handleLikeButton={handleOnClickLikeButton}
+              ></StretchingDetailMobilView>
+            ) : (
+              <StretchingDetailPcView
+                data={data}
+                isLiked={likeButtonClicked}
+                isLogin={isLoggined}
+                handleLikeButton={handleOnClickLikeButton}
+              ></StretchingDetailPcView>
+            )}
+          </>
+        )}
+      </PageWrapper>
+    </>
   );
 };
 

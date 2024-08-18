@@ -50,6 +50,7 @@ const Navigator = (props: IProps) => {
 
   const handleKakaoLogout = () => {
     removeToken();
+    setIsModalOpened(false);
     router.replace("/stretchings");
   };
 

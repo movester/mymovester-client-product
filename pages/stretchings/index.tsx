@@ -26,6 +26,7 @@ import { NextPageContext } from "next";
 import { useInView } from "react-intersection-observer";
 
 const PAGE_SIZE = 10;
+const GRID_MAX_WIDTH = 900;
 
 export type labeItemType = { label: string; labelId: string };
 
@@ -33,7 +34,7 @@ interface styleType {
   $ismobile: boolean;
 }
 
-const StrechingPage = ({ isLoggined }) => {
+const StretchingPage = ({ isLoggined }) => {
   const labelItems = [
     { label: "타겟 부위", labelId: "sections" },
     { label: "효과", labelId: "effects" },
@@ -45,21 +46,21 @@ const StrechingPage = ({ isLoggined }) => {
 
   const [selectedCategoryButtonItem, setSelectedCategoryButtonItem] =
     useState<labeItemType>(labelItems[0]);
-  const [listOrder, setListOreder] = useState<
+  const [listOrder, setListOrder] = useState<
     IComboBoxType<StretchingListOrderFilter>
   >(LIST_ORDER_CATEGORY[0]);
   const [selectedCategoryItem, setSelectedCategoryItem] =
     useState<ICategoryIconBoxType<
       StretchingMainCategoryType | StretchingSubCategoryType
     > | null>(null);
-  const [seletedEffectItem, setSeletedEffectItem] =
+  const [selectedEffectItem, setSelectedEffectItem] =
     useState<ICategoryIconBoxType<StretchingEffectType> | null>(null);
 
   const { data, fetchNextPage, hasNextPage, isFetching } = useStretchingInquiry(
     {
       size: PAGE_SIZE,
       orderFilter: listOrder.id,
-      effect: seletedEffectItem?.id,
+      effect: selectedEffectItem?.id,
       mainCategory:
         selectedCategoryItem?.id === "UPPER_BODY" ||
         selectedCategoryItem?.id === "LOWER_BODY"
@@ -82,7 +83,8 @@ const StrechingPage = ({ isLoggined }) => {
 
   useEffect(() => {
     setSelectedCategoryItem(null);
-    setSeletedEffectItem(null);
+    setSelectedEffectItem(null);
+    setListOrder(LIST_ORDER_CATEGORY[0]);
   }, [selectedCategoryButtonItem]);
 
   const { ref, inView } = useInView({
@@ -132,25 +134,21 @@ const StrechingPage = ({ isLoggined }) => {
                     menuItem={categoryItem}
                     isSelected={categoryItem.id === selectedCategoryItem?.id}
                     setSelectedItem={setSelectedCategoryItem}
+                    setListOrder={setListOrder}
                   ></StretchingCategoryMenu>
                 ))
               : EFFECT_CATEGORY.map((categoryItem) => (
                   <StretchingCategoryMenu
                     key={`category-item-id-${categoryItem.id}`}
                     menuItem={categoryItem}
-                    isSelected={categoryItem.id === seletedEffectItem?.id}
-                    setSelectedItem={setSeletedEffectItem}
+                    isSelected={categoryItem.id === selectedEffectItem?.id}
+                    setSelectedItem={setSelectedEffectItem}
+                    setListOrder={setListOrder}
                   ></StretchingCategoryMenu>
                 ))}
           </Box>
         </Box>
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          alignItems="center"
-          gap={16}
-        >
+        <ContentBox>
           <Box
             display="flex"
             flexDirection="column"
@@ -162,7 +160,7 @@ const StrechingPage = ({ isLoggined }) => {
               size="xs"
               list={LIST_ORDER_CATEGORY}
               value={listOrder}
-              setValue={setListOreder}
+              setValue={setListOrder}
             ></ComboBox>
           </Box>
           {data && (
@@ -181,13 +179,13 @@ const StrechingPage = ({ isLoggined }) => {
           <div ref={ref}>
             <Box height={32}></Box>
           </div>
-        </Box>
+        </ContentBox>
       </ContentWrapper>
     </PageWrapper>
   );
 };
 
-export default StrechingPage;
+export default StretchingPage;
 
 const PageWrapper = styled.div`
   display: flex;
@@ -214,7 +212,7 @@ const ContentWrapper = styled.div<styleType>`
 `;
 
 const ItemGrid = styled.div`
-  max-width: 900px;
+  max-width: ${GRID_MAX_WIDTH}px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 16px;
@@ -225,6 +223,16 @@ const ItemGrid = styled.div`
   @media screen and (max-width: 560px) {
     grid-template-columns: repeat(1, 1fr);
   }
+`;
+
+const ContentBox = styled.div`
+  max-width: ${GRID_MAX_WIDTH}px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
 `;
 
 export const getServerSideProps = ({ req }: NextPageContext) => {
